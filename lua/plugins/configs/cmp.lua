@@ -1,126 +1,83 @@
-local ok, cmp = pcall(require, "cmp")
+local _cmp, cmp = pcall(require, "cmp")
+local _vsnip, vsnip = pcall(require, "vsnip")
+local _lspkind, lspkind = pcall(require, "lspkind")
 
-if not ok then
+if not _cmp or not _lspkind then
     return
 end
 
-local kinds = {
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "ﰕ",
-    Field = "ﰠ",
-    Variable = "",
-    Class = "ﴯ",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "塞",
-    Value = "",
-    Enum = "",
-    Keyword = "廓",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "פּ",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-}
+if _vsnip then
+    require("vsnip.loaders.from_vscode").lazy_load()
+end
+
+local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+end
+
 
 cmp.setup {
-    experimental = {
-        ghost_text = true,
-    },
-    confirmation = {
-        get_commit_characters = function()
-            return {}
-        end,
-    },
-    view = {
-        entries = "custom",
-    },
-    completion = {
-        completeopt = "menu,menuone,noinsert",
-        keyword_pattern = [[\%(-\?\d\+\%(\.\d\+\)\?\|\h\w*\%(-\w*\)*\)]],
-        keyword_length = 1,
-    },
-    formatting = {
-        fields = { "kind", "abbr", "menu" },
-        format = function(_, vim_item)
-            vim_item.menu = vim_item.kind
-            vim_item.kind = kinds[vim_item.kind]
-
-            return vim_item
-        end,
-    },
+    enabled = function()
+        local in_prompt = vim.api.nvim_buf_get_option(0, "buftype") == "prompt"
+        if in_prompt then
+            return false
+        end
+        local context = require "cmp.config.context"
+        return not (context.in_treesitter_capture "comment" == true or context.in_syntax_group "Comment")
+    end,
     snippet = {
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
-        end,
+        end
     },
-    mapping = {
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-q>"] = cmp.mapping.close(),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif vim.fn["vsnip#available"](1) == 1 then
-                vim.api.nvim_feedkeys(
-                    vim.api.nvim_replace_termcodes("<Plug>(vsnip-expand-or-jump)", true, true, true),
-                    "",
-                    true
-                )
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-                vim.api.nvim_feedkeys(
-                    vim.api.nvim_replace_termcodes("<Plug>(vsnip-jump-prev)", true, true, true),
-                    "",
-                    true
-                )
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-        ["<CR>"] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = false,
-        },
+    sorting = {
+        comparators = {cmp.config.compare.offset, cmp.config.compare.exact, cmp.config.compare.score,
+                       cmp.config.compare._under_comparator, cmp.config.compare.kind, cmp.config.compare.sort_text,
+                       cmp.config.compare.length, cmp.config.compare.order}
     },
+    formatting = {
+        format = function(entry, vim_item)
+            -- fancy icons and a name of kind
+            vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+            -- set a name for each source
+            vim_item.menu = ({
+                buffer = "[Buffer]",
+                nvim_lsp = "[LSP]",
+                ultisnips = "[UltiSnips]",
+                nvim_lua = "[Lua]",
+                cmp_tabnine = "[TabNine]",
+                look = "[Look]",
+                path = "[Path]",
+                spell = "[Spell]",
+                calc = "[Calc]",
+                emoji = "[Emoji]"
+            })[entry.source.name]
+            return vim_item
+        end
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm({
+            select = true
+        }) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
     sources = {
-        { name = "nvim_lsp" },
-        { name = "nvim_lua" },
-        { name = "vsnip" },
-        { name = "path" },
-        { name = "buffer" },
-    },
-    preselect = cmp.PreselectMode.None,
-}
+        {name = "nvim_lsp"},
+        {name = "nvim_lua"},
+        {name = "vsnip"},
+        {name = "path"},
+        {name = "buffer"}
+        },
+    }
 
 cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-        { name = "buffer" },
-    },
+    sources = {{name = "buffer"}}
 })
 
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-        { name = "path" },
-    }, {
-        { name = "cmdline" },
-    }),
+    sources = cmp.config.sources({{name = "path"}}, {{name = "cmdline"}})
 })

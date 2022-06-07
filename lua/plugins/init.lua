@@ -61,15 +61,19 @@ require("packer").startup(function(use)
     ---- Treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
-        requires = {"windwp/nvim-ts-autotag", -- ALT:use "ludovicchabant/vim-gutentags" -- Automatic tags management
-        "p00f/nvim-ts-rainbow", -- Open/Close node coloring
-        "nvim-treesitter/nvim-treesitter-textobjects"},
+        requires = {
+            --"windwp/nvim-ts-autotag", -- HTML nodes autoclose/rename
+            "ludovicchabant/vim-gutentags", -- Automatic tags management
+            "p00f/nvim-ts-rainbow", -- Open/Close node coloring
+            "nvim-treesitter/nvim-treesitter-textobjects"},
         run = ":TSUpdate",
         config = require "plugins.configs.treesitter"
     }
 
     ---- Utilities
-    use "majutsushi/tagbar" -- Tag explorer
+    --use "ludovicchabant/vim-gutentags" -- CTags auto updater (in files)
+    use "majutsushi/tagbar" -- Tag explorer and tag updater (just memory)
+ 
     use {
         -- Tree file explorer
         "nvim-neo-tree/neo-tree.nvim",
@@ -78,6 +82,7 @@ require("packer").startup(function(use)
         config = require "plugins.configs.neotree"
     }
     use {
+        -- Search engine
         "nvim-telescope/telescope.nvim",
         requires = {"nvim-lua/plenary.nvim"},
         config = require "plugins.configs.telescope"
@@ -104,6 +109,7 @@ require("packer").startup(function(use)
         end
     }
     use {
+        -- Colorize written color codes (#02F1AA, rgb(0,10,20)...)
         "norcalli/nvim-colorizer.lua",
         config = require "plugins.configs.colorizer"
     }
@@ -119,45 +125,72 @@ require("packer").startup(function(use)
         config = require "plugins.configs.neoclip"
     }
     use {
+        --- Improved terminal toggle
         "akinsho/toggleterm.nvim",
         tag = "v1.*",
         config = require "plugins.configs.toggleterm"
     }
 
-    ---- LSP
-    use {
-        "neovim/nvim-lspconfig",
-        requires = {
-            -- As reference "jose-elias-alvarez/typescript.nvim",
-        }
-    }
-    use "ray-x/lsp_signature.nvim"
-
-    ---- Comment
-    use {
+     ---- Comment
+     use {
         "numToStr/Comment.nvim",
-        config = require "plugins.configs.comment"
+        config = function()
+            require "plugins.configs.comment"
+        end,
+        setup = function()
+            require("utils").packer_lazy_load "Comment.nvim"
+        end,
     }
 
+    ---- LSP
+    use "williamboman/nvim-lsp-installer"
+   --[[  use {
+        "neovim/nvim-lspconfig",
+        config = require "plugins.configs.lspconfig"
+    } ]]
+    use {
+        "mfussenegger/nvim-jdtls",
+    }
     ---- Completion
     use {
         "hrsh7th/nvim-cmp",
-        requires = {"hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-nvim-lua", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path",
-                    "hrsh7th/cmp-cmdline", "hrsh7th/cmp-nvim-lsp-document-symbol", "hrsh7th/cmp-vsnip",
-                    "hrsh7th/vim-vsnip"},
+        requires = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-nvim-lsp-document-symbol",
+            "hrsh7th/vim-vsnip",
+            "hrsh7th/cmp-vsnip",
+            "lukas-reineke/cmp-under-comparator",
+        },
         config = require "plugins.configs.cmp"
+    }
+    -- VSCode like item type icons
+    use "onsails/lspkind.nvim"
+    
+    use {
+        "ray-x/lsp_signature.nvim",
+        setup = function()
+            require("utils").packer_lazy_load "lsp_signature.nvim"
+        end,
+        config = require "plugins.configs.lsp_signature"
     }
 
     ---- Snippets
-    use "kitagry/vs-snippets"
-    -- ALT: use "L3MON4D3/LuaSnip" -- Snippets plugin
-    -- ALT: use "saadparwaiz1/cmp_luasnip"
+    use {
+        "rafamadriz/friendly-snippets",
+        setup = function()
+            require("utils").packer_lazy_load "friendly-snippets"
+        end,
+    }
 
     -- Tmux
-    --[[ use {
+    use {
         "aserowy/tmux.nvim",
         config = require "plugins.configs.tmux"
-    } ]]
+    }
 
     ---- Git
     use {

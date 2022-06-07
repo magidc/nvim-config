@@ -47,16 +47,16 @@ wk.register({
         m = { "<cmd>Telescope marks<cr>", "[TELESCOPE] Marks" },
         r = { "<cmd>Telescope oldfiles<cr>", "[TELESCOPE] Recent files" },
         z = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "[TELESCOPE] Current buffer fuzzy find" },
-        t = { "<cmd>Telescope tags<cr>", "[TELESCOPE] Tags" },
-        o = { "<cmd>Telescope current_buffer_tags<cr>", "[TELESCOPE] Current buffer tags"},
+        --t = { "<cmd>Telescope tags<cr>", "[TELESCOPE] Tags" },
+        --o = { "<cmd>Telescope current_buffer_tags<cr>", "[TELESCOPE] Current buffer tags"},
         c = { "<cmd>Telescope command_history<cr>", "[TELESCOPE] Search command history"},
     },
     -- Vscode simular
-    ["<c-p>"] = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "Command Prompt" },
+    ["<c-p>"] = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
 
+    ["<F5>"] = { "<cmd>NeoTreeShowToggle<cr>", "[Neotree] Toggle" },
+    ["<F6>"] = { "<cmd>TroubleToggle<cr>", "[Trouble] Toggle" },
     ["<F8>"] = { "<cmd>TagbarToggle<cr>", "[Tagbar] Toggle" },
-    ["<F9>"] = { "<cmd>NeoTreeShowToggle<cr>", "[Neotree] Toggle" },
-    ["<F10>"] = { "<cmd>TroubleToggle<cr>", "[Trouble] Toggle" },
    
     
     ["<leader>g"] = {

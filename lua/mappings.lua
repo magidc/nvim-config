@@ -58,7 +58,10 @@ wk.register({
     ["<F6>"] = { "<cmd>TroubleToggle<cr>", "[Trouble] Toggle" },
     ["<F8>"] = { "<cmd>TagbarToggle<cr>", "[Tagbar] Toggle" },
    
-    
+    ["ca"] = { ":lua vim.lsp.buf.code_action()<cr>", "[LSP] Code actions" },
+
+    ["<C-\\>"] = { ":ToggleTerm<cr>", "[ToggleTerm] Open new terminal" },
+
     ["<leader>g"] = {
         name = "[GIT]",
         s = { "<cmd>Gitsigns toggle_signs<cr>", "[GIT] Toggle signs" },

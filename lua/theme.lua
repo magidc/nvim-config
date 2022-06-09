@@ -34,6 +34,7 @@ _M.colors = {
 
 _M.init = function()
     local _onenord, onenord = pcall(require, "onenord")
+    
     if _onenord then
         onenord.setup {
             borders = true,

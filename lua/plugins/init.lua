@@ -1,7 +1,6 @@
 local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = vim.fn.system {"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim",
-                                      install_path}
+    PACKER_BOOTSTRAP = vim.fn.system {"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path}
 end
 vim.cmd [[packadd packer.nvim]]
 
@@ -49,8 +48,7 @@ require("packer").startup(function(use)
     use {
         "nvim-lualine/lualine.nvim",
         config = require "plugins.configs.lualine"
-    }
-
+    }   
     use {
         -- Status line component that shows context of the current cursor position in file.
         "SmiteshP/nvim-gps",
@@ -130,6 +128,12 @@ require("packer").startup(function(use)
         tag = "v1.*",
         config = require "plugins.configs.toggleterm"
     }
+    use "RRethy/vim-illuminate" -- Automatically highlighting other uses of the current word under the cursor
+    use {
+        -- Loading animation (Just for nvim-lsp)
+        "j-hui/fidget.nvim",
+        config = require "plugins.configs.fidget"
+    }
 
      ---- Comment
      use {
@@ -148,9 +152,25 @@ require("packer").startup(function(use)
         "neovim/nvim-lspconfig",
         config = require "plugins.configs.lspconfig"
     } ]]
-    use {
-        "mfussenegger/nvim-jdtls",
-    }
+    use "mfussenegger/nvim-jdtls"
+
+    -- Debug
+    use("gfanto/fzf-lsp.nvim")
+    use("mfussenegger/nvim-dap")
+    use({
+      "rcarriga/nvim-dap-ui",
+      config = function()
+        require("plugin.configs.dapui")
+      end,
+    })
+   
+    use({
+      "nvim-telescope/telescope-dap.nvim",
+      config = function()
+        require("telescope").load_extension("dap")
+      end,
+    })
+
     ---- Completion
     use {
         "hrsh7th/nvim-cmp",
@@ -161,9 +181,9 @@ require("packer").startup(function(use)
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-nvim-lsp-document-symbol",
-            "hrsh7th/vim-vsnip",
-            "hrsh7th/cmp-vsnip",
-            "lukas-reineke/cmp-under-comparator",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
+            "lukas-reineke/cmp-under-comparator", -- Better sort completion items starting with underscore (Python)
         },
         config = require "plugins.configs.cmp"
     }

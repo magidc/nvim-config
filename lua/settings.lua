@@ -13,7 +13,7 @@ local options = {
     wrap = true,
     backup = false,
     swapfile = false,
-    hlsearch = false, -- Set highlight on search
+    hlsearch = true, -- Set highlight on search
     incsearch = true,
     showmode = false,
     expandtab = true,
@@ -44,7 +44,7 @@ local options = {
     laststatus = 3,
     updatetime = 250, -- Decrease update time
     background = "dark",
-    completeopt = "menuone,noselect", -- Set completeopt to have a better completion experience
+    completeopt = "menuone", -- Set completeopt to have a better completion experience
     breakindent = true, -- Enable break indent
 }
 

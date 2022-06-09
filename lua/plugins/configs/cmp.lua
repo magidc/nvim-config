@@ -1,13 +1,14 @@
 local _cmp, cmp = pcall(require, "cmp")
-local _vsnip, vsnip = pcall(require, "vsnip")
+local _luasnip, luasnip = pcall(require, "luasnip")
 local _lspkind, lspkind = pcall(require, "lspkind")
 
 if not _cmp or not _lspkind then
     return
 end
 
-if _vsnip then
-    require("vsnip.loaders.from_vscode").lazy_load()
+-- Lazy load all vscode like snippets
+if _luasnip then
+    require("luasnip/loaders/from_vscode").lazy_load()
 end
 
 local has_words_before = function()
@@ -15,8 +16,9 @@ local has_words_before = function()
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
 end
 
-
 cmp.setup {
+    preselect = cmp.PreselectMode.Item,
+    --completion = { autocomplete = false }, -- Make completion only on demand
     enabled = function()
         local in_prompt = vim.api.nvim_buf_get_option(0, "buftype") == "prompt"
         if in_prompt then
@@ -25,9 +27,13 @@ cmp.setup {
         local context = require "cmp.config.context"
         return not (context.in_treesitter_capture "comment" == true or context.in_syntax_group "Comment")
     end,
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
     snippet = {
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            require('luasnip').lsp_expand(args.body)
         end
     },
     sorting = {
@@ -37,24 +43,12 @@ cmp.setup {
     },
     formatting = {
         format = function(entry, vim_item)
-            -- fancy icons and a name of kind
+            -- Fancy icons and a name of kind
             vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-            -- set a name for each source
-            vim_item.menu = ({
-                buffer = "[Buffer]",
-                nvim_lsp = "[LSP]",
-                ultisnips = "[UltiSnips]",
-                nvim_lua = "[Lua]",
-                cmp_tabnine = "[TabNine]",
-                look = "[Look]",
-                path = "[Path]",
-                spell = "[Spell]",
-                calc = "[Calc]",
-                emoji = "[Emoji]"
-            })[entry.source.name]
             return vim_item
         end
     },
+
     mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -66,7 +60,7 @@ cmp.setup {
     sources = {
         {name = "nvim_lsp"},
         {name = "nvim_lua"},
-        {name = "vsnip"},
+        {name = "luasnip"},
         {name = "path"},
         {name = "buffer"}
         },

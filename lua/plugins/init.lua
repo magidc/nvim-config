@@ -33,6 +33,7 @@ require("packer").startup(function(use)
     ---- UI
     use "mhinz/vim-startify" -- Start page
     use "rmehri01/onenord.nvim" -- UI Theme
+    --use "folke/tokyonight.nvim"
     use "kyazdani42/nvim-web-devicons"
     use {
         "akinsho/bufferline.nvim",
@@ -42,10 +43,17 @@ require("packer").startup(function(use)
     -- ALT: use {"romgrk/barbar.nvim", requires = {"kyazdani42/nvim-web-devicons"}} -- Fancy tabs
     use "folke/which-key.nvim"
     use {
+        -- Smoother scroll
         "karb94/neoscroll.nvim",
         config = require "plugins.configs.neoscroll"
     }
     use {
+        -- Scroll bar
+        "petertriho/nvim-scrollbar",
+        config = require "plugins.configs.scrollbar"
+    }
+    use {
+        -- Status bar
         "nvim-lualine/lualine.nvim",
         config = require "plugins.configs.lualine"
     }   
@@ -55,22 +63,26 @@ require("packer").startup(function(use)
         requires = "nvim-treesitter/nvim-treesitter",
         config = require "plugins.configs.gps"
     }
+    use {
+        -- Loading animation (Just for nvim-lsp)
+        "j-hui/fidget.nvim",
+        config = require "plugins.configs.fidget"
+    }
 
     ---- Treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
         requires = {
-            --"windwp/nvim-ts-autotag", -- HTML nodes autoclose/rename
-            "ludovicchabant/vim-gutentags", -- Automatic tags management
             "p00f/nvim-ts-rainbow", -- Open/Close node coloring
-            "nvim-treesitter/nvim-treesitter-textobjects"},
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "nvim-treesitter/playground", -- View treesitter information directly in Neovim
+        },
         run = ":TSUpdate",
         config = require "plugins.configs.treesitter"
     }
 
     ---- Utilities
-    --use "ludovicchabant/vim-gutentags" -- CTags auto updater (in files)
-    use "majutsushi/tagbar" -- Tag explorer and tag updater (just memory)
+    --use "majutsushi/tagbar" -- Tag explorer and tag updater (just memory)
  
     use {
         -- Tree file explorer
@@ -78,6 +90,11 @@ require("packer").startup(function(use)
         branch = "v2.x",
         requires = {"nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim"},
         config = require "plugins.configs.neotree"
+    }
+    use {
+        -- Code outline window for skimming and quick navigation
+        "stevearc/aerial.nvim",
+        config = require "plugins.configs.aerial"
     }
     use {
         -- Search engine
@@ -130,11 +147,22 @@ require("packer").startup(function(use)
     }
     use "RRethy/vim-illuminate" -- Automatically highlighting other uses of the current word under the cursor
     use {
-        -- Loading animation (Just for nvim-lsp)
-        "j-hui/fidget.nvim",
-        config = require "plugins.configs.fidget"
+        -- Automatic session management
+        'rmagatti/auto-session',
+        config =  "plugins.configs.autosession"
     }
-
+    use {
+        --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
+        "sindrets/diffview.nvim", 
+        requires = "nvim-lua/plenary.nvim"
+     }
+     use({
+        "rcarriga/nvim-notify",
+        config = function()
+          require("plugin.configs.notify")
+        end,
+      })
+  
      ---- Comment
      use {
         "numToStr/Comment.nvim",
@@ -155,8 +183,7 @@ require("packer").startup(function(use)
     use "mfussenegger/nvim-jdtls"
 
     -- Debug
-    use("gfanto/fzf-lsp.nvim")
-    use("mfussenegger/nvim-dap")
+    use "mfussenegger/nvim-dap"
     use({
       "rcarriga/nvim-dap-ui",
       config = function()
@@ -190,14 +217,8 @@ require("packer").startup(function(use)
     -- VSCode like item type icons
     use "onsails/lspkind.nvim"
     
-    use {
-        "ray-x/lsp_signature.nvim",
-        setup = function()
-            require("utils").packer_lazy_load "lsp_signature.nvim"
-        end,
-        config = require "plugins.configs.lsp_signature"
-    }
-
+    use "ray-x/lsp_signature.nvim"
+    
     ---- Snippets
     use {
         "rafamadriz/friendly-snippets",

@@ -34,6 +34,7 @@ _M.colors = {
 
 _M.init = function()
     local _onenord, onenord = pcall(require, "onenord")
+    local _tokyonight, tokyonight = pcall(require, "tokyonight.theme")
     
     if _onenord then
         onenord.setup {
@@ -78,7 +79,12 @@ _M.init = function()
                 TSVariableBuiltin = { fg = _M.colors.blue },
             },
         }
+    elseif _tokyonight then
+        tokyonight.setup {
+            style = "day"
+        }
     end
+        
 end
 
 return _M

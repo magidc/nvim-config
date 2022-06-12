@@ -1,10 +1,10 @@
 local _jdtls, jdtls  = pcall(require, "jdtls")
 local _handlers, handlers = pcall(require, "lsp.handlers")
+local _aerial, aerial = pcall(require, "aerial")
 
 if not _jdtls or not _handlers then
     return
 end
-
 
 -- Fidget plugin workaround (loadinf animation)
 local function progress_report(_, result, ctx)
@@ -41,38 +41,13 @@ local function progress_report(_, result, ctx)
     lsp.handlers["$/progress"](nil, msg, info)
  end
 
-local function map_java_keys(bufnr)
-    local opts = { noremap = true, silent = true }
-    local bufmap = vim.api.nvim_buf_set_keymap
-    bufmap(bufnr, "n", "<leader>uo", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
-    bufmap(bufnr, "n", "<leader>ut", "<Cmd>lua require'jdtls'.test_class({ config = { console = 'console' }})<CR>", opts)
-    bufmap(
-      bufnr,
-      "n",
-      "<leader>uT",
-      "<Cmd>lua require'jdtls'.test_nearest_method({ config = { console = 'console' }})<CR>",
-      opts
-    )
-    bufmap(bufnr, "v", "<leader>ue", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
-    bufmap(bufnr, "n", "<leader>ue", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
-    bufmap(bufnr, "v", "<leader>um", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
-  end
-
-local on_attach = function(client, bufnr)
-    handlers.set_document_higlighting(client)
-    handlers.set_signature_helper(client)
-    handlers.set_hover_border(client)
-    --map_keys(bufnr)
-    if client.name == "jdt.ls" then
-      jdtls.setup_dap({ hotcodereplace = "auto" })
-      jdtls.setup.add_commands()
-      -- Auto-detect main and setup dap config
-      require("jdtls.dap").setup_dap_main_class_configs()
-      map_java_keys(bufnr)
+local function on_init(client)
+    if client.config.settings then
+      client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
     end
-  end
+end
 
-local share_dir ="/home/magidc/.local/share"
+local share_dir = os.getenv("HOME") .. "/.local/share"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = share_dir .. "/eclipse/" .. project_name
 
@@ -113,7 +88,7 @@ local config = {
             bundles = bundles
         },
         capabilities = handlers.capabilities,
-        on_attach = on_attach,
+        on_attach = handlers.on_attach,
         settings = {
             java = {
                 signatureHelp = {
@@ -123,7 +98,7 @@ local config = {
                     organizeImports = true
                 },
                 completion = {
-                    maxResults = 10,
+                    maxResults = 20,
                     favoriteStaticMembers = {
                       "org.hamcrest.MatcherAssert.assertThat",
                       "org.hamcrest.Matchers.*",

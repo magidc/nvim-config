@@ -46,6 +46,8 @@ local options = {
     background = "dark",
     completeopt = "menuone", -- Set completeopt to have a better completion experience
     breakindent = true, -- Enable break indent
+    foldmethod = "expr",
+    foldexpr = "nvim_treesitter#foldexpr()",
 }
 
 vim.opt.shortmess:append "c"

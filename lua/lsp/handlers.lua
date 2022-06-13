@@ -51,19 +51,13 @@ local function get_basic_capabilities()
 
   return capabilities
 end
+
 M.on_attach = function(client, bufnr)
-    print(client.name .. " started")
+    vim.notify(client.name .. " started")
     require("aerial").on_attach(client, bufnr)
     set_document_higlighting(client)
     set_signature_helper(client, bufnr)
     set_hover_border(client)
-    if client.name == "jdt.ls" then
-        jdtls = require("jdtls")
-        jdtls.setup_dap({ hotcodereplace = "auto" })
-        jdtls.setup.add_commands()
-        -- Auto-detect main and setup dap config
-        require("jdtls.dap").setup_dap_main_class_configs()     
-    end
   end
 
 M.capabilities = require("cmp_nvim_lsp").update_capabilities(get_basic_capabilities())

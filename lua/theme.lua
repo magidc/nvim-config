@@ -1,6 +1,6 @@
-local _M = {}
+local M = {}
 
-_M.colors = {
+M.colors = {
     bg = "#2e3440",
     fg = "#ECEFF4",
     red = "#bf616a",
@@ -29,15 +29,16 @@ _M.colors = {
     grey16 = "#1c1f26",
     grey17 = "#0f1115",
     grey18 = "#0d0e11",
-    grey19 = "#020203",
+    grey19 = "#020203"
 }
 
-_M.init = function()
-    local _onenord, onenord = pcall(require, "onenord")
-    local _tokyonight, tokyonight = pcall(require, "tokyonight.theme")
-    
-    if _onenord then
-        onenord.setup {
+M.theme_name = 'tokyonight'
+
+M.init = function()
+    local theme = require(M.theme_name)
+   
+    if M.theme_name == 'onenord' then
+        theme.setup {
             borders = true,
             fade_nc = false,
             styles = {
@@ -46,45 +47,87 @@ _M.init = function()
                 keywords = "NONE",
                 functions = "italic",
                 variables = "bold",
-                diagnostics = "underline",
+                diagnostics = "underline"
             },
             disable = {
                 background = false,
                 cursorline = false,
-                eob_lines = true,
+                eob_lines = true
             },
             colors = {},
             custom_highlights = {
-                VertSplit = { fg = _M.colors.grey14 },
-                BufferLineIndicatorSelected = { fg = _M.colors.cyan, bg = _M.colors.bg },
-                BufferLineFill = { fg = _M.colors.fg, bg = _M.colors.grey14 },
-                WhichKeyFloat = { bg = _M.colors.grey14 },
-                GitSignsAdd = { fg = _M.colors.green },
-                GitSignsChange = { fg = _M.colors.orange },
-                GitSignsDelete = { fg = _M.colors.red },
+                VertSplit = {
+                    fg = M.colors.grey14
+                },
+                BufferLineIndicatorSelected = {
+                    fg = M.colors.cyan,
+                    bg = M.colors.bg
+                },
+                BufferLineFill = {
+                    fg = M.colors.fg,
+                    bg = M.colors.grey14
+                },
+                WhichKeyFloat = {
+                    bg = M.colors.grey14
+                },
+                GitSignsAdd = {
+                    fg = M.colors.green
+                },
+                GitSignsChange = {
+                    fg = M.colors.orange
+                },
+                GitSignsDelete = {
+                    fg = M.colors.red
+                },
 
-                NormalFloat = { bg = _M.colors.grey14 },
-                FloatBorder = { bg = _M.colors.grey14, fg = _M.colors.grey14 },
+                NormalFloat = {
+                    bg = M.colors.grey14
+                },
+                FloatBorder = {
+                    bg = M.colors.grey14,
+                    fg = M.colors.grey14
+                },
 
-                Pmenu = { bg = _M.colors.grey14 },
-                PMenuThumb = { bg = _M.colors.grey16 },
+                Pmenu = {
+                    bg = M.colors.grey14
+                },
+                PMenuThumb = {
+                    bg = M.colors.grey16
+                },
 
-                LspFloatWinNormal = { fg = _M.colors.fg, bg = _M.colors.grey14 },
-                LspFloatWinBorder = { fg = _M.colors.grey14 },
+                LspFloatWinNormal = {
+                    fg = M.colors.fg,
+                    bg = M.colors.grey14
+                },
+                LspFloatWinBorder = {
+                    fg = M.colors.grey14
+                },
 
-                IndentBlanklineChar = { fg = _M.colors.grey12, style = "nocombine" },
-                IndentBlanklineContextChar = { fg = _M.colors.magenta, style = "nocombine" },
+                IndentBlanklineChar = {
+                    fg = M.colors.grey12,
+                    style = "nocombine"
+                },
+                IndentBlanklineContextChar = {
+                    fg = M.colors.magenta,
+                    style = "nocombine"
+                },
 
-                TSVariable = { fg = _M.colors.blue },
-                TSVariableBuiltin = { fg = _M.colors.blue },
-            },
+                TSVariable = {
+                    fg = M.colors.blue
+                },
+                TSVariableBuiltin = {
+                    fg = M.colors.blue
+                }
+            }
         }
-    elseif _tokyonight then
-        tokyonight.setup {
-            style = "day"
-        }
+    elseif M.theme_name == 'tokyonight' then
+        vim.g.tokyonight_style = "storm"
+        theme.colorscheme()
+    elseif M.theme_name == 'onedark' then
+        theme.setup {style = 'darker'}
+        theme.load()
     end
-        
+
 end
 
-return _M
+return M

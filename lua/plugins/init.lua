@@ -30,10 +30,14 @@ require("packer").startup(function(use)
     ---- Package manager
     use "wbthomason/packer.nvim"
 
+    ---- UI Themes
+    use "rmehri01/onenord.nvim"
+    use "folke/tokyonight.nvim"
+    use "navarasu/onedark.nvim"
+    
     ---- UI
     use "mhinz/vim-startify" -- Start page
-    use "rmehri01/onenord.nvim" -- UI Theme
-    --use "folke/tokyonight.nvim"
+    
     use "kyazdani42/nvim-web-devicons"
     use {
         "akinsho/bufferline.nvim",
@@ -180,7 +184,7 @@ require("packer").startup(function(use)
         "neovim/nvim-lspconfig",
         config = require "plugins.configs.lspconfig"
     } ]]
-    use "mfussenegger/nvim-jdtls"
+    use "magidc/nvim-jdtls"
 
     -- Debug
     use "mfussenegger/nvim-dap"

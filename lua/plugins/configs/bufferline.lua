@@ -67,7 +67,7 @@ bufferline.setup {
         color_icons = true, -- whether or not to add the filetype icon highlights
         show_buffer_icons = true, -- disable filetype icons for buffers
         show_buffer_close_icons = true,
-        show_buffer_default_icon = true, -- whether or not an unrecognised filetype should show a default icon
+        show_buffer_default_icon = true, -- whether or not an unrecognised filetype should show a defMgrey14ault icon
         show_close_icon = true,
         show_tab_indicators = true,
         persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
@@ -79,68 +79,28 @@ bufferline.setup {
         sort_by = 'insert_after_current'
     },
     highlights = {
-        fill = {
-            guifg = colors.fg,
-            guibg = colors.grey19
-        },
-        background = {
-            guifg = colors.fg,
-            guibg = colors.bg
-        },
-        buffer_visible = {
-            guifg = colors.fg,
-            guibg = colors.bg
-        },
         buffer_selected = {
             gui = "bold",
-            guifg = colors.fg,
-            guibg = colors.bg
-        },
-        separator = {
-            guifg = colors.grey14,
-            guibg = colors.bg
+            guibg = colors.grey13
         },
         separator_selected = {
-            guifg = colors.grey14,
-            guibg = colors.bg
-        },
-        separator_visible = {
-            guifg = colors.grey14,
-            guibg = colors.bg
-        },
-        close_button = {
-            guifg = colors.fg,
-            guibg = colors.bg
-        },
-        duplicate = {
-            guifg = colors.grey9,
-            guibg = colors.grey12
+            guibg = colors.grey13
         },
         duplicate_selected = {
-            guifg = colors.grey9,
             gui = "italic",
-            guibg = colors.bg
-        },
-        duplicate_visible = {
-            guifg = colors.grey9,
-            gui = "italic",
-            guibg = colors.grey12
+            guibg = colors.grey13
         },
         indicator_selected = {
-            guifg = colors.cyan,
-            guibg = colors.bg
-        },
-        modified = {
-            guifg = colors.grey11,
-            guibg = colors.grey12
-        },
-        modified_visible = {
-            guifg = colors.grey11,
-            guibg = colors.grey12
+            guibg = colors.grey13
         },
         modified_selected = {
-            guifg = colors.grey10,
-            guibg = colors.bg
+            guibg = colors.grey13
+        },
+        numbers_selected = {
+            guibg = colors.grey13
+        },
+        close_button_selected = {
+            guibg = colors.grey13
         }
     }
 }

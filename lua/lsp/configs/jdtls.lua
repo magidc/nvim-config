@@ -58,6 +58,20 @@ local bundles = {
 }
 vim.list_extend(bundles, vim.split(vim.fn.glob(share_dir .. "/nvim/debug_extensions/vscode-java-test/server/*.jar"), "\n"))
 
+local on_attach = function(client, bufnr)
+    handlers.on_attach(client, bufnr)
+    if client.name == "jdt.ls" then
+        jdtls = require("jdtls")
+        jdtls.setup_dap({ hotcodereplace = "auto" })
+        jdtls.setup.add_commands()
+        -- Auto-detect main and setup dap config
+        require("jdtls.dap").setup_dap_main_class_configs({config_overrides = {
+            vmArgs = "-Dspring.profiles.active=local",
+        }})
+    end
+  end
+
+
 local config = {
         cmd = {
           'java', 
@@ -88,7 +102,7 @@ local config = {
             bundles = bundles
         },
         capabilities = handlers.capabilities,
-        on_attach = handlers.on_attach,
+        on_attach = on_attach,
         settings = {
             java = {
                 signatureHelp = {

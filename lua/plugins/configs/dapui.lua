@@ -4,7 +4,7 @@ if not ok then
     return
 end
 
-dapui.setup({
+dapui.setup{
     icons = {
         expanded = "▾",
         collapsed = "▸"
@@ -52,4 +52,4 @@ dapui.setup({
     windows = {
         indent = 1
     }
-})
+}

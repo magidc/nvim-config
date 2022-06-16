@@ -34,7 +34,11 @@ require("packer").startup(function(use)
     use "rmehri01/onenord.nvim"
     use "folke/tokyonight.nvim"
     use "navarasu/onedark.nvim"
-    
+    use "bluz71/vim-moonfly-colors"
+    use {
+        "marko-cerovac/material.nvim",
+        config = require "plugins.configs.materialui"
+    }
     ---- UI
     use "mhinz/vim-startify" -- Start page
     
@@ -86,8 +90,7 @@ require("packer").startup(function(use)
     }
 
     ---- Utilities
-    --use "majutsushi/tagbar" -- Tag explorer and tag updater (just memory)
- 
+    use "rcarriga/nvim-notify"
     use {
         -- Tree file explorer
         "nvim-neo-tree/neo-tree.nvim",
@@ -123,9 +126,6 @@ require("packer").startup(function(use)
     use {
         -- Autochange open/close chars
         "tpope/vim-surround",
-        setup = function()
-            require("utils").packer_lazy_load "vim-surround"
-        end
     }
     use {
         -- Colorize written color codes (#02F1AA, rgb(0,10,20)...)
@@ -153,30 +153,19 @@ require("packer").startup(function(use)
     use {
         -- Automatic session management
         'rmagatti/auto-session',
-        config =  "plugins.configs.autosession"
+        config = require "plugins.configs.autosession"
     }
     use {
         --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
         "sindrets/diffview.nvim", 
         requires = "nvim-lua/plenary.nvim"
      }
-     use({
-        "rcarriga/nvim-notify",
-        config = function()
-          require("plugin.configs.notify")
-        end,
-      })
-  
+
      ---- Comment
      use {
         "numToStr/Comment.nvim",
-        config = function()
-            require "plugins.configs.comment"
-        end,
-        setup = function()
-            require("utils").packer_lazy_load "Comment.nvim"
-        end,
-    }
+        config = require "plugins.configs.comment",
+    }   
 
     ---- LSP
     use "williamboman/nvim-lsp-installer"
@@ -188,19 +177,24 @@ require("packer").startup(function(use)
 
     -- Debug
     use "mfussenegger/nvim-dap"
-    use({
+    use {
       "rcarriga/nvim-dap-ui",
-      config = function()
-        require("plugin.configs.dapui")
-      end,
-    })
+      config = require "plugins.configs.dapui"
+    }
    
-    use({
+    use {
       "nvim-telescope/telescope-dap.nvim",
       config = function()
         require("telescope").load_extension("dap")
       end,
-    })
+    }
+    ---- Snippets
+    use {
+        "L3MON4D3/LuaSnip",  
+    }
+    use {
+        "rafamadriz/friendly-snippets",
+    }
 
     ---- Completion
     use {
@@ -222,14 +216,6 @@ require("packer").startup(function(use)
     use "onsails/lspkind.nvim"
     
     use "ray-x/lsp_signature.nvim"
-    
-    ---- Snippets
-    use {
-        "rafamadriz/friendly-snippets",
-        setup = function()
-            require("utils").packer_lazy_load "friendly-snippets"
-        end,
-    }
 
     -- Tmux
     use {

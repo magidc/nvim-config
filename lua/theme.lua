@@ -32,10 +32,9 @@ M.colors = {
     grey19 = "#020203"
 }
 
-M.theme_name = 'tokyonight'
-
-M.init = function()
-    local theme = require(M.theme_name)
+M.init = function(theme_name)
+    M.theme_name = theme_name
+    local _ok, theme = pcall(require, M.theme_name)
    
     if M.theme_name == 'onenord' then
         theme.setup {
@@ -121,13 +120,17 @@ M.init = function()
             }
         }
     elseif M.theme_name == 'tokyonight' then
-        vim.g.tokyonight_style = "storm"
+        vim.g.tokyonight_style = "night"
         theme.colorscheme()
     elseif M.theme_name == 'onedark' then
         theme.setup {style = 'darker'}
         theme.load()
+    elseif M.theme_name == 'moonfly' then
+        vim.cmd [[colorscheme moonfly]]
+    elseif M.theme_name == 'material' then
+        vim.g.material_style = "oceanic"
+        vim.cmd 'colorscheme material'
     end
-
 end
 
 return M

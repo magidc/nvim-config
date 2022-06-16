@@ -1,10 +1,4 @@
 local utils = require "utils"
-local theme = require "theme"
-
-vim.g.mapleader = " "
-
-vim.cmd [[set fcs=eob:\ ]]
-vim.cmd [[filetype plugin indent on]]
 
 local options = {
     termguicolors = true,
@@ -50,17 +44,21 @@ local options = {
     foldexpr = "nvim_treesitter#foldexpr()",
 }
 
+for key, value in pairs(options) do
+    vim.opt[key] = value
+end
+
 vim.opt.shortmess:append "c"
+
+vim.cmd [[set fcs=eob:\ ]]
+vim.cmd [[filetype plugin indent on]]
 
 -- Space as leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-for key, value in pairs(options) do
-    vim.opt[key] = value
-end
-
 utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4 }
 
+-- nvim-notify as default vim notification method
 vim.notify = require("notify")
-theme.init()
+require"theme".init"moonfly"

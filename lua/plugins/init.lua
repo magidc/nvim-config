@@ -34,6 +34,8 @@ require("packer").startup(function(use)
     use "rmehri01/onenord.nvim"
     use "folke/tokyonight.nvim"
     use "navarasu/onedark.nvim"
+    use "olimorris/onedarkpro.nvim"
+    use "tiagovla/tokyodark.nvim"
     use "bluz71/vim-moonfly-colors"
     use {
         "marko-cerovac/material.nvim",
@@ -56,6 +58,12 @@ require("packer").startup(function(use)
         config = require "plugins.configs.neoscroll"
     }
     use {
+        -- Better looking folding
+        "kevinhwang91/nvim-ufo", 
+        requires = "kevinhwang91/promise-async",
+        config = require "plugins.configs.ufo"
+    }
+    use {
         -- Scroll bar
         "petertriho/nvim-scrollbar",
         config = require "plugins.configs.scrollbar"
@@ -64,17 +72,14 @@ require("packer").startup(function(use)
         -- Status bar
         "nvim-lualine/lualine.nvim",
         config = require "plugins.configs.lualine"
-    }   
+    }
+    use "arkav/lualine-lsp-progress"
+   
     use {
         -- Status line component that shows context of the current cursor position in file.
         "SmiteshP/nvim-gps",
         requires = "nvim-treesitter/nvim-treesitter",
         config = require "plugins.configs.gps"
-    }
-    use {
-        -- Loading animation (Just for nvim-lsp)
-        "j-hui/fidget.nvim",
-        config = require "plugins.configs.fidget"
     }
 
     ---- Treesitter
@@ -173,7 +178,7 @@ require("packer").startup(function(use)
         "neovim/nvim-lspconfig",
         config = require "plugins.configs.lspconfig"
     } ]]
-    use "magidc/nvim-jdtls"
+    use "mfussenegger/nvim-jdtls"
 
     -- Debug
     use "mfussenegger/nvim-dap"

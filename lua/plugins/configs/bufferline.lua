@@ -81,26 +81,41 @@ bufferline.setup {
     highlights = {
         buffer_selected = {
             gui = "bold",
-            guibg = colors.grey13
+            guibg = colors.purple
         },
-        separator_selected = {
-            guibg = colors.grey13
+        background = {
+            guibg = colors.grey18,
+        },
+        fill = {
+            guibg = colors.grey16,
         },
         duplicate_selected = {
             gui = "italic",
-            guibg = colors.grey13
+            guibg = colors.purple
         },
         indicator_selected = {
-            guibg = colors.grey13
+            guibg = colors.purple
         },
         modified_selected = {
-            guibg = colors.grey13
+            guibg = colors.purple
         },
         numbers_selected = {
-            guibg = colors.grey13
+            guibg = colors.purple
         },
         close_button_selected = {
-            guibg = colors.grey13
-        }
+            guibg = colors.purple
+        },
+        separator_selected = {
+            guifg = colors.grey16,
+            guibg = colors.purple,
+        },
+        separator_visible = {
+            guifg = colors.grey16,
+            guibg = colors.grey18,
+        },
+        separator = {
+            guifg = colors.grey16,
+            guibg = colors.grey18,
+        },
     }
 }

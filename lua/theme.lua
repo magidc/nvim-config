@@ -10,6 +10,7 @@ M.colors = {
     green = "#a3be8c",
     cyan = "#88c0d0",
     magenta = "#b48ead",
+    purple = "#534671",
     pink = "#FFA19F",
     grey1 = "#f8fafc",
     grey2 = "#f0f1f4",
@@ -130,6 +131,15 @@ M.init = function(theme_name)
     elseif M.theme_name == 'material' then
         vim.g.material_style = "oceanic"
         vim.cmd 'colorscheme material'
+    elseif M.theme_name == 'onedarkpro' then
+        vim.o.background = "dark"
+        theme.load()
+    elseif M.theme_name == 'tokyodark' then
+        vim.g.tokyodark_transparent_background = false
+        vim.g.tokyodark_enable_italic_comment = true
+        vim.g.tokyodark_enable_italic = true
+        vim.g.tokyodark_color_gamma = "0"
+        vim.cmd 'colorscheme tokyodark'
     end
 end
 

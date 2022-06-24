@@ -61,8 +61,6 @@ wk.register({
     ["<F6>"] = { "<cmd>TroubleToggle<cr>", "[Trouble] Toggle" },
     ["<F8>"] = { "<cmd>AerialToggle<cr>", "[Aerial] Toggle" },
    
-    ["ca"] = { ":lua vim.lsp.buf.code_action()<cr>", "[LSP] Code actions" },
-    
     ["<leader>d"] = {
         name = "[DAP debug]",
         c = { "<cmd>DapContinue<cr>", "[DAP] Start/continue debug"},
@@ -79,8 +77,32 @@ wk.register({
     ["<F11>"] = { ":lua require'dap'.step_into()<cr>", "[DAP] Step into" },
     ["<F12>"] = { ":lua require'dap'.step_out()<cr>", "[DAP] Step out" },
 
-    ["<C-\\>"] = { ":ToggleTerm<cr>", "[ToggleTerm] Open new terminal" },
+    ["<leader>c"] = {
+        name = "[LSP]",
+        r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references"},
+        d = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
+        f = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
+        i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
+        a = { ":lua vim.lsp.buf.code_action()<cr>", "[LSP] Code actions" },
+        v = { ":lua vim.lsp.buf.hover()<cr>", "[LSP] Hover" },
+        h = { ":lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
+    },
 
+  --[[   vim.api.nvim_set_keymap("n", "<leader>cx", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    vim.api.nvim_set_keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+    vim.api.nvim_set_keymap(
+        "n",
+        "gl",
+        '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
+        opts)
+    vim.api.nvim_set_keymap("n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+    vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+     ]]
+   
+
+    ["<C-\\>"] = { ":ToggleTerm<cr>", "[ToggleTerm] Open new terminal" },
+    ["<leader>xx"] = { ":BufferLineCloseRight<cr>:BufferLineCloseLeft<cr>", "[Bufferline] Close other buffers" },
+    ["<leader>xc"] = { ":bdelete<cr>", "[Bufferline] Close current buffer" },
     ["<leader>g"] = {
         name = "[GIT]",
         s = { "<cmd>Gitsigns toggle_signs<cr>", "[GIT] Toggle signs" },

@@ -29,14 +29,22 @@ local n_opts = {
 }
 
 wk.register({
-    [","] = { "@:", "Repeat last command" },
-    ["r"] = { "<cmd>reg<cr>", "Show registers" },
+    -- [","] = { "@:", "Repeat last command" },
+    ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
+    ["ll"] = { "o<ESC>", "New line in normal mode" },
+    ["LL"] = { "O<ESC>", "New line before in normal mode" },
+    ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
+    [";;"] = { "<cmd>:noh<cr>", "Clean search highlights" },
 
     ["<leader>]"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
     ["<leader>["] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
-    ["<leader>q"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
-    ["<leader>Q"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
-
+    ["q"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
+    ["Q"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
+   
+    ["rr"] = { "zR", "[BLOCK] Expand all blocks" },
+    ["+"] = { "zo", "[BUFFER] Expand block" },
+    ["-"] = { "zc", "[BUFFER] Close block" },
+    
     ["<leader>f"] = {
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },
@@ -101,8 +109,6 @@ wk.register({
    
 
     ["<C-\\>"] = { ":ToggleTerm<cr>", "[ToggleTerm] Open new terminal" },
-    ["<leader>xx"] = { ":BufferLineCloseRight<cr>:BufferLineCloseLeft<cr>", "[Bufferline] Close other buffers" },
-    ["<leader>xc"] = { ":bdelete<cr>", "[Bufferline] Close current buffer" },
     ["<leader>g"] = {
         name = "[GIT]",
         s = { "<cmd>Gitsigns toggle_signs<cr>", "[GIT] Toggle signs" },

@@ -59,7 +59,7 @@ local config = {
         },
         --root_dir = require("jdtls.setup").find_root({"build.gradle", "pom.xml", ".git"}),
         -- Using .metadata dir (Eclipse workspace) as reference for setting root dir
-        root_dir = require("jdtls.setup").find_root({".metadata"}),
+        root_dir = require("jdtls.setup").find_root({".metadata", "pom.xml", ".git"}),
 
         on_init = on_init,
         init_options = {

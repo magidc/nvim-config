@@ -47,11 +47,13 @@ require("packer").startup(function(use)
     use "kyazdani42/nvim-web-devicons"
     use {
         "akinsho/bufferline.nvim",
-        requires = {"kyazdani42/nvim-web-devicons"},
+        requires = "kyazdani42/nvim-web-devicons",
         config = require "plugins.configs.bufferline"
     }
     -- ALT: use {"romgrk/barbar.nvim", requires = {"kyazdani42/nvim-web-devicons"}} -- Fancy tabs
-    use "folke/which-key.nvim"
+    use {
+        "folke/which-key.nvim",
+    }
     use {
         -- Smoother scroll
         "karb94/neoscroll.nvim",

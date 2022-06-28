@@ -79,27 +79,71 @@ bufferline.setup {
         sort_by = 'insert_after_current'
     },
     highlights = {
+        background = {
+            guibg = colors.grey18
+        },
+        fill = {
+            guibg = colors.grey16
+        },
         buffer_selected = {
             gui = "bold",
             guibg = colors.purple
-        },
-        background = {
-            guibg = colors.grey18,
-        },
-        fill = {
-            guibg = colors.grey16,
         },
         duplicate_selected = {
             gui = "italic",
             guibg = colors.purple
         },
+        error_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        error_diagnostic_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        warning_diagnostic_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        warning_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        info_diagnostic_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        info_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        hint_diagnostic_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        hint_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        diagnostic_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        numbers_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
+        pick_selected = {
+            guibg = colors.purple,
+            gui = "bold,italic"
+        },
         indicator_selected = {
             guibg = colors.purple
         },
-        modified_selected = {
+        tab_selected = {
             guibg = colors.purple
         },
-        numbers_selected = {
+        modified_selected = {
             guibg = colors.purple
         },
         close_button_selected = {
@@ -107,15 +151,15 @@ bufferline.setup {
         },
         separator_selected = {
             guifg = colors.grey16,
-            guibg = colors.purple,
+            guibg = colors.purple
         },
         separator_visible = {
             guifg = colors.grey16,
-            guibg = colors.grey18,
+            guibg = colors.grey18
         },
         separator = {
             guifg = colors.grey16,
-            guibg = colors.grey18,
-        },
+            guibg = colors.grey18
+        }
     }
 }

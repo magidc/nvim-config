@@ -1,3 +1,4 @@
+
 local ok, wk = pcall(require, "which-key")
 
 if not ok then
@@ -31,8 +32,8 @@ local n_opts = {
 wk.register({
     -- [","] = { "@:", "Repeat last command" },
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
-    ["ll"] = { "o<ESC>", "New line in normal mode" },
-    ["LL"] = { "O<ESC>", "New line before in normal mode" },
+    ["0"] = { "o<ESC>", "New line in normal mode" },
+    [")"] = { "O<ESC>", "New line before in normal mode" },
     ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
     [";;"] = { "<cmd>:noh<cr>", "Clean search highlights" },
 
@@ -41,10 +42,11 @@ wk.register({
     ["q"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
     ["Q"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
    
-    ["rr"] = { "zR", "[BLOCK] Expand all blocks" },
+    ["_"] = { "zR", "[BLOCK] Expand all blocks" },
     ["+"] = { "zo", "[BUFFER] Expand block" },
     ["-"] = { "zc", "[BUFFER] Close block" },
-    
+    ["=="] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "[BUFFER] Format code" },
+
     ["<leader>f"] = {
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },

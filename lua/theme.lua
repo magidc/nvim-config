@@ -140,6 +140,9 @@ M.init = function(theme_name)
         vim.g.tokyodark_enable_italic = true
         vim.g.tokyodark_color_gamma = "0"
         vim.cmd 'colorscheme tokyodark'
+    elseif M.theme_name == 'catppuccin' then
+        vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+        vim.cmd[[colorscheme catppuccin]]           
     end
 end
 

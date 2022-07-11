@@ -37,6 +37,10 @@ require("packer").startup(function(use)
     use "olimorris/onedarkpro.nvim"
     use "tiagovla/tokyodark.nvim"
     use "bluz71/vim-moonfly-colors"
+    use{
+        "catppuccin/nvim",
+        as = "catppuccin"
+    }
     use {
         "marko-cerovac/material.nvim",
         config = require "plugins.configs.materialui"

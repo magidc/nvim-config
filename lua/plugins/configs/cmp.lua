@@ -18,7 +18,7 @@ end
 
 cmp.setup {
     preselect = cmp.PreselectMode.Item,
-    --completion = { autocomplete = false }, -- Make completion only on demand
+    -- completion = { autocomplete = false }, -- Make completion only on demand
     enabled = function()
         local in_prompt = vim.api.nvim_buf_get_option(0, "buftype") == "prompt"
         if in_prompt then

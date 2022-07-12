@@ -61,4 +61,6 @@ utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4,
 
 -- nvim-notify as default vim notification method
 vim.notify = require("notify")
+
+-- UI theme
 require"theme".init"tokyonight"

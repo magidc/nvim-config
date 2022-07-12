@@ -14,6 +14,7 @@ treesitter.setup {
         enable = true,
     },
     --ensure_installed = "all",
+    ensure_installed = "java",
     highlight = {
         enable = true,
     },

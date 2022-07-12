@@ -32,8 +32,8 @@ local n_opts = {
 wk.register({
     -- [","] = { "@:", "Repeat last command" },
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
-    ["0"] = { "o<ESC>", "New line in normal mode" },
-    [")"] = { "O<ESC>", "New line before in normal mode" },
+    ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
+    ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
     ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
     [";;"] = { "<cmd>:noh<cr>", "Clean search highlights" },
 

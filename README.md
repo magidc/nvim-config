@@ -4,8 +4,14 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
 
 <br>
 
-*Neovim Java IDE overview*
-![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/nvim1.png?raw=true)
+*Neovim Java autocompletion*
+![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/nvim_lsp_1.png?raw=true)
+
+*Neovim Java errors*
+![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/nvim_lsp_2.png?raw=true)
+
+*Neovim Java debug*
+![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/nvim_debug.png?raw=true)
 
 *Telescope fuzzy finder*
 ![telecope usage](https://github.com/magidc/nvim-config/blob/master/nvim_telescope.png?raw=true)

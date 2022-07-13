@@ -43,8 +43,6 @@ wk.register({
     ["Q"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
    
     ["_"] = { "zR", "[BLOCK] Expand all blocks" },
-    ["+"] = { "zo", "[BUFFER] Expand block" },
-    ["-"] = { "zc", "[BUFFER] Close block" },
     ["=="] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "[BUFFER] Format code" },
 
     ["<leader>f"] = {

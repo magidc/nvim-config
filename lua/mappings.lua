@@ -30,7 +30,7 @@ local n_opts = {
 }
 
 wk.register({
-    -- [","] = { "@:", "Repeat last command" },
+    [","] = { "@:", "Repeat last command" },
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
@@ -65,9 +65,9 @@ wk.register({
     -- Vscode simular
     ["<c-p>"] = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
 
-    ["<F5>"] = { "<cmd>NeoTreeShowToggle<cr>", "[Neotree] Toggle" },
-    ["<F6>"] = { "<cmd>TroubleToggle<cr>", "[Trouble] Toggle" },
-    ["<F8>"] = { "<cmd>AerialToggle<cr>", "[Aerial] Toggle" },
+    ["<c-q>"] = { "<cmd>NeoTreeShowToggle<cr>", "[Neotree] Toggle" },
+    ["<c-w>"] = { "<cmd>TroubleToggle<cr>", "[Trouble] Toggle" },
+    ["<c-e>"] = { "<cmd>AerialToggle<cr>", "[Aerial] Toggle" },
    
     ["<leader>d"] = {
         name = "[DAP debug]",
@@ -95,6 +95,10 @@ wk.register({
         v = { ":lua vim.lsp.buf.hover()<cr>", "[LSP] Hover" },
         h = { ":lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
     },
+    ["<leader>j"] = {
+        name = "[JDTLS]",
+        o = { "<cmd>:lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports"}
+    }
 
   --[[   vim.api.nvim_set_keymap("n", "<leader>cx", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     vim.api.nvim_set_keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
@@ -107,8 +111,8 @@ wk.register({
     vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
      ]]
    
-
     ["<C-\\>"] = { ":ToggleTerm<cr>", "[ToggleTerm] Open new terminal" },
+
     ["<leader>g"] = {
         name = "[GIT]",
         s = { "<cmd>Gitsigns toggle_signs<cr>", "[GIT] Toggle signs" },

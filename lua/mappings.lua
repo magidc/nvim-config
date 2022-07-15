@@ -33,7 +33,7 @@ wk.register({
     [","] = { "@:", "Repeat last command" },
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
-    ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
+
     ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
     [";;"] = { "<cmd>:noh<cr>", "Clean search highlights" },
 
@@ -97,8 +97,8 @@ wk.register({
     },
     ["<leader>j"] = {
         name = "[JDTLS]",
-        o = { "<cmd>:lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports"}
-    }
+        o = { ":lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
+    },
 
   --[[   vim.api.nvim_set_keymap("n", "<leader>cx", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
     vim.api.nvim_set_keymap("n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)

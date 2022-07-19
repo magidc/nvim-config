@@ -55,9 +55,7 @@ require("packer").startup(function(use)
         config = require "plugins.configs.bufferline"
     }
     -- ALT: use {"romgrk/barbar.nvim", requires = {"kyazdani42/nvim-web-devicons"}} -- Fancy tabs
-    use {
-        "folke/which-key.nvim",
-    }
+    use "folke/which-key.nvim"
     use {
         -- Smoother scroll
         "karb94/neoscroll.nvim",
@@ -171,7 +169,6 @@ require("packer").startup(function(use)
         "sindrets/diffview.nvim", 
         requires = "nvim-lua/plenary.nvim"
      }
-
      ---- Comment
      use {
         "numToStr/Comment.nvim",

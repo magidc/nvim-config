@@ -17,7 +17,7 @@ lualine.setup ({
     -- Autosession plugin integration
     sections = {
         lualine_c = {
-            require('auto-session-library').current_session_name, 
+           require('auto-session-library').current_session_name, 
             {gps.get_location, cond = gps.is_available},
             "lsp_progress"}
     }

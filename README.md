@@ -13,6 +13,9 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
 *Debug*
 ![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/nvim_debug.png?raw=true)
 
+*Running Spring boot*
+![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/run.png?raw=true)
+
 *Telescope fuzzy finder*
 ![telecope usage](https://github.com/magidc/nvim-config/blob/master/nvim_telescope.png?raw=true)
 

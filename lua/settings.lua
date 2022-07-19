@@ -11,7 +11,7 @@ local options = {
     incsearch = true,
     showmode = false,
     expandtab = true,
-    shiftwidth = 4,
+    shiftwidth = 2,
     tabstop = 2,
     softtabstop = 2,
     scrolloff = 5,
@@ -57,7 +57,7 @@ vim.cmd [[filetype plugin indent on]]
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4 }
+utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, jav = 4 }
 
 -- nvim-notify as default vim notification method
 vim.notify = require("notify")

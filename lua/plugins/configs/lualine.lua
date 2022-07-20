@@ -1,8 +1,8 @@
-local _ok, lualine = pcall(require, "lualine")
+local _lualine, lualine = pcall(require, "lualine")
 local _theme, theme = pcall(require, "theme")
 local _gps, gps = pcall(require, "nvim-gps")
 
-if not _ok then
+if not _lualine then
     return
 end
 

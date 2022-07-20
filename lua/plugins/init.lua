@@ -46,8 +46,7 @@ require("packer").startup(function(use)
         config = require "plugins.configs.materialui"
     }
     ---- UI
-    use "mhinz/vim-startify" -- Start page
-    
+    use "mhinz/vim-startify" -- Start page 
     use "kyazdani42/nvim-web-devicons"
     use {
         "akinsho/bufferline.nvim",
@@ -75,10 +74,14 @@ require("packer").startup(function(use)
     use {
         -- Status bar
         "nvim-lualine/lualine.nvim",
+        requires = {
+            "arkav/lualine-lsp-progress",
+            "SmiteshP/nvim-gps",
+            "rmagatti/auto-session"
+        },
         config = require "plugins.configs.lualine"
     }
-    use "arkav/lualine-lsp-progress"
-   
+    
     use {
         -- Status line component that shows context of the current cursor position in file.
         "SmiteshP/nvim-gps",
@@ -161,7 +164,7 @@ require("packer").startup(function(use)
     use "RRethy/vim-illuminate" -- Automatically highlighting other uses of the current word under the cursor
     use {
         -- Automatic session management
-        'rmagatti/auto-session',
+        "rmagatti/auto-session",
         config = require "plugins.configs.autosession"
     }
     use {

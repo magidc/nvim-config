@@ -60,7 +60,16 @@ vim.g.maplocalleader = ' '
 utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, jav = 4 }
 
 -- nvim-notify as default vim notification method
-vim.notify = require("notify")
+local _notify, notify = pcall(require, "notify")
+if _notify then
+    vim.notify = notify
+end
 
 -- UI theme
-require"theme".init"tokyonight"
+local themename = "tokyonight"
+local _theme, theme = pcall(require, themename)
+if _theme then
+    require("theme").init("tokyonight")
+end
+
+

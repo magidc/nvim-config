@@ -14,7 +14,7 @@ treesitter.setup {
         enable = true,
     },
     --ensure_installed = "all",
-    ensure_installed = "java",
+    ensure_installed = {"java", "lua", "html", "json", "sql", "dockerfile", "yaml"},
     highlight = {
         enable = true,
     },

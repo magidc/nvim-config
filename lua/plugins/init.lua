@@ -53,7 +53,6 @@ require("packer").startup(function(use)
         requires = "kyazdani42/nvim-web-devicons",
         config = require "plugins.configs.bufferline"
     }
-    -- ALT: use {"romgrk/barbar.nvim", requires = {"kyazdani42/nvim-web-devicons"}} -- Fancy tabs
     use "folke/which-key.nvim"
     use {
         -- Smoother scroll
@@ -102,7 +101,7 @@ require("packer").startup(function(use)
     }
 
     ---- Utilities
-    use "rcarriga/nvim-notify"
+    use "rcarriga/nvim-notify" -- Popup notifications
     use {
         -- Tree file explorer
         "nvim-neo-tree/neo-tree.nvim",
@@ -149,7 +148,7 @@ require("packer").startup(function(use)
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = require "plugins.configs.trouble"
-    }
+    }     
     use {
         "AckslD/nvim-neoclip.lua",
         requires = {"nvim-telescope/telescope.nvim"},
@@ -165,25 +164,29 @@ require("packer").startup(function(use)
     use {
         -- Automatic session management
         "rmagatti/auto-session",
-        config = require "plugins.configs.autosession"
     }
     use {
         --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
         "sindrets/diffview.nvim", 
         requires = "nvim-lua/plenary.nvim"
      }
-     ---- Comment
-     use {
+ 
+    ---- Comment
+    use {
         "numToStr/Comment.nvim",
         config = require "plugins.configs.comment",
     }   
 
     ---- LSP
     use "williamboman/nvim-lsp-installer"
-   --[[  use {
+    use {
         "neovim/nvim-lspconfig",
         config = require "plugins.configs.lspconfig"
-    } ]]
+    } 
+    use {
+        "simrat39/rust-tools.nvim",
+        config = require "plugins.configs.rusttools"
+    }
     use "mfussenegger/nvim-jdtls"
 
     -- Debug
@@ -206,7 +209,6 @@ require("packer").startup(function(use)
     use {
         "rafamadriz/friendly-snippets",
     }
-
     ---- Completion
     use {
         "hrsh7th/nvim-cmp",

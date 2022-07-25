@@ -5,38 +5,34 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
 <br>
 
 *Autocompletion*
-![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/captures/nvim_lsp_1.png?raw=true)
+![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/screenshots/nvim_lsp_1.png?raw=true)
 
 *Compilation errors*
-![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/captures/nvim_lsp_2.png?raw=true)
+![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/screenshots/nvim_lsp_2.png?raw=true)
 
 *Debug*
-![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/captures/nvim_debug.png?raw=true)
+![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/screenshots/nvim_debug.png?raw=true)
 
 *Running Spring boot*
-![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/captures/run.png?raw=true)
+![lsp autocompletion](https://github.com/magidc/nvim-config/blob/master/screenshots/run.png?raw=true)
 
 *Telescope fuzzy finder*
-![telecope usage](https://github.com/magidc/nvim-config/blob/master/captures/nvim_telescope.png?raw=true)
+![telecope usage](https://github.com/magidc/nvim-config/blob/master/screenshots/nvim_telescope.png?raw=true)
 
 # Installation
 ## Manual Setup
 0. Install latest [NeoVIM version](https://github.com/neovim/neovim/wiki/Installing-Neovim). 
-1. Packer.nvim plugin manager is required for this setup. Please follow [official install instructions](https://github.com/wbthomason/packer.nvim#quickstart).
-2. Clone this repository into `~/.config/nvim`:
+1. Clone this repository into `~/.config/nvim`:
     ```
     git clone https://github.com/magidc/nvim-config.git ~/.config/nvim
     ```
-4. Install [ripgrep](https://github.com/BurntSushi/ripgrep) into your OS. It is required by some [Telescope](https://github.com/nvim-telescope/telescope.nvim) plugin searching modes.
+2. Install [ripgrep](https://github.com/BurntSushi/ripgrep) into your OS. It is required by some [Telescope](https://github.com/nvim-telescope/telescope.nvim) plugin searching modes.
 3. Run `nvim` and execute `:PackerInstall` command to install the plugins.<br>
-    > There is a chance that the download would timeout and `packer.nvim` would report install failed, in this case run `:PackerInstall` again.
+    > There is a chance that the download would timeout and `packer.nvim` would report install failed, in this case run `:PackerInstall` again.<br>
     > Some plugins may not be able to complete installation in a fresh Neovim environment as there may be some dependencies between them. In that case, just run `:TSUpdate` on the next Neovim start.
 4. As this Neovim environment is designed mostly to be used as Java IDE, only Java LSP is configured by default. Neovim native LSP support is handled by the [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) plugin (see [jdtls.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/configs/jdtls.lua)). As external Java LSP server is required to provide IDE features to the editor, this setup relies on [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer/), just run `:LspInstall jdtls` and the server will be downloaded into configured location.
 5. If you want to provide LSP support for more languages, add [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) plugin to your configuration. It manages to configure most of the LSP server options out of the box, all is needed is to install the LSP servers themselves. A complete list of supported LSP servers is listed [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).<br>
 Make sure also that after LSP installation, Treesitter support is added by running  `:TSInstall <lang>`.
-
-## Auto install
-> TODO
  
 <br>
 

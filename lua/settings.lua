@@ -53,10 +53,6 @@ vim.opt.shortmess:append "c"
 vim.cmd [[set fcs=eob:\ ]]
 vim.cmd [[filetype plugin indent on]]
 
--- Space as leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, jav = 4 }
 
 -- nvim-notify as default vim notification method
@@ -71,5 +67,3 @@ local _theme, theme = pcall(require, themename)
 if _theme then
     require("theme").init("tokyonight")
 end
-
-

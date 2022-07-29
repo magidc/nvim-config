@@ -29,7 +29,7 @@ packer.init {
 require("packer").startup(function(use)
     ---- Package manager
     use "wbthomason/packer.nvim"
-
+   
     ---- UI Themes
     use "rmehri01/onenord.nvim"
     use "folke/tokyonight.nvim"
@@ -101,6 +101,7 @@ require("packer").startup(function(use)
     }
 
     ---- Utilities
+    use "lewis6991/impatient.nvim" -- Startup performance enhancer
     use "rcarriga/nvim-notify" -- Popup notifications
     use {
         -- Tree file explorer

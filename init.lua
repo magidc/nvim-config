@@ -4,8 +4,8 @@ if _impatient then
 end
 
 require "settings"
+require "mappings"
 require "plugins"
 require "lsp"
-require "mappings"
 require "autocmds"
 require "commands"

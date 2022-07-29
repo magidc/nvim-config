@@ -53,7 +53,6 @@ local function get_basic_capabilities()
 end
 
 M.on_attach = function(client, bufnr)
-    vim.notify(client.name .. " started")
     require("aerial").on_attach(client, bufnr)
     set_document_higlighting(client)
     set_signature_helper(client, bufnr)

@@ -30,10 +30,13 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
 3. Run `nvim` and execute `:PackerInstall` command to install the plugins.<br>
     > There is a chance that the download would timeout and `packer.nvim` would report install failed, in this case run `:PackerInstall` again.<br>
     > Some plugins may not be able to complete installation in a fresh Neovim environment as there may be some dependencies between them. In that case, just run `:TSUpdate` on the next Neovim start.
-4. As this Neovim environment is designed mostly to be used as Java IDE, only Java LSP is configured by default. Neovim native LSP support is handled by the [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) plugin (see [jdtls.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/configs/jdtls.lua)). As external Java LSP server is required to provide IDE features to the editor, this setup relies on [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer/), just run `:LspInstall jdtls` and the server will be downloaded into configured location.
-5. If you want to provide LSP support for more languages, add [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) plugin to your configuration. It manages to configure most of the LSP server options out of the box, all is needed is to install the LSP servers themselves. A complete list of supported LSP servers is listed [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md).<br>
-Make sure also that after LSP installation, Treesitter support is added by running  `:TSInstall <lang>`.
- 
+
+4. This environment is configured with several Language Server Providers (LSP) for Java, Python, Rust and Lua. All of them are integrated with Neovim native LSP support. It is required to install LSP in your system in order to have IDE features like autocompletions or error highlight. Other language related features are also provided by Treesitter. To download and setup LSPs in you system, this configuration relies on [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer/) plugin:
+   1. Java: Run `:LspInstall jdtls` to download LSP to `~/.local/share/nvim/lsp_servers/jdtls`. This environment expects to find the server executables in that location, if different one is choosen, edit [jdtls.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/configs/jdtls.lua) and set the proper location of the LSP.
+   2. Rust: Run `:LspInstall rust_analyzer` to download LSP to `~/.local/share/nvim/lsp_servers/rust`. This environment expects the contents of this directory to be accesible, make sure you add it to PATH variable.
+   3. Lua: Run `:LspInstall sumneko_lua` to download LSP to `~/.local/share/nvim/lsp_servers/sumneko_lua`. This environment expects to find the server executables in that location, if different one is choosen, edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change variable  sumneko_root_path to the proper location.
+   4. Python: Run `:LspInstall pyright` to download LSP to `~/.local/share/nvim/lsp_servers/python`. This environment expects the contents of this directory to be accesible, make sure you add it to PATH variable.
+   
 <br>
 
 # UI theme
@@ -64,12 +67,6 @@ Note that the config uses `SPACE` as the leader key by default, you can change i
     > Debug Adapter Protocol client implementation for Neovim
 * [Tokyonight UI theme](https://github.com/folke/tokyonight.nvim)
 * Others...
-  
-<br>
-
-# Supported programming languages by default
-## Java
-Current setup is designed mostly to be used as Java IDE. Neovim native LSP support is handled by the [nvim-jdtls](https://github.com/mfussenegger/nvim-jdtls) plugin (see [jdtls.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/configs/jdtls.lua)). As external Java LSP server is required to provide IDE features to the editor, this setup relies on [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer/), just run `:LspInstall jdtls` and the server will be downloaded into configured location.
 
 <br>
 

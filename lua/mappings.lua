@@ -39,7 +39,7 @@ wk.register({
     ["<a-j>"] = { ":m .+1<cr>==", "[MOVE] Move block down" },
     ["<a-k>"] = { ":m .-2<cr>==", "[MOVE] Move block up" },
 
-    ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
+    ["<leader>r"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
     [";;"] = { "<cmd>:noh<cr>", "Clean search highlights" },
 
     ["<c-Up>"] = { "<cmd>resize +2<cr>", "[WINDOW] Make window taller" },
@@ -111,6 +111,7 @@ wk.register({
         v = { "<cmd>lua vim.lsp.buf.hover()<cr>", "[LSP] Hover" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
         c = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "[LSP] Format code" },
+        n = { ":lua vim.lsp.buf.rename('')", "[LSP] Rename" },
     },
     ["<leader>j"] = {
         name = "[JDTLS]",

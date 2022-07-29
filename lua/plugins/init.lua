@@ -1,6 +1,7 @@
 local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = vim.fn.system {"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path}
+    PACKER_BOOTSTRAP = vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim",
+        install_path }
 end
 vim.cmd [[packadd packer.nvim]]
 
@@ -29,7 +30,7 @@ packer.init {
 require("packer").startup(function(use)
     ---- Package manager
     use "wbthomason/packer.nvim"
-   
+
     ---- UI Themes
     use "rmehri01/onenord.nvim"
     use "folke/tokyonight.nvim"
@@ -37,7 +38,7 @@ require("packer").startup(function(use)
     use "olimorris/onedarkpro.nvim"
     use "tiagovla/tokyodark.nvim"
     use "bluz71/vim-moonfly-colors"
-    use{
+    use {
         "catppuccin/nvim",
         as = "catppuccin"
     }
@@ -61,7 +62,7 @@ require("packer").startup(function(use)
     }
     use {
         -- Better looking folding
-        "kevinhwang91/nvim-ufo", 
+        "kevinhwang91/nvim-ufo",
         requires = "kevinhwang91/promise-async",
         config = require "plugins.configs.ufo"
     }
@@ -80,7 +81,7 @@ require("packer").startup(function(use)
         },
         config = require "plugins.configs.lualine"
     }
-    
+
     use {
         -- Status line component that shows context of the current cursor position in file.
         "SmiteshP/nvim-gps",
@@ -107,7 +108,7 @@ require("packer").startup(function(use)
         -- Tree file explorer
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
-        requires = {"nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim"},
+        requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
         config = require "plugins.configs.neotree"
     }
     use {
@@ -118,7 +119,7 @@ require("packer").startup(function(use)
     use {
         -- Search engine
         "nvim-telescope/telescope.nvim",
-        requires = {"nvim-lua/plenary.nvim"},
+        requires = { "nvim-lua/plenary.nvim" },
         config = require "plugins.configs.telescope"
     }
     use {
@@ -149,10 +150,10 @@ require("packer").startup(function(use)
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = require "plugins.configs.trouble"
-    }     
+    }
     use {
         "AckslD/nvim-neoclip.lua",
-        requires = {"nvim-telescope/telescope.nvim"},
+        requires = { "nvim-telescope/telescope.nvim" },
         config = require "plugins.configs.neoclip"
     }
     use {
@@ -168,25 +169,24 @@ require("packer").startup(function(use)
     }
     use {
         --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
-        "sindrets/diffview.nvim", 
+        "sindrets/diffview.nvim",
         requires = "nvim-lua/plenary.nvim"
-     }
- 
+    }
+
     ---- Comment
     use {
         "numToStr/Comment.nvim",
         config = require "plugins.configs.comment",
-    }   
+    }
 
     ---- LSP
     use "williamboman/nvim-lsp-installer"
     use {
         "neovim/nvim-lspconfig",
         config = require "plugins.configs.lspconfig"
-    } 
+    }
     use {
         "simrat39/rust-tools.nvim",
-        config = require "plugins.configs.rusttools",
         requires = "nvim-lua/plenary.nvim"
     }
     use "mfussenegger/nvim-jdtls"
@@ -194,19 +194,19 @@ require("packer").startup(function(use)
     -- Debug
     use "mfussenegger/nvim-dap"
     use {
-      "rcarriga/nvim-dap-ui",
-      config = require "plugins.configs.dapui"
+        "rcarriga/nvim-dap-ui",
+        config = require "plugins.configs.dapui"
     }
-   
+
     use {
-      "nvim-telescope/telescope-dap.nvim",
-      config = function()
-        require("telescope").load_extension("dap")
-      end,
+        "nvim-telescope/telescope-dap.nvim",
+        config = function()
+            require("telescope").load_extension("dap")
+        end,
     }
     ---- Snippets
     use {
-        "L3MON4D3/LuaSnip",  
+        "L3MON4D3/LuaSnip",
     }
     use {
         "rafamadriz/friendly-snippets",
@@ -229,7 +229,7 @@ require("packer").startup(function(use)
     }
     -- VSCode like item type icons
     use "onsails/lspkind.nvim"
-    
+
     use "ray-x/lsp_signature.nvim"
 
     -- Tmux
@@ -242,7 +242,7 @@ require("packer").startup(function(use)
     use {
         -- Add git related info in the signs columns and popups
         "lewis6991/gitsigns.nvim",
-        requires = {"nvim-lua/plenary.nvim"},
+        requires = { "nvim-lua/plenary.nvim" },
         config = require "plugins.configs.gitsigns"
     }
 end)

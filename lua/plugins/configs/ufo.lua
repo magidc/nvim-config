@@ -32,8 +32,13 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     return newVirtText
 end
 
+local selector = function(bufnr, filetype, buftype)
+        return {'treesitter', 'indent'}
+    end
+
 -- global handler
 ufo.setup({
-    fold_virt_text_handler = handler
+    fold_virt_text_handler = handler,
+    provider_selector = selector
 })
 

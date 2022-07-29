@@ -185,7 +185,8 @@ require("packer").startup(function(use)
     } 
     use {
         "simrat39/rust-tools.nvim",
-        config = require "plugins.configs.rusttools"
+        config = require "plugins.configs.rusttools",
+        requires = "nvim-lua/plenary.nvim"
     }
     use "mfussenegger/nvim-jdtls"
 

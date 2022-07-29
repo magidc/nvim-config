@@ -12,9 +12,10 @@ treesitter.setup {
     },
     indent = {
         enable = true,
+        disable = { "python", "css", "rust" },
     },
     --ensure_installed = "all",
-    ensure_installed = {"java", "lua", "html", "json", "sql", "dockerfile", "yaml"},
+    ensure_installed = {"java", "rust", "python", "go", "lua", "html", "json", "sql", "dockerfile", "yaml"},
     highlight = {
         enable = true,
     },

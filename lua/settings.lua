@@ -42,6 +42,9 @@ local options = {
     breakindent = true, -- Enable break indent
     foldmethod = "expr",
     foldexpr = "nvim_treesitter#foldexpr()",
+    foldlevelstart = 99,
+    foldlevel = 99,
+    foldenable = true,
 }
 
 for key, value in pairs(options) do
@@ -53,7 +56,7 @@ vim.opt.shortmess:append "c"
 vim.cmd [[set fcs=eob:\ ]]
 vim.cmd [[filetype plugin indent on]]
 
-utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, jav = 4 }
+utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, java = 4 }
 
 -- nvim-notify as default vim notification method
 local _notify, notify = pcall(require, "notify")

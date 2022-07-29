@@ -58,8 +58,9 @@ wk.register({
     ["q"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
     ["Q"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
    
-    ["_"] = { "zR", "[BLOCK] Expand all blocks" },
-   
+    ["--"] = { "zR", "[FOLDS] Expand all folds" },
+    ["_"] = { "zM", "[FOLDS] Close all folds" },
+    
     ["<leader>f"] = {
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },

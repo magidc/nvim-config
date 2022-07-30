@@ -1,6 +1,5 @@
 local _jdtls, jdtls  = pcall(require, "jdtls")
 local _handlers, handlers = pcall(require, "lsp.handlers")
-local _aerial, aerial = pcall(require, "aerial")
 
 if not _jdtls or not _handlers then
     return
@@ -39,7 +38,7 @@ local on_attach = function(client, bufnr)
 
 local config = {
         cmd = {
-          'java', 
+          'java',
           '-Declipse.application=org.eclipse.jdt.ls.core.id1',
           '-Dosgi.bundles.defaultStartLevel=4',
           '-Declipse.product=org.eclipse.jdt.ls.core.product',
@@ -49,9 +48,9 @@ local config = {
           '-Xmx2048m',
           '--add-modules=ALL-SYSTEM',
           '--add-opens', 'java.base/java.util=ALL-UNNAMED',
-          '--add-opens', 'java.base/java.lang=ALL-UNNAMED', 
-          '-jar', share_dir .. '/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-          '-configuration', share_dir .. '/nvim/lsp_servers/jdtls/config_linux', 
+          '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+          '-jar', LSP_ROOT_PATH .. '/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+          '-configuration', LSP_ROOT_PATH .. '/jdtls/config_linux',
           '-data',workspace_dir},
         flags = {
             debounce_text_changes = 150,

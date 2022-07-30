@@ -180,7 +180,10 @@ require("packer").startup(function(use)
     }
 
     ---- LSP
-    use "williamboman/nvim-lsp-installer"
+    use {
+        "williamboman/nvim-lsp-installer",
+        config = require "plugins.configs.installer"
+    }
     use {
         "neovim/nvim-lspconfig",
         config = require "plugins.configs.lspconfig"

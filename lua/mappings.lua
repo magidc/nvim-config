@@ -39,7 +39,8 @@ wk.register({
     ["<a-j>"] = { ":m .+1<cr>==", "[MOVE] Move block down" },
     ["<a-k>"] = { ":m .-2<cr>==", "[MOVE] Move block up" },
 
-    ["<leader>r"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
+    ["t"] = {'"_', "Set black hole registry"},
+    ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
     [";;"] = { "<cmd>:noh<cr>", "Clean search highlights" },
 
     ["<c-Up>"] = { "<cmd>resize +2<cr>", "[WINDOW] Make window taller" },
@@ -57,11 +58,10 @@ wk.register({
     ["<s-h>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
     ["q"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
     ["Q"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
-   
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
     ["_"] = { "zM", "[FOLDS] Close all folds" },
-    
     ["<leader>f"] = {
+
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },
         s = { "<cmd>Telescope grep_string<cr>", "[TELESCOPE] Find files using grep in file names" },
@@ -84,7 +84,7 @@ wk.register({
     ["<c-1>"] = { "<cmd>NeoTreeShowToggle<cr>", "[Neotree] Toggle" },
     ["<c-2>"] = { "<cmd>TroubleToggle<cr>", "[Trouble] Toggle" },
     ["<c-3>"] = { "<cmd>AerialToggle<cr>", "[Aerial] Toggle" },
-   
+
     ["<leader>d"] = {
         name = "[DAP debug]",
         d = { "<cmd>DapContinue<cr>", "[DAP] Start/continue debug"},

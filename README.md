@@ -32,10 +32,10 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
     > Some plugins may not be able to complete installation in a fresh Neovim environment as there may be some dependencies between them. In that case, just run `:TSUpdate` on the next Neovim start.
 
 4. This environment is configured with Language Server Providers (LSP) for Java, Python, Rust and Lua. All of them are integrated with Neovim native LSP support. It is required to install LSP in your system in order to have IDE features like autocompletions or error highlight. To facilitate installation of LSPs this configuration relies on [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer/) plugin. Download location is set to `~/.local/share/nvim/lsp_servers` but it can be changed by editing global variable `LSP_ROOT_PATH` on file [installer.lua](https://github.com/magidc/nvim-config/blob/master/lua/plugins/configs/installer.lua). Find below the instructions to setup each one of the supported LSPs:
-   1. Java: Run `:LspInstall jdtls` to download LSP to `LSP_ROOT_PATH/jdtls`. This environment expects to find the server executables in that location, if different one is desired just edit [jdtls.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/configs/jdtls.lua) and set the proper location of the LSP.
-   2. Rust: Run `:LspInstall rust_analyzer` to download LSP to `LSP_ROOT_PATH/rust_analyzer`. This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Rust LSP settings `cmd` property to the proper location.
-   3. Lua: Run `:LspInstall sumneko_lua` to download LSP to `LSP_ROOT_PATH/sumneko_lua`. This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Lua LSP settings `cmd` property to the proper location.
-   4. Python: Run `:LspInstall pyright` to download LSP to `LSP_ROOT_PATH/pyright`.This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Pyright LSP `cmd` property to the proper location.
+   1. **Java**: Run `:LspInstall jdtls` to download LSP to `LSP_ROOT_PATH/jdtls`. This environment expects to find the server executables in that location, if different one is desired just edit [jdtls.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/configs/jdtls.lua) and set the proper location of the LSP.
+   2. **Rust**: Run `:LspInstall rust_analyzer` to download LSP to `LSP_ROOT_PATH/rust_analyzer`. This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Rust LSP settings `cmd` property to the proper location.
+   3. **Lua**: Run `:LspInstall sumneko_lua` to download LSP to `LSP_ROOT_PATH/sumneko_lua`. This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Lua LSP settings `cmd` property to the proper location.
+   4. **Python**: Run `:LspInstall pyright` to download LSP to `LSP_ROOT_PATH/pyright`.This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Pyright LSP `cmd` property to the proper location.
    
 <br>
 
@@ -48,7 +48,6 @@ Default active theme is [Tokyonight](https://github.com/folke/tokyonight.nvim).
 # Custom mappings
 Most of mappings are defined in file `lua/mappings.lua`. WhichKey plugin is used in order to provide a description for each one of them.
 Other mappings can be found in specific plugin configuration files in `lua/plugins/configs` directory.
-Note that the config uses `SPACE` as the leader key by default, you can change it in `lua/settings.lua`, line `57`
 
 <br>
 

@@ -1,15 +1,15 @@
 local _lualine, lualine = pcall(require, "lualine")
-local _theme, theme = pcall(require, "theme")
-local _gps, gps = pcall(require, "nvim-gps")
 
 if not _lualine then
     return
 end
 
+local gps = require("nvim-gps")
+
 lualine.setup({
     options = {
         icons_enabled = true,
-        theme = theme.theme_name,
+        theme = require("theme").theme_name,
         disabled_filetypes = {},
         always_divide_middle = true,
         globalstatus = true

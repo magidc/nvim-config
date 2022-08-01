@@ -47,7 +47,10 @@ require("packer").startup(function(use)
         config = require "plugins.configs.materialui"
     }
     ---- UI
-    use "mhinz/vim-startify" -- Start page 
+    use {
+        -- Start page
+        "mhinz/vim-startify",
+    }
     use "kyazdani42/nvim-web-devicons"
     use {
         "akinsho/bufferline.nvim",
@@ -81,14 +84,36 @@ require("packer").startup(function(use)
         },
         config = require "plugins.configs.lualine"
     }
-
     use {
         -- Status line component that shows context of the current cursor position in file.
         "SmiteshP/nvim-gps",
         requires = "nvim-treesitter/nvim-treesitter",
         config = require "plugins.configs.gps"
     }
-
+    use {
+        -- Pretty list for showing diagnostics, references, telescope results, quickfix and location lists
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = require "plugins.configs.trouble"
+    }
+    use {
+        -- Code outline window for skimming and quick navigation
+        "stevearc/aerial.nvim",
+        config = require "plugins.configs.aerial"
+    }
+    use "rcarriga/nvim-notify" -- Popup notifications
+    use {
+        -- Tree file explorer
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
+        config = require "plugins.configs.neotree"
+    }
+    use{
+        "glepnir/lspsaga.nvim",
+        branch = "main",
+        config = require "plugins.configs.lspsaga"
+    }
     ---- Treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
@@ -103,19 +128,7 @@ require("packer").startup(function(use)
 
     ---- Utilities
     use "lewis6991/impatient.nvim" -- Startup performance enhancer
-    use "rcarriga/nvim-notify" -- Popup notifications
-    use {
-        -- Tree file explorer
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v2.x",
-        requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
-        config = require "plugins.configs.neotree"
-    }
-    use {
-        -- Code outline window for skimming and quick navigation
-        "stevearc/aerial.nvim",
-        config = require "plugins.configs.aerial"
-    }
+
     use {
         -- Search engine
         "nvim-telescope/telescope.nvim",
@@ -146,12 +159,7 @@ require("packer").startup(function(use)
         config = require "plugins.configs.colorizer"
     }
     use {
-        -- Pretty list for showing diagnostics, references, telescope results, quickfix and location lists
-        "folke/trouble.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = require "plugins.configs.trouble"
-    }
-    use {
+        -- Clipboard maanager
         "AckslD/nvim-neoclip.lua",
         requires = { "nvim-telescope/telescope.nvim" },
         config = require "plugins.configs.neoclip"
@@ -172,7 +180,11 @@ require("packer").startup(function(use)
         "sindrets/diffview.nvim",
         requires = "nvim-lua/plenary.nvim"
     }
-
+    use {
+        -- Project management
+        "ahmedkhalf/project.nvim",
+        config = require "plugins.configs.project"
+    }
     ---- Comment
     use {
         "numToStr/Comment.nvim",

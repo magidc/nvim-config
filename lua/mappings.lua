@@ -1,4 +1,3 @@
-
 local ok, wk = pcall(require, "which-key")
 
 if not ok then
@@ -36,12 +35,13 @@ wk.register({
     [","] = { "@:", "Repeat last command" },
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
-    ["<a-j>"] = { ":m .+1<cr>==", "[MOVE] Move block down" },
-    ["<a-k>"] = { ":m .-2<cr>==", "[MOVE] Move block up" },
+    ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
+    ["<a-j>"] = { ":m .+1<cr>==", "[MOVE] Move line down" },
+    ["<a-k>"] = { ":m .-2<cr>==", "[MOVE] Move line up" },
 
-    ["t"] = {'"_', "Set black hole registry"},
+    ["t"] = { '"_', "Set black hole registry" },
     ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
-    [";;"] = { "<cmd>:noh<cr>", "Clean search highlights" },
+    [";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
 
     ["<c-Up>"] = { "<cmd>resize +2<cr>", "[WINDOW] Make window taller" },
     ["<c-Down>"] = { "<cmd>resize -2<cr>", "[WINDOW] Make window shorter" },
@@ -61,7 +61,6 @@ wk.register({
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
     ["_"] = { "zM", "[FOLDS] Close all folds" },
     ["<leader>f"] = {
-
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },
         s = { "<cmd>Telescope grep_string<cr>", "[TELESCOPE] Find files using grep in file names" },
@@ -73,10 +72,11 @@ wk.register({
         z = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "[TELESCOPE] Current buffer fuzzy find" },
         --t = { "<cmd>Telescope tags<cr>", "[TELESCOPE] Tags" },
         --o = { "<cmd>Telescope current_buffer_tags<cr>", "[TELESCOPE] Current buffer tags"},
-        c = { "<cmd>Telescope command_history<cr>", "[TELESCOPE] Search command history"},
-        db = { "<cmd>Telescope dap list_breakpoints<cr>", "[TELESCOPE DAP] Breakpoints"},
-        dc = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Debug configurations"},
-        dv = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Varibles"},
+        c = { "<cmd>Telescope command_history<cr>", "[TELESCOPE] Search command history" },
+        p = { "<cmd>Telescope projects<cr>", "[TELESCOPE] Search projects" },
+        db = { "<cmd>Telescope dap list_breakpoints<cr>", "[TELESCOPE DAP] Breakpoints" },
+        dc = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Debug configurations" },
+        dv = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Varibles" },
     },
     -- Vscode similar
     ["<c-p>"] = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
@@ -87,13 +87,15 @@ wk.register({
 
     ["<leader>d"] = {
         name = "[DAP debug]",
-        d = { "<cmd>DapContinue<cr>", "[DAP] Start/continue debug"},
+        d = { "<cmd>DapContinue<cr>", "[DAP] Start/continue debug" },
         k = { "<cmd>DapTerminate<cr>", "[DAP] Terminate" },
         b = { "<cmd>DapToggleBreakpoint<cr>", "[DAP] Toggle breakpoint" },
-	    cb = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", "[DAP] Set conditional breakpoint" },
-	    lb = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", "[DAP] Set log point breakpoint" },
-	    r = { "<cmd>DapToggleRepl", "[DAP] Repl open" },
-	    l = { "<cmd>lua require'dap'.run_last()<cr>", "[DAP] Run last" },
+        cb = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
+            "[DAP] Set conditional breakpoint" },
+        lb = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>",
+            "[DAP] Set log point breakpoint" },
+        r = { "<cmd>DapToggleRepl", "[DAP] Repl open" },
+        l = { "<cmd>lua require'dap'.run_last()<cr>", "[DAP] Run last" },
         o = { "<cmd>lua require'dapui'.open()<cr>", "[DAPUI] Open debugging UI" },
         c = { "<cmd>lua require'dapui'.close()<cr>", "[DAPUI] Close debugging UI" },
     },
@@ -103,7 +105,7 @@ wk.register({
 
     ["<leader>c"] = {
         name = "[LSP]",
-        r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references"},
+        r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
         d = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
         f = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
         i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },

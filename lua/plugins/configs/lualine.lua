@@ -6,7 +6,7 @@ if not _lualine then
     return
 end
 
-lualine.setup ({
+lualine.setup({
     options = {
         icons_enabled = true,
         theme = theme.theme_name,
@@ -17,8 +17,9 @@ lualine.setup ({
     -- Autosession plugin integration
     sections = {
         lualine_c = {
-           require('auto-session-library').current_session_name, 
-            {gps.get_location, cond = gps.is_available},
-            "lsp_progress"}
+            require('auto-session-library').current_session_name,
+            { gps.get_location, cond = gps.is_available },
+            "lsp_progress"
+        }
     }
 })

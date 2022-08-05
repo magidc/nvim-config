@@ -36,7 +36,8 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
    2. **Rust**: Run `:LspInstall rust_analyzer` to download LSP to `LSP_ROOT_PATH/rust_analyzer`. This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Rust LSP settings `cmd` property to the proper location.
    3. **Lua**: Run `:LspInstall sumneko_lua` to download LSP to `LSP_ROOT_PATH/sumneko_lua`. This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Lua LSP settings `cmd` property to the proper location.
    4. **Python**: Run `:LspInstall pyright` to download LSP to `LSP_ROOT_PATH/pyright`.This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Pyright LSP `cmd` property to the proper location.
-   
+   5. **Bash**: Run `:LspInstall bashls` to download LSP to `LSP_ROOT_PATH/bashls`.This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Bash LSP `cmd` property to the proper location.  
+   6. **HTML, CSS, JSON, Markdown**: Run `:LspInstall html` to download LSP to `LSP_ROOT_PATH/html`.This environment expects to find the server executables in that location, if different one is desired just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change LSPs `cmd` property to the proper location.
 <br>
 
 # UI theme

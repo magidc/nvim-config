@@ -6,7 +6,7 @@ end
 
 aerial.setup {
     log_level = 'info',
-    backends = { "treesitter" },
+    backends = {  "treesitter" },
     filter_kind = {
         "Class",
         "Field",

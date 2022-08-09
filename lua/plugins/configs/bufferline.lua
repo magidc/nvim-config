@@ -4,8 +4,6 @@ if not ok then
     return
 end
 
-local colors = require("theme").colors
-
 bufferline.setup {
     options = {
         mode = "buffers", -- set to "tabs" to only show tabpages instead
@@ -80,93 +78,51 @@ bufferline.setup {
     },
     highlights = {
         buffer_selected = {
-            guifg = normal_fg,
-            guibg = normal_bg,
             gui = "bold"
         },
         numbers_selected = {
-            guifg = normal_fg,
-            guibg = normal_bg,
             gui = "bold"
         },
         diagnostic_selected = {
-            guifg = normal_diagnostic_fg,
-            guibg = normal_bg,
             gui = "bold"
         },
         hint_selected = {
-            guifg = hint_fg,
-            guibg = normal_bg,
             gui = "bold",
-            guisp = hint_fg
         },
         hint_diagnostic_selected = {
-            guifg = hint_diagnostic_fg,
-            guibg = normal_bg,
             gui = "bold",
-            guisp = hint_diagnostic_fg
         },
         info_selected = {
-            guifg = info_fg,
-            guibg = normal_bg,
             gui = "bold",
-            guisp = info_fg
         },
         info_diagnostic_selected = {
-            guifg = info_diagnostic_fg,
-            guibg = normal_bg,
             gui = "bold",
-            guisp = info_diagnostic_fg
         },
         warning_selected = {
-            guifg = warning_fg,
-            guibg = normal_bg,
             gui = "bold",
-            guisp = warning_fg
         },
         warning_diagnostic_selected = {
-            guifg = warning_diagnostic_fg,
-            guibg = normal_bg,
             gui = "bold",
-            guisp = warning_diagnostic_fg
         },
         error_selected = {
-            guifg = error_fg,
-            guibg = normal_bg,
             gui = "bold",
-            guisp = error_fg
         },
         error_diagnostic_selected = {
-            guifg = error_diagnostic_fg,
-            guibg = normal_bg,
             gui = "bold",
-            guisp = error_diagnostic_fg
         },
         duplicate_selected = {
-            guifg = duplicate_color,
-            guibg = normal_bg
         },
         duplicate_visible = {
-            guifg = duplicate_color,
-            guibg = visible_bg
         },
         duplicate = {
-            guifg = duplicate_color,
-            guibg = background_color
         },
         pick_selected = {
-            guifg = error_fg,
-            guibg = normal_bg,
             gui = "bold"
         },
         pick_visible = {
-            guifg = error_fg,
-            guibg = visible_bg,
             gui = "bold"
         },
         pick = {
-            guifg = error_fg,
-            guibg = background_color,
             gui = "bold"
         }
     }

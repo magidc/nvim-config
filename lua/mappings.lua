@@ -56,8 +56,8 @@ wk.register({
 
     ["<s-l>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
     ["<s-h>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
-    ["q"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
-    ["Q"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
+    ["<s-q>"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
+    ["<s-w>"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
     ["_"] = { "zM", "[FOLDS] Close all folds" },
     ["<leader>f"] = {

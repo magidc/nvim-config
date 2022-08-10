@@ -109,7 +109,7 @@ require("packer").startup(function(use)
         requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
         config = require "plugins.configs.neotree"
     }
-    use{
+    use {
         "glepnir/lspsaga.nvim",
         branch = "main",
         config = require "plugins.configs.lspsaga"

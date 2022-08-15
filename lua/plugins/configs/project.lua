@@ -5,6 +5,6 @@ if not ok then
 end
 
 project.setup {
-    -- Using maker file ".project" as a hacky way to detect project directory. Refusing to use ".git" as there are projects involving multiple git repos
-    patterns = { "*.code-workspace", ".metadata", ".project.nvim", "Makefile", "package.json" },
+    -- Using maker file ".project.nvim" as a hacky way to detect project directory. Refusing to use ".git" as there are projects involving multiple git repos
+    patterns = { ".project.nvim" },
 }

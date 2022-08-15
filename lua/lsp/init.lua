@@ -1,7 +1,7 @@
 local function start_language_server(pattern, callback)
-    vim.api.nvim_create_autocmd({"FileType"}, {
+    vim.api.nvim_create_autocmd({ "FileType" }, {
         pattern = pattern,
-        callback =  callback,
+        callback = callback,
         desc = "Start language server: " .. pattern
     })
 end
@@ -32,43 +32,49 @@ if _lspconfig then
     }
 
     -- LUA
-    local sumneko_root_path = LSP_ROOT_PATH .. "/sumneko_lua/extension/server/bin"
+    local lua_language_server_root_path = LSP_ROOT_PATH .. "/lua-language-server/extension/server/bin"
     lspconfig.sumneko_lua.setup {
-        cmd = { sumneko_root_path .. "/lua-language-server", "-E", sumneko_root_path .. "/main.lua" };
+        cmd = { lua_language_server_root_path .. "/lua-language-server", "-E",
+            lua_language_server_root_path .. "/main.lua" };
     }
 
-    -- BASH
-    local bashls_root_path = LSP_ROOT_PATH .. "/bashls/node_modules/.bin"
+    -- Bash
     lspconfig.bashls.setup {
-        cmd = { bashls_root_path .. "/bash-language-server" };
+        cmd = { LSP_ROOT_PATH .. "/bash-language-server/node_modules/.bin/bash-language-server" };
     }
 
+    -- Dockerfile
+    lspconfig.dockerls.setup {
+        cmd = { LSP_ROOT_PATH .. "/dockerfile-language-server/node_modules/.bin/docker-langserver" };
+    }
     -- HTML
-    local html_root_path = LSP_ROOT_PATH .. "/html/node_modules/.bin"
+    local html_root_path = LSP_ROOT_PATH .. "/html-lsp/node_modules/.bin"
     lspconfig.html.setup {
-        cmd = { html_root_path .. "/vscode-html-language-server", "--stdio"};
+        cmd = { html_root_path .. "/vscode-html-language-server", "--stdio" };
     }
 
     -- JSON
     lspconfig.jsonls.setup {
-        cmd = { html_root_path .. "/vscode-json-language-server", "--stdio"};
+        cmd = { html_root_path .. "/vscode-json-language-server", "--stdio" };
     }
 
     -- CSS
     lspconfig.cssls.setup {
-        cmd = { html_root_path .. "/vscode-css-language-server", "--stdio"};
+        cmd = { html_root_path .. "/vscode-css-language-server", "--stdio" };
     }
 
     -- Markdown
     lspconfig.cssls.setup {
-        cmd = { html_root_path .. "/vscode-markdown-language-server", "--stdio"};
+        cmd = { html_root_path .. "/vscode-markdown-language-server", "--stdio" };
     }
 
+    -- Javascript/Typescript
+    lspconfig.eslint.setup {
+        cmd = { html_root_path .. "/vscode-eslint-language-server", "--stdio" };
+    }
     -- CSS Modules
     local cssmodules_ls_root_path = LSP_ROOT_PATH .. "/cssmodules_ls/node_modules/.bin"
     lspconfig.cssmodules_ls.setup {
-        cmd = { cssmodules_ls_root_path .. "/cssmodules-language-server"};
+        cmd = { cssmodules_ls_root_path .. "/cssmodules-language-server" };
     }
 end
-
-

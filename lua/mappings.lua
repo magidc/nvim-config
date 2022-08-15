@@ -18,6 +18,7 @@ local i_opts = {
 
 wk.register({
     ["jk"] = { "<Esc>", "Normal mode switch" },
+    ["JK"] = { "<Esc>", "Normal mode switch" },
     ["<a-d>"] = { "<Del>", "Handy DEL on insert mode" },
     ["<a-j>"] = { "<ESC>:m .+1<cr>==gi", "[MOVE] Move block down" },
     ["<a-k>"] = { "<ESC>:m .-2<cr>==gi", "[MOVE] Move block up" },
@@ -49,15 +50,15 @@ wk.register({
     ["<c-Right>"] = { "<cmd>vertical resize +2<cr>", "[WINDOW] Make window wider" },
 
     -- Better window navigation
-    ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
-    ["<c-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
-    ["<c-k>"] = { "<c-w>k", "[WINDOW] Focus in top window" },
-    ["<c-l>"] = { "<c-w>l", "[WINDOW] Focus in right window" },
+    ["<s-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
+    ["<s-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
+    ["<s-k>"] = { "<c-w>k", "[WINDOW] Focus in top window" },
+    ["<s-l>"] = { "<c-w>l", "[WINDOW] Focus in right window" },
 
-    ["<s-l>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
-    ["<s-h>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
-    ["<s-q>"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
-    ["<s-w>"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
+    ["<a-l>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
+    ["<a-h>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
+    ["<a-w>"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
+    ["<a-q>"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
     ["_"] = { "zM", "[FOLDS] Close all folds" },
     ["<leader>f"] = {
@@ -70,9 +71,10 @@ wk.register({
         m = { "<cmd>Telescope marks<cr>", "[TELESCOPE] Marks" },
         r = { "<cmd>Telescope oldfiles<cr>", "[TELESCOPE] Recent files" },
         z = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "[TELESCOPE] Current buffer fuzzy find" },
-        --t = { "<cmd>Telescope tags<cr>", "[TELESCOPE] Tags" },
+        t = { "<cmd>TodoTelescope<cr>", "[TELESCOPE] TODO list" },
         --o = { "<cmd>Telescope current_buffer_tags<cr>", "[TELESCOPE] Current buffer tags"},
         c = { "<cmd>Telescope command_history<cr>", "[TELESCOPE] Search command history" },
+        x = { "<cmd>Telescope neoclip<cr>", "[TELESCOPE] Search in clipboard manager" },
         p = { "<cmd>Telescope projects<cr>", "[TELESCOPE] Search projects" },
         db = { "<cmd>Telescope dap list_breakpoints<cr>", "[TELESCOPE DAP] Breakpoints" },
         dc = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Debug configurations" },

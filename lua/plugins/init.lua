@@ -151,7 +151,8 @@ require("packer").startup(function(use)
     }
     use {
         -- Autochange open/close chars
-        "tpope/vim-surround",
+        "kylechui/nvim-surround",
+        config = require "plugins.configs.surround"
     }
     use {
         -- Colorize written color codes (#02F1AA, rgb(0,10,20)...)
@@ -167,10 +168,16 @@ require("packer").startup(function(use)
     use {
         --- Improved terminal toggle
         "akinsho/toggleterm.nvim",
-        tag = "v1.*",
+        tag = "v2.*",
         config = require "plugins.configs.toggleterm"
     }
-    use "RRethy/vim-illuminate" -- Automatically highlighting other uses of the current word under the cursor
+    use {
+        "wellle/targets.vim"
+    }
+    use {
+        -- Automatically highlighting other uses of the current word under the cursor
+        "RRethy/vim-illuminate"
+    }
     use {
         -- Automatic session management
         "rmagatti/auto-session",
@@ -185,17 +192,23 @@ require("packer").startup(function(use)
         "ahmedkhalf/project.nvim",
         config = require "plugins.configs.project"
     }
-    ---- Comment
+    ---- Comments
     use {
         "numToStr/Comment.nvim",
         config = require "plugins.configs.comment",
     }
 
-    ---- LSP
     use {
-        "williamboman/nvim-lsp-installer",
-        config = require "plugins.configs.installer"
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = require "plugins.configs.todo"
     }
+    use {
+        "williamboman/mason.nvim",
+        config = require "plugins.configs.mason"
+    }
+
+    ---- LSP
     use {
         "neovim/nvim-lspconfig",
         config = require "plugins.configs.lspconfig"

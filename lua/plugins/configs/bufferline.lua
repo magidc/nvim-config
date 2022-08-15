@@ -59,9 +59,9 @@ bufferline.setup {
                 return true
             end
         end,
-        offsets = {{
+        offsets = { {
             text_align = "center"
-        }},
+        } },
         color_icons = true, -- whether or not to add the filetype icon highlights
         show_buffer_icons = true, -- disable filetype icons for buffers
         show_buffer_close_icons = true,
@@ -78,37 +78,37 @@ bufferline.setup {
     },
     highlights = {
         buffer_selected = {
-            gui = "bold"
+            bold = true
         },
         numbers_selected = {
-            gui = "bold"
+            bold = true
         },
         diagnostic_selected = {
-            gui = "bold"
+            bold = true
         },
         hint_selected = {
-            gui = "bold",
+            bold = true,
         },
         hint_diagnostic_selected = {
-            gui = "bold",
+            bold = true,
         },
         info_selected = {
-            gui = "bold",
+            bold = true,
         },
         info_diagnostic_selected = {
-            gui = "bold",
+            bold = true,
         },
         warning_selected = {
-            gui = "bold",
+            bold = true,
         },
         warning_diagnostic_selected = {
-            gui = "bold",
+            bold = true,
         },
         error_selected = {
-            gui = "bold",
+            bold = true,
         },
         error_diagnostic_selected = {
-            gui = "bold",
+            bold = true,
         },
         duplicate_selected = {
         },
@@ -117,13 +117,13 @@ bufferline.setup {
         duplicate = {
         },
         pick_selected = {
-            gui = "bold"
+            bold = true
         },
         pick_visible = {
-            gui = "bold"
+            bold = true
         },
         pick = {
-            gui = "bold"
+            bold = true
         }
     }
 }

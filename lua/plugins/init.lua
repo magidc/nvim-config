@@ -162,7 +162,7 @@ require("packer").startup(function(use)
     use {
         -- Clipboard maanager
         "AckslD/nvim-neoclip.lua",
-        requires = { "nvim-telescope/telescope.nvim" },
+        requires = "nvim-telescope/telescope.nvim",
         config = require "plugins.configs.neoclip"
     }
     use {
@@ -190,6 +190,7 @@ require("packer").startup(function(use)
     use {
         -- Project management
         "ahmedkhalf/project.nvim",
+        requires = "nvim-telescope/telescope.nvim",
         config = require "plugins.configs.project"
     }
     ---- Comments
@@ -228,6 +229,8 @@ require("packer").startup(function(use)
 
     use {
         "nvim-telescope/telescope-dap.nvim",
+        requires = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
+        config = require "plugins.configs.telescopedap"
     }
     ---- Snippets
     use {

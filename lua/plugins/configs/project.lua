@@ -8,3 +8,5 @@ project.setup {
     -- Using maker file ".project.nvim" as a hacky way to detect project directory. Refusing to use ".git" as there are projects involving multiple git repos
     patterns = { ".project.nvim" },
 }
+require("telescope").load_extension("projects")
+

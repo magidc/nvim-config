@@ -12,13 +12,13 @@ if _jdtls and type(jdtls) ~= 'boolean' then
     start_language_server('java', jdtls.start)
 end
 
--- RUST
+-- Rust
 local _rust, rust = pcall(require, "rust-tools")
 if _rust then
     local opts = {
         server = {
             standalone = true,
-            cmd = { LSP_ROOT_PATH .. "/rust_analyzer/rust-analyzer" };
+            cmd = { LSP_ROOT_PATH .. "/rust-analyzer/rust-analyzer" };
         },
     }
     rust.setup(opts)
@@ -26,7 +26,7 @@ end
 
 local _lspconfig, lspconfig = pcall(require, "lspconfig")
 if _lspconfig then
-    -- PYTHON
+    -- Python
     lspconfig.pyright.setup {
         cmd = { LSP_ROOT_PATH .. "/pyright/node_modules/.bin/pyright-langserver", "--stdio" };
     }

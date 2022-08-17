@@ -73,7 +73,7 @@ if _lspconfig then
         cmd = { html_root_path .. "/vscode-eslint-language-server", "--stdio" };
     }
     -- CSS Modules
-    local cssmodules_ls_root_path = LSP_ROOT_PATH .. "/cssmodules_ls/node_modules/.bin"
+    local cssmodules_ls_root_path = LSP_ROOT_PATH .. "/cssmodules-language-server/node_modules/.bin"
     lspconfig.cssmodules_ls.setup {
         cmd = { cssmodules_ls_root_path .. "/cssmodules-language-server" };
     }

@@ -50,10 +50,10 @@ wk.register({
     ["<c-Right>"] = { "<cmd>vertical resize +2<cr>", "[WINDOW] Make window wider" },
 
     -- Better window navigation
-    ["<s-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
-    ["<s-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
-    ["<s-k>"] = { "<c-w>k", "[WINDOW] Focus in top window" },
-    ["<s-l>"] = { "<c-w>l", "[WINDOW] Focus in right window" },
+    ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
+    ["<c-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
+    ["<c-k>"] = { "<c-w>k", "[WINDOW] Focus in top window" },
+    ["<c-l>"] = { "<c-w>l", "[WINDOW] Focus in right window" },
 
     ["<a-l>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
     ["<a-h>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
@@ -80,12 +80,12 @@ wk.register({
         dc = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Debug configurations" },
         dv = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Varibles" },
     },
-    -- Vscode similar
+    -- VScode similar
     ["<c-p>"] = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
 
-    ["<c-1>"] = { "<cmd>NeoTreeShowToggle<cr>", "[Neotree] Toggle" },
-    ["<c-2>"] = { "<cmd>TroubleToggle<cr>", "[Trouble] Toggle" },
-    ["<c-3>"] = { "<cmd>AerialToggle<cr>", "[Aerial] Toggle" },
+    ["<c-1>"] = { "<cmd>NeoTreeShowToggle<cr>", "[NEOTREE] Toggle" },
+    ["<c-2>"] = { "<cmd>TroubleToggle<cr>", "[TROUBLE] Toggle" },
+    ["<c-3>"] = { "<cmd>AerialToggle<cr>", "[AERIAL] Toggle" },
 
     ["<leader>d"] = {
         name = "[DAP debug]",
@@ -122,7 +122,7 @@ wk.register({
         o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
     },
 
-    ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", "[ToggleTerm] Open new terminal" },
+    ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", "[TOGGLETERM] Open new terminal" },
 
     ["<leader>g"] = {
         name = "[GIT]",

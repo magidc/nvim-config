@@ -38,12 +38,12 @@ treesitter.setup {
             enable = true,
             lookahead = true,
             keymaps = {
-                ["ap"] = "@parameter.outer",
-                ["ip"] = "@parameter.inner",
+                ["af"] = "@parameter.outer",
+                ["if"] = "@parameter.inner",
                 ["ab"] = "@block.outer",
                 ["ib"] = "@block.inner",
-                ["af"] = "@function.outer",
-                ["if"] = "@function.inner",
+                ["am"] = "@function.outer",
+                ["im"] = "@function.inner",
                 ["ac"] = "@class.outer",
                 ["ic"] = "@class.inner",
             },
@@ -52,27 +52,27 @@ treesitter.setup {
             enable = true,
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
-                [']f'] = '@function.outer',
-                [']c'] = '@class.outer',
-                [']p'] = '@parameter.outer',
+                [']m'] = '@function.outer',
+                [']['] = '@class.outer',
+                [']f'] = '@parameter.outer',
                 [']b'] = '@block.outer'
             },
             goto_next_end = {
-                [']F'] = '@function.outer',
-                [']C'] = '@class.outer',
-                [']P'] = '@parameter.outer',
+                [']M'] = '@function.outer',
+                [']]'] = '@class.outer',
+                [']F'] = '@parameter.outer',
                 [']B'] = '@block.outer'
             },
             goto_previous_start = {
-                ['[f'] = '@function.outer',
-                ['[c'] = '@class.outer',
-                ['[p'] = '@parameter.outer',
+                ['[m'] = '@function.outer',
+                ['[['] = '@class.outer',
+                ['[f'] = '@parameter.outer',
                 ['[b'] = '@block.outer'
             },
             goto_previous_end = {
-                ['[F'] = '@function.outer',
-                ['[C'] = '@class.outer',
-                ['[P'] = '@parameter.outer',
+                ['[M'] = '@function.outer',
+                ['[]'] = '@class.outer',
+                ['[F'] = '@parameter.outer',
                 ['[B'] = '@block.outer'
             }
         }

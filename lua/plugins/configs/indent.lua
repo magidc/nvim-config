@@ -5,6 +5,5 @@ if not ok then
 end
 
 indent.setup {
-    char = '┊',
-    show_trailing_blankline_indent = false
+    show_end_of_line = true,
 }

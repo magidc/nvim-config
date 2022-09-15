@@ -38,6 +38,8 @@ require("packer").startup(function(use)
     use "olimorris/onedarkpro.nvim"
     use "tiagovla/tokyodark.nvim"
     use "bluz71/vim-moonfly-colors"
+    use "Mofiqul/dracula.nvim"
+    use "magidc/draculanight"
     use {
         "catppuccin/nvim",
         as = "catppuccin"

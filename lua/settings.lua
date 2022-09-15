@@ -65,8 +65,8 @@ if _notify then
 end
 
 -- UI theme
-local themename = "tokyonight"
+local themename = "draculanight"
 local _theme, theme = pcall(require, themename)
 if _theme then
-    require("theme").init("tokyonight")
+    require("theme").init(themename)
 end

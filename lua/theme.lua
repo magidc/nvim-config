@@ -36,7 +36,7 @@ M.colors = {
 M.init = function(theme_name)
     M.theme_name = theme_name
     local _ok, theme = pcall(require, M.theme_name)
-   
+
     if M.theme_name == 'onenord' then
         theme.setup {
             borders = true,
@@ -121,10 +121,16 @@ M.init = function(theme_name)
             }
         }
     elseif M.theme_name == 'tokyonight' then
-        vim.g.tokyonight_style = "night"
-        theme.colorscheme()
+        theme.setup({
+            style = 'night',
+            on_colors = function(colors)
+                colors.bg_dark = '#000000'
+                colors.bg = '#11121D'
+            end
+        })
+        theme.load()
     elseif M.theme_name == 'onedark' then
-        theme.setup {style = 'darker'}
+        theme.setup { style = 'darker' }
         theme.load()
     elseif M.theme_name == 'moonfly' then
         vim.cmd [[colorscheme moonfly]]
@@ -138,11 +144,17 @@ M.init = function(theme_name)
         vim.g.tokyodark_transparent_background = false
         vim.g.tokyodark_enable_italic_comment = true
         vim.g.tokyodark_enable_italic = true
-        vim.g.tokyodark_color_gamma = "0"
+        vim.g.tokyodark_color_gamma = "0.0"
         vim.cmd 'colorscheme tokyodark'
     elseif M.theme_name == 'catppuccin' then
         vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-        vim.cmd[[colorscheme catppuccin]]           
+        vim.cmd [[colorscheme catppuccin]]
+    elseif M.theme_name == 'dracula' then
+        theme.setup {}
+        theme.load()
+     elseif M.theme_name == 'draculanight' then
+        theme.setup {}
+        theme.load()
     end
 end
 

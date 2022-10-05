@@ -32,13 +32,13 @@ require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
     ---- UI Themes
-    use "rmehri01/onenord.nvim"
-    use "folke/tokyonight.nvim"
-    use "navarasu/onedark.nvim"
-    use "olimorris/onedarkpro.nvim"
-    use "tiagovla/tokyodark.nvim"
-    use "bluz71/vim-moonfly-colors"
-    use "Mofiqul/dracula.nvim"
+    -- use "rmehri01/onenord.nvim"
+    -- use "folke/tokyonight.nvim"
+    -- use "navarasu/onedark.nvim"
+    -- use "olimorris/onedarkpro.nvim"
+    -- use "tiagovla/tokyodark.nvim"
+    -- use "bluz71/vim-moonfly-colors"
+    -- use "Mofiqul/dracula.nvim"
     use "magidc/draculanight"
     use {
         "catppuccin/nvim",
@@ -234,6 +234,12 @@ require("packer").startup(function(use)
         requires = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
         config = require "plugins.configs.telescopedap"
     }
+
+    use {
+        "ggandor/leap.nvim",
+        config = require "plugins.configs.leap"
+    }
+
     ---- Snippets
     use {
         "L3MON4D3/LuaSnip",

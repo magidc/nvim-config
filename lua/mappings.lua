@@ -20,6 +20,10 @@ wk.register({
     ["jk"] = { "<Esc>", "Normal mode switch" },
     ["JK"] = { "<Esc>", "Normal mode switch" },
     ["<a-d>"] = { "<Del>", "Handy DEL on insert mode" },
+    ["<a-Bs>"] = { "<C-o>diw", "Delete word" },
+    ["<a-e>"] = { "<C-o>de", "Delete to end of word" },
+    ["<c-w>"] = { "<C-o>w", "Move to next word" },
+    ["<c-b>"] = { "<C-o>b", "Move to previous word" },
     ["<a-j>"] = { "<ESC>:m .+1<cr>==gi", "[MOVE] Move block down" },
     ["<a-k>"] = { "<ESC>:m .-2<cr>==gi", "[MOVE] Move block up" },
 }, i_opts)
@@ -34,6 +38,9 @@ local n_opts = {
 
 wk.register({
     [","] = { "@:", "Repeat last command" },
+    ["<a-Bs>"] = { "diw", "Delete word" },
+    ["<a-f>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>d", "Delete function parameter" },
+    ["<a-d>"] = { "mzwdw`z", "Delete next word" },
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },

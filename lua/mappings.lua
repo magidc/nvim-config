@@ -22,8 +22,8 @@ wk.register({
     ["<a-d>"] = { "<Del>", "Handy DEL on insert mode" },
     ["<a-Bs>"] = { "<C-o>diw", "Delete word" },
     ["<a-e>"] = { "<C-o>de", "Delete to end of word" },
-    ["<c-w>"] = { "<C-o>w", "Move to next word" },
-    ["<c-b>"] = { "<C-o>b", "Move to previous word" },
+    ["<a-w>"] = { "<C-o>w", "Move to next word" },
+    ["<a-b>"] = { "<C-o>b", "Move to previous word" },
     ["<a-j>"] = { "<ESC>:m .+1<cr>==gi", "[MOVE] Move block down" },
     ["<a-k>"] = { "<ESC>:m .-2<cr>==gi", "[MOVE] Move block up" },
 }, i_opts)

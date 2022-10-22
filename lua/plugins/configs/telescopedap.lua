@@ -1,4 +1,4 @@
-local ok, dapui = pcall(require, "dapui")
+local ok, _ = pcall(require, "dapui")
 
 if not ok then
     return

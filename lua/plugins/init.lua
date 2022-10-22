@@ -40,14 +40,14 @@ require("packer").startup(function(use)
     -- use "bluz71/vim-moonfly-colors"
     -- use "Mofiqul/dracula.nvim"
     use "magidc/draculanight"
-    use {
-        "catppuccin/nvim",
-        as = "catppuccin"
-    }
-    use {
-        "marko-cerovac/material.nvim",
-        config = require "plugins.configs.materialui"
-    }
+    -- use {
+    --     "catppuccin/nvim",
+    --     as = "catppuccin"
+    -- }
+    -- use {
+    --     "marko-cerovac/material.nvim",
+    --     config = require "plugins.configs.materialui"
+    -- }
     ---- UI
     use {
         -- Start page
@@ -129,7 +129,7 @@ require("packer").startup(function(use)
     }
 
     ---- Utilities
-    use "lewis6991/impatient.nvim" -- Startup performance enhancer
+    -- use "lewis6991/impatient.nvim" -- Startup performance enhancer
 
     use {
         -- Search engine

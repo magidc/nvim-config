@@ -9,12 +9,12 @@ comment.setup {
     sticky = true,
     ignore = nil,
     toggler = {
-        line = "gcc",
-        block = "gbc",
+        line = "<c-/>",
+        block = "<c-]>",
     },
     opleader = {
-        line = "gc",
-        block = "gb",
+        line = "<c-a-/>",
+        block = "<c-a-]>",
     },
     mappings = {
         basic = true,

@@ -20,7 +20,7 @@ telescope.setup {
             "--smart-case",
             "--hidden",
         },
-        file_ignore_patterns = { "/.git/","/.settings/", "/.metadata/", "/target/", "/node_modules/", '.class$' },
+        file_ignore_patterns = { ".git/",".settings/", ".metadata/", "target/", "node_modules/", '.class$' },
         mappings = {
             i = {
                 ['<C-u>'] = false,

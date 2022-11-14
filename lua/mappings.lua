@@ -46,6 +46,11 @@ wk.register({
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
     ["<a-j>"] = { ":m .+1<cr>==", "[MOVE] Move line down" },
     ["<a-k>"] = { ":m .-2<cr>==", "[MOVE] Move line up" },
+    ["m"] = { "]m", "[MOVE] Move to next method" },
+    ["M"] = { "[m", "[MOVE] Move to previous method" },
+    ["<c-a>"] = { "ggVG", "[SELECT] Select all" },
+    ["H"] = { "^", "[MOVE] First character of line" },
+    ["L"] = { "$", "[MOVE] Last character of line" },
 
     ["t"] = { '"_', "Set black hole registry" },
     ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
@@ -114,13 +119,14 @@ wk.register({
     ["<leader>c"] = {
         name = "[LSP]",
         r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
-        t = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
+        c = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
         d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
+        t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "[LSP] Go to type definition" },
         i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
         a = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
         v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
-        c = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "[LSP] Format code" },
+        s = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "[LSP] Format code" },
         n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
     },
     ["<leader>j"] = {

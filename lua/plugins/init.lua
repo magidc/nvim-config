@@ -82,7 +82,6 @@ require("packer").startup(function(use)
         requires = {
             "arkav/lualine-lsp-progress",
             "SmiteshP/nvim-gps",
-            "rmagatti/auto-session"
         },
         config = require "plugins.configs.lualine"
     }
@@ -102,6 +101,16 @@ require("packer").startup(function(use)
         -- Code outline window for skimming and quick navigation
         "stevearc/aerial.nvim",
         config = require "plugins.configs.aerial"
+    }
+    use {
+        -- Custom modes tu run commands with a common prefix
+        "anuvyklack/hydra.nvim",
+        config = require "plugins.configs.hydra"
+    }
+    use {
+        -- Extends LSP function with external tools
+        "jose-elias-alvarez/null-ls.nvim",
+        config = require "plugins.configs.null-ls"
     }
     use "rcarriga/nvim-notify" -- Popup notifications
     use {
@@ -180,10 +189,10 @@ require("packer").startup(function(use)
         -- Automatically highlighting other uses of the current word under the cursor
         "RRethy/vim-illuminate"
     }
-    use {
+    --[[ use {
         -- Automatic session management
         "rmagatti/auto-session",
-    }
+    } ]]
     use {
         --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
         "sindrets/diffview.nvim",
@@ -240,7 +249,7 @@ require("packer").startup(function(use)
         config = require "plugins.configs.leap"
     }
 
-    ---- Snippets
+   ---- Snippets
     use {
         "L3MON4D3/LuaSnip",
     }

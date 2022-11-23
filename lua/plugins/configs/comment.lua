@@ -13,8 +13,8 @@ comment.setup {
         block = "<c-]>",
     },
     opleader = {
-        line = "<c-A-/>",
-        block = "<c-A-]>",
+        line = "<c-/>",
+        block = "<c-]>",
     },
     mappings = {
         basic = true,

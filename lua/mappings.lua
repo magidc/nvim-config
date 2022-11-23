@@ -44,22 +44,19 @@ wk.register({
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
+    ["<c-a>"] = { "ggVG", "[SELECT] Select all" },
+
     ["<a-j>"] = { ":m .+1<cr>==", "[MOVE] Move line down" },
     ["<a-k>"] = { ":m .-2<cr>==", "[MOVE] Move line up" },
+
     ["m"] = { "]m", "[MOVE] Move to next method" },
     ["M"] = { "[m", "[MOVE] Move to previous method" },
-    ["<c-a>"] = { "ggVG", "[SELECT] Select all" },
     ["H"] = { "^", "[MOVE] First character of line" },
     ["L"] = { "$", "[MOVE] Last character of line" },
 
     ["t"] = { '"_', "Set black hole registry" },
-    ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
+    ["<leader>p"] = { '"_diwP', "Replace word with paste" },
     [";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
-
-    ["<c-Up>"] = { "<cmd>resize +2<cr>", "[WINDOW] Make window taller" },
-    ["<c-Down>"] = { "<cmd>resize -2<cr>", "[WINDOW] Make window shorter" },
-    ["<c-Left>"] = { "<cmd>vertical resize -2<cr>", "[WINDOW] Make window narrower" },
-    ["<c-Right>"] = { "<cmd>vertical resize +2<cr>", "[WINDOW] Make window wider" },
 
     -- Better window navigation
     ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
@@ -69,10 +66,13 @@ wk.register({
 
     ["<a-l>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
     ["<a-h>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
-    ["<a-w>"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
-    ["<a-q>"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
+    ["<a-w>"] = { "<cmd>bd!<cr>", "[BUFFER] Close current buffer" },
+    ["<a-q>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
+    ["<a-n>"] = { "<cmd>ene<cr>", "[BUFFER] Open a new empty buffer" },
+
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
     ["_"] = { "zM", "[FOLDS] Close all folds" },
+
     ["<leader>f"] = {
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },
@@ -93,7 +93,6 @@ wk.register({
     },
     -- VScode similar
     ["<c-p>"] = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
-
     ["<c-1>"] = { "<cmd>NeoTreeShowToggle<cr>", "[NEOTREE] Toggle" },
     ["<c-2>"] = { "<cmd>TroubleToggle<cr>", "[TROUBLE] Toggle" },
     ["<c-3>"] = { "<cmd>AerialToggle<cr>", "[AERIAL] Toggle" },
@@ -101,16 +100,19 @@ wk.register({
     ["<leader>d"] = {
         name = "[DAP debug]",
         d = { "<cmd>DapContinue<cr>", "[DAP] Start/continue debug" },
-        k = { "<cmd>DapTerminate<cr>", "[DAP] Terminate" },
+        n = { "<cmd>DapStepOver<cr>", "[DAP] Step over" },
+        s = { "<cmd>DapStepInto<cr>", "[DAP] Step into" },
+        o = { "<cmd>DapStepOut<cr>", "[DAP] Step out" },
+        x = { "<cmd>DapTerminate<cr>", "[DAP] Terminate" },
         b = { "<cmd>DapToggleBreakpoint<cr>", "[DAP] Toggle breakpoint" },
-        cb = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
+        c = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
             "[DAP] Set conditional breakpoint" },
-        lb = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>",
+        m = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>",
             "[DAP] Set log point breakpoint" },
-        r = { "<cmd>DapToggleRepl", "[DAP] Repl open" },
+        r = { "<cmd>DapToggleRepl<cr>", "[DAP] Repl open" },
         l = { "<cmd>lua require'dap'.run_last()<cr>", "[DAP] Run last" },
-        o = { "<cmd>lua require'dapui'.open()<cr>", "[DAPUI] Open debugging UI" },
-        c = { "<cmd>lua require'dapui'.close()<cr>", "[DAPUI] Close debugging UI" },
+        O = { "<cmd>lua require'dapui'.open()<cr>", "[DAPUI] Open debugging UI" },
+        C = { "<cmd>lua require'dapui'.close()<cr>", "[DAPUI] Close debugging UI" },
     },
     ["<F10>"] = { "<cmd>lua require'dap'.step_over()<cr>", "[DAP] Step over" },
     ["<F11>"] = { "<cmd>lua require'dap'.step_into()<cr>", "[DAP] Step into" },

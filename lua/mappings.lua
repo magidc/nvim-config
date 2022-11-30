@@ -8,6 +8,7 @@ end
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- Insert mode mappings
 local i_opts = {
     mode = "i",
     prefix = "",
@@ -21,6 +22,7 @@ wk.register({
     ["JK"] = { "<Esc>", "Normal mode switch" },
     ["<a-d>"] = { "<Del>", "Handy DEL on insert mode" },
     ["<a-Bs>"] = { "<C-o>diw", "Delete word" },
+    ["<a-c>"] = { "<C-o>ciw", "Change word" },
     ["<a-e>"] = { "<C-o>de", "Delete to end of word" },
     ["<a-w>"] = { "<C-o>w", "Move to next word" },
     ["<a-b>"] = { "<C-o>b", "Move to previous word" },
@@ -28,6 +30,7 @@ wk.register({
     ["<a-k>"] = { "<ESC>:m .-2<cr>==gi", "[MOVE] Move block up" },
 }, i_opts)
 
+-- Normal mode mappings
 local n_opts = {
     mode = "n",
     prefix = "",
@@ -39,8 +42,10 @@ local n_opts = {
 wk.register({
     [","] = { "@:", "Repeat last command" },
     ["<a-Bs>"] = { "diw", "Delete word" },
+    ["<a-c>"] = { "ciw", "Change word" },
     ["<a-f>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>d", "Delete function parameter" },
     ["<a-d>"] = { "mzwdw`z", "Delete next word" },
+    ["<a-\\>"] = { "ci(", "Change inside parentheses" },
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
@@ -69,6 +74,8 @@ wk.register({
     ["<a-w>"] = { "<cmd>bd!<cr>", "[BUFFER] Close current buffer" },
     ["<a-q>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
     ["<a-n>"] = { "<cmd>ene<cr>", "[BUFFER] Open a new empty buffer" },
+    ["WQ"] = { "<cmd>wqall<cr>", "[BUFFER] Quit and save all" },
+    ["Q"] = { "<cmd>qall!<cr>", "[BUFFER] Quit all without saving" },
 
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
     ["_"] = { "zM", "[FOLDS] Close all folds" },
@@ -148,6 +155,7 @@ wk.register({
     },
 }, n_opts)
 
+-- Visual mode mappings
 local v_opts = {
     mode = "v",
     nowait = true,
@@ -163,5 +171,20 @@ wk.register({
     ["<a-j>"] = { ":m '>+1<cr>gv=gv", "[MOVE] Move block down" },
     ["<a-k>"] = { ":m '<-2<cr>gv=gv", "[MOVE] Move block up" },
 }, v_opts)
+
+
+-- Select mode mappings
+local s_opts = {
+    mode = "s",
+    prefix = "",
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
+wk.register({
+   ["<a-Bs>"] = { "<C-o>diw", "Delete word" },
+    ["<a-c>"] = { "<C-o>ciw", "Change word" },
+}, s_opts)
+
 
 wk.setup {}

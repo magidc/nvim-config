@@ -29,11 +29,18 @@ cmp.setup {
             luasnip.lsp_expand(args.body)
         end
     },
-    sorting = {
-        comparators = { cmp.config.compare.offset, cmp.config.compare.exact, cmp.config.compare.score,
-            cmp.config.compare._under_comparator, cmp.config.compare.kind, cmp.config.compare.sort_text,
-            cmp.config.compare.length, cmp.config.compare.order }
-    },
+    -- sorting = {
+    --     comparators = {
+    --         cmp.config.compare.offset,
+    --         cmp.config.compare.exact,
+    --         cmp.config.compare.score,
+    --         cmp.config.compare._under_comparator,
+    --         cmp.config.compare.kind,
+    --         cmp.config.compare.sort_text,
+    --         cmp.config.compare.length,
+    --         cmp.config.compare.order,
+    --     }
+    -- },
     formatting = {
         format = function(entry, vim_item)
             -- Fancy icons and a name of kind

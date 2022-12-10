@@ -6,7 +6,7 @@ end
 
 telescope.setup {
     picker = {
-        hidden = false,
+        hidden = true,
     },
     defaults = {
         vimgrep_arguments = {

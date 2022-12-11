@@ -56,7 +56,7 @@ wk.register({
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
 
     -- Macros and registers
-    ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
+    ["<leader>m"] = { "<cmd>reg<cr>", "Show registers" },
     ["t"] = { '"_', "Set black hole registry" },
     ["qj"] = { '@q', "Execute macro saved in 'q' register" },
     [","] = { "@:", "Repeat last command" },
@@ -66,12 +66,11 @@ wk.register({
     ["<leader>f"] = {
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
-        s = { "<cmd>Telescope grep_string<cr>", "[TELESCOPE] Find files using grep in file names" },
+        n = { "<cmd>Telescope grep_string<cr>", "[TELESCOPE] Find files using grep in file names" },
         g = { "<cmd>Telescope live_grep<cr>", "[TELESCOPE] Find File by live grep (search content inside file)" },
         b = { "<cmd>Telescope buffers<cr>", "[TELESCOPE] Find buffers" },
-        h = { "<cmd>Telescope help_tags<cr>", "[TELESCOPE] Help tags" },
         m = { "<cmd>Telescope marks<cr>", "[TELESCOPE] Marks" },
-        r = { "<cmd>Telescope oldfiles<cr>", "[TELESCOPE] Recent files" },
+        h = { "<cmd>Telescope oldfiles<cr>", "[TELESCOPE] Recent files" },
         z = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "[TELESCOPE] Current buffer fuzzy find" },
         t = { "<cmd>TodoTelescope<cr>", "[TELESCOPE] TODO list" },
         c = { "<cmd>Telescope command_history<cr>", "[TELESCOPE] Search command history" },
@@ -79,7 +78,7 @@ wk.register({
         p = { "<cmd>Telescope projects<cr>", "[TELESCOPE] Search projects" },
         db = { "<cmd>Telescope dap list_breakpoints<cr>", "[TELESCOPE DAP] Breakpoints" },
         dc = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Debug configurations" },
-        dv = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Varibles" },
+        dv = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Variables" },
     },
 
     -- Views
@@ -95,8 +94,10 @@ wk.register({
         d = { "<cmd>DapContinue<cr>", "[DAP] Debug/Resume" },
         k = { "<cmd>DapTerminate<cr>", "[DAP] Terminate" },
         b = { "<cmd>DapToggleBreakpoint<cr>", "[DAP] Toggle breakpoint" },
-        B = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", "[DAP] Set conditional breakpoint"},
-        l = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", "[DAP] Set log point breakpoint"},
+        B = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
+            "[DAP] Set conditional breakpoint" },
+        l = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>",
+            "[DAP] Set log point breakpoint" },
         v = { "<cmd>DapStepOver<cr>", "[DAP] Step over" },
         i = { "<cmd>DapStepInto<cr>", "[DAP] Step into" },
         o = { "<cmd>DapStepOut<cr>", "[DAP] Step out" },
@@ -105,21 +106,33 @@ wk.register({
         u = { "<cmd>lua require'dapui'.toggle()<cr>", "[DAPUI] Toggle debugging UI" },
     },
 
-    -- Code and refactoring
+    -- Code navigation
     ["<leader>c"] = {
-        name = "[LSP]",
-        r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
+        name = "[Code navigation]",
         c = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
         d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
         t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "[LSP] Go to type definition" },
         i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
+        s = { "<cmd>lua require'jdtls'.super_implementation()<cr>", "[JDLTS] Go to super implementation" },
+        r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
         a = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
         v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
+    },
+
+    -- Code refactoring
+    ["<leader>r"] = {
+        name = "[Code refactor]",
         f = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "[LSP] Format code" },
         n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
-        s = { "<cmd>lua require'jdtls'.super_implementation()<cr>", "[JDLTS] Go to super implementation" },
         o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
+    },
+
+    -- Diagnostics
+    ["<leader>e"] = {
+        name = "[Diagnostics]",
+        n = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "[DIAG] Go to next error" },
+        p = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "[DIAG] Go to previous error" },
     },
 
     -- Git
@@ -170,7 +183,7 @@ wk.register({
     [">"] = { ">gv", "[Indent] Indent right" },
     ["<a-j>"] = { ":m '>+1<cr>gv=gv", "[MOVE] Move block down" },
     ["<a-k>"] = { ":m '<-2<cr>gv=gv", "[MOVE] Move block up" },
-    ["<leader>dx"] ={"<cmd>lua require('dapui').eval()<CR>", "[DAPUI] Evaluate (selection in visual mode) }" },
+    ["<leader>dx"] = { "<cmd>lua require('dapui').eval()<CR>", "[DAPUI] Evaluate (selection in visual mode) }" },
 }, v_opts)
 
 -- Select mode mappings
@@ -182,7 +195,7 @@ local s_opts = {
     nowait = true,
 }
 wk.register({
-   ["<a-Bs>"] = { "<C-o>diw", "Delete word" },
+    ["<a-Bs>"] = { "<C-o>diw", "Delete word" },
     ["<a-c>"] = { "<C-o>ciw", "Change word" },
 }, s_opts)
 

@@ -113,6 +113,7 @@ require("packer").startup(function(use)
         config = require "plugins.configs.null-ls"
     }
     use "rcarriga/nvim-notify" -- Popup notifications
+    use "terryma/vim-expand-region" --Incremental selection expansion
     use {
         -- Tree file explorer
         "nvim-neo-tree/neo-tree.nvim",

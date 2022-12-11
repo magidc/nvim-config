@@ -61,7 +61,7 @@ wk.register({
     ["qj"] = { '@q', "Execute macro saved in 'q' register" },
     [","] = { "@:", "Repeat last command" },
 
-    -- Search
+    -- Find
     [";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
     ["<leader>f"] = {
         name = "[TELESCOPE]",
@@ -123,7 +123,7 @@ wk.register({
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
     },
 
-    -- Code refactoring
+    -- Refactoring
     ["<leader>r"] = {
         name = "[Code refactor]",
         f = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "[LSP] Format code" },
@@ -131,7 +131,7 @@ wk.register({
         o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
     },
 
-    -- Diagnostics
+    -- Errors and diagnostics
     ["<leader>e"] = {
         name = "[Diagnostics]",
         n = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "[DIAG] Go to next error" },

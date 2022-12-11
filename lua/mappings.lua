@@ -82,10 +82,13 @@ wk.register({
     },
 
     -- Views
-    ["<c-1>"] = { "<cmd>NeoTreeShowToggle<cr>", "[NEOTREE] Toggle" },
-    ["<c-2>"] = { "<cmd>TroubleToggle<cr>", "[TROUBLE] Toggle" },
-    ["<c-3>"] = { "<cmd>AerialToggle<cr>", "[AERIAL] Toggle" },
-    ["<C-4>"] = { "<cmd>ToggleTerm<cr>", "[TOGGLETERM] Open new terminal" },
+    ["<leader>v"] = {
+        name = "[Views]",
+        f = { "<cmd>NeoTreeShowToggle<cr>", "[NEOTREE] Toggle" },
+        p = { "<cmd>TroubleToggle<cr>", "[TROUBLE] Toggle" },
+        s = { "<cmd>AerialToggle<cr>", "[AERIAL] Toggle" },
+        t = { "<cmd>ToggleTerm<cr>", "[TOGGLETERM] Open new terminal" },
+    },
 
     -- Debug
     ["<leader>d"] = {

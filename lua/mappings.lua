@@ -49,8 +49,8 @@ wk.register({
     ["WQ"] = { "<cmd>wqall<cr>", "[BUFFER] Quit and save all" },
     ["W"] = { "<cmd>wall<cr>", "[BUFFER] Save all" },
     ["Q"] = { "<cmd>qall!<cr>", "[BUFFER] Quit all without saving" },
-    ["<a-w>"] = { "<cmd>bd!<cr>", "[BUFFER] Close current buffer" },
-    ["<a-q>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
+    ["<a-q>"] = { "<cmd>bd!<cr>", "[BUFFER] Close current buffer" },
+    ["<a-w>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
 
     -- Folds
     ["--"] = { "zR", "[FOLDS] Expand all folds" },

@@ -29,6 +29,7 @@ wk.register({
     ["<a-f>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>d", "Delete function parameter" },
     ["<a-x>"] = { "mzwdw`z", "Delete next word" },
     ["<a-\\>"] = { "ci(", "Change inside parentheses" },
+    ["E"] = { "ge", "Jump backwards to end of word" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
 
@@ -56,9 +57,8 @@ wk.register({
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
 
     -- Macros and registers
-    ["<leader>m"] = { "<cmd>reg<cr>", "Show registers" },
     ["t"] = { '"_', "Set black hole registry" },
-    ["qj"] = { '@q', "Execute macro saved in 'q' register" },
+    ["<leader>q"] = { '@q', "Execute macro saved in 'q' register" },
     [","] = { "@:", "Repeat last command" },
 
     -- Find
@@ -118,7 +118,6 @@ wk.register({
         i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
         s = { "<cmd>lua require'jdtls'.super_implementation()<cr>", "[JDLTS] Go to super implementation" },
         r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
-        a = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
         v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
     },
@@ -126,6 +125,7 @@ wk.register({
     -- Refactoring
     ["<leader>r"] = {
         name = "[Code refactor]",
+        r = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
         f = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "[LSP] Format code" },
         n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
         o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },

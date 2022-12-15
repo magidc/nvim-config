@@ -5,8 +5,8 @@ if not ok then
 end
 
 project.setup {
-    -- Using maker file ".project.nvim" as a hacky way to detect project directory. Refusing to use ".git" as there are projects involving multiple git repos
-    patterns = { ".project.nvim" },
+    -- No auto detection, managing file manually
+    detection_methods = {},
 }
 require("telescope").load_extension("projects")
 

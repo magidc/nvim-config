@@ -94,6 +94,7 @@ wk.register({
     ["<leader>d"] = {
         name = "[DAP debug]",
         r = { "<cmd>lua require'dap'.run_last()<cr>", "[DAP] Run last" },
+        R = { "<cmd>lua require'dap'.run()<cr>", "[DAP] Run" },
         d = { "<cmd>DapContinue<cr>", "[DAP] Debug/Resume" },
         k = { "<cmd>DapTerminate<cr>", "[DAP] Terminate" },
         b = { "<cmd>DapToggleBreakpoint<cr>", "[DAP] Toggle breakpoint" },

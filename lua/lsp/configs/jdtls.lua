@@ -14,6 +14,8 @@ end
 local share_dir = os.getenv("HOME") .. "/.local/share"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = share_dir .. "/eclipse/" .. project_name
+-- local java_cmd = '/opt/java/jdk-18/bin/java'
+local java_cmd = 'java'
 
 local bundles = {
     vim.fn.glob(
@@ -40,7 +42,7 @@ end
 
 local config = {
     cmd = {
-        '/opt/java/jdk-18/bin/java',
+        java_cmd,
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
         '-Declipse.product=org.eclipse.jdt.ls.core.product',

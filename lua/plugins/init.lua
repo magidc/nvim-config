@@ -24,7 +24,7 @@ packer.init {
         clone_timeout = 600
     },
     auto_clean = true,
-    compile_on_sync = false
+    compile_on_sync = true
 }
 
 require("packer").startup(function(use)
@@ -114,6 +114,7 @@ require("packer").startup(function(use)
     }
     use "rcarriga/nvim-notify" -- Popup notifications
     use "terryma/vim-expand-region" --Incremental selection expansion
+    use "mbbill/undotree"
     use {
         -- Tree file explorer
         "nvim-neo-tree/neo-tree.nvim",
@@ -244,11 +245,10 @@ require("packer").startup(function(use)
         requires = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
         config = require "plugins.configs.telescopedap"
     }
-
-    use {
-        "ggandor/leap.nvim",
-        config = require "plugins.configs.leap"
-    }
+    -- use {
+    --     "ggandor/leap.nvim",
+    --     config = require "plugins.configs.leap"
+    -- }
 
    ---- Snippets
     use {

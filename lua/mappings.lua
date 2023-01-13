@@ -32,10 +32,14 @@ wk.register({
     ["E"] = { "ge", "Jump backwards to end of word" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
+    ----Following remaps conflict with Neoscroll plugin for scrolling animations
+    ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
+    ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
+    ----
+    ["n"] = { "nzz", "Keep searching result in the middle" },
+    ["N"] = { "Nzz", "Keep searching result in the middle" },
 
     -- Motions
-    ["m"] = { "]m", "[MOTION] Move to next method" },
-    ["M"] = { "[m", "[MOTION] Move to previous method" },
     ["H"] = { "^", "[MOTION] Move to first character of line" },
     ["L"] = { "$", "[MOTION] Move to last character of line" },
 
@@ -58,7 +62,7 @@ wk.register({
 
     -- Macros and registers
     ["t"] = { '"_', "Set black hole registry" },
-    ["<leader>q"] = { '@q', "Execute macro saved in 'q' register" },
+    ["qj"] = { '@q', "Execute macro saved in 'q' register" },
     [","] = { "@:", "Repeat last command" },
 
     -- Find
@@ -79,6 +83,8 @@ wk.register({
         db = { "<cmd>Telescope dap list_breakpoints<cr>", "[TELESCOPE DAP] Breakpoints" },
         dc = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Debug configurations" },
         dv = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Variables" },
+        s = { "<cmd>Telescope lsp_document_symbols<cr>", "[TELESCOPE LSP] Find symbols" },
+        r = { "<cmd>Telescope lsp_references<cr>", "[TELESCOPE LSP] Find references" },
     },
 
     -- Views
@@ -88,6 +94,7 @@ wk.register({
         p = { "<cmd>TroubleToggle<cr>", "[TROUBLE] Toggle" },
         s = { "<cmd>AerialToggle<cr>", "[AERIAL] Toggle" },
         t = { "<cmd>ToggleTerm<cr>", "[TOGGLETERM] Open new terminal" },
+        u = { "<cmd>UndotreeToggle<cr>", "[UNDOTREE]Toggle undotree" },
     },
 
     -- Debug

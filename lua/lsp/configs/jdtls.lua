@@ -14,7 +14,7 @@ end
 local share_dir = os.getenv("HOME") .. "/.local/share"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = share_dir .. "/eclipse/" .. project_name
--- local java_cmd = '/opt/java/jdk-18/bin/java'
+-- Set proper Java executable
 local java_cmd = 'java'
 
 local bundles = {

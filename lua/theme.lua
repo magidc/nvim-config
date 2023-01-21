@@ -33,6 +33,22 @@ M.colors = {
     grey19 = "#020203"
 }
 
+local function loadNoClownFiesta()
+    vim.cmd [[colorscheme no-clown-fiesta]]
+    require("no-clown-fiesta").setup({
+        transparent = false, -- Enable this to disable the bg color
+        styles = {
+            -- You can set any of the style values specified for `:h nvim_set_hl`
+            comments = {},
+            keywords = {},
+            functions = {},
+            variables = {},
+            type = { bold = true },
+        },
+    })
+end
+
+
 M.init = function(theme_name)
     M.theme_name = theme_name
     local _ok, theme = pcall(require, M.theme_name)
@@ -55,70 +71,6 @@ M.init = function(theme_name)
                 eob_lines = true
             },
             colors = {},
-            custom_highlights = {
-                VertSplit = {
-                    fg = M.colors.grey14
-                },
-                BufferLineIndicatorSelected = {
-                    fg = M.colors.cyan,
-                    bg = M.colors.bg
-                },
-                BufferLineFill = {
-                    fg = M.colors.fg,
-                    bg = M.colors.grey14
-                },
-                WhichKeyFloat = {
-                    bg = M.colors.grey14
-                },
-                GitSignsAdd = {
-                    fg = M.colors.green
-                },
-                GitSignsChange = {
-                    fg = M.colors.orange
-                },
-                GitSignsDelete = {
-                    fg = M.colors.red
-                },
-
-                NormalFloat = {
-                    bg = M.colors.grey14
-                },
-                FloatBorder = {
-                    bg = M.colors.grey14,
-                    fg = M.colors.grey14
-                },
-
-                Pmenu = {
-                    bg = M.colors.grey14
-                },
-                PMenuThumb = {
-                    bg = M.colors.grey16
-                },
-
-                LspFloatWinNormal = {
-                    fg = M.colors.fg,
-                    bg = M.colors.grey14
-                },
-                LspFloatWinBorder = {
-                    fg = M.colors.grey14
-                },
-
-                IndentBlanklineChar = {
-                    fg = M.colors.grey12,
-                    style = "nocombine"
-                },
-                IndentBlanklineContextChar = {
-                    fg = M.colors.magenta,
-                    style = "nocombine"
-                },
-
-                TSVariable = {
-                    fg = M.colors.blue
-                },
-                TSVariableBuiltin = {
-                    fg = M.colors.blue
-                }
-            }
         }
     elseif M.theme_name == 'tokyonight' then
         theme.setup({
@@ -130,8 +82,22 @@ M.init = function(theme_name)
         })
         theme.load()
     elseif M.theme_name == 'onedark' then
-        theme.setup { style = 'darker' }
+        theme.setup {
+            style = 'warm',
+            transparent = true, -- Show/hide background
+            code_style = {
+                comments = 'italic',
+                keywords = 'none',
+                functions = 'none',
+                strings = 'none',
+                variables = 'none'
+            },
+            lualine = {
+                transparent = true, -- lualine center bar transparency
+            },
+        }
         theme.load()
+        --loadNoClownFiesta()
     elseif M.theme_name == 'moonfly' then
         vim.cmd [[colorscheme moonfly]]
     elseif M.theme_name == 'material' then
@@ -152,7 +118,7 @@ M.init = function(theme_name)
     elseif M.theme_name == 'dracula' then
         theme.setup {}
         theme.load()
-     elseif M.theme_name == 'draculanight' then
+    elseif M.theme_name == 'draculanight' then
         theme.setup {}
         theme.load()
     end

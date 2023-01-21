@@ -8,6 +8,6 @@ local colors = require("theme").colors
 
 scrollbar.setup {
     handle = {
-        color = colors.blue
+        color = colors.grey12
     }
 }

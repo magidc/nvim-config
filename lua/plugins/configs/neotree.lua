@@ -8,6 +8,14 @@ neotree.setup {
     close_if_last_window = true,
     popup_border_style = "rounded",
     enable_git_status = true,
+    default_component_configs = {
+        indent = {
+            with_markers = false,
+            indent_marker = "│",
+            last_indent_marker = "└",
+            indent_size = 2,
+        },
+    },
     name = {
         trailing_slash = false,
         use_git_status_colors = true
@@ -60,6 +68,19 @@ neotree.setup {
         }
     },
     git_status = {
+        symbols = {
+            -- Change type
+            added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+            modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+            deleted   = "✖", -- this can only be used in the git_status source
+            renamed   = "", -- this can only be used in the git_status source
+            -- Status type
+            untracked = "",
+            ignored   = "",
+            unstaged  = "",
+            staged    = "",
+            conflict  = "",
+        },
         window = {
             position = "float",
             mappings = {

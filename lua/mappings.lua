@@ -32,7 +32,7 @@ wk.register({
     ["E"] = { "ge", "Jump backwards to end of word" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
-    ----Following remaps conflict with Neoscroll plugin for scrolling animations
+    ---- Following remaps conflict with Neoscroll plugin for scrolling animations
     ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
     ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
     ----
@@ -42,6 +42,8 @@ wk.register({
     -- Motions
     ["H"] = { "^", "[MOTION] Move to first character of line" },
     ["L"] = { "$", "[MOTION] Move to last character of line" },
+    ["<a-m>"] = { "]m", "[MOTION] Move to next method" },
+    ["<a-M>"] = { "[m", "[MOTION] Move to previous method" },
 
     -- Windows and buffers
     ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },

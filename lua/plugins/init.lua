@@ -34,12 +34,12 @@ require("packer").startup(function(use)
     ---- UI Themes
     -- use "rmehri01/onenord.nvim"
     -- use "folke/tokyonight.nvim"
-    -- use "navarasu/onedark.nvim"
+    use "navarasu/onedark.nvim"
     -- use "olimorris/onedarkpro.nvim"
     -- use "tiagovla/tokyodark.nvim"
     -- use "bluz71/vim-moonfly-colors"
     -- use "Mofiqul/dracula.nvim"
-    use "magidc/draculanight"
+    -- use "magidc/draculanight"
     -- use {
     --     "catppuccin/nvim",
     --     as = "catppuccin"
@@ -53,6 +53,7 @@ require("packer").startup(function(use)
         -- Start page
         "mhinz/vim-startify",
     }
+    use "aktersnurra/no-clown-fiesta.nvim"
     use "kyazdani42/nvim-web-devicons"
     use {
         "akinsho/bufferline.nvim",
@@ -152,11 +153,11 @@ require("packer").startup(function(use)
         "nvim-telescope/telescope-fzf-native.nvim",
         run = "make"
     }
-    use {
-        -- Add indentation guides even on blank lines
-        "lukas-reineke/indent-blankline.nvim",
-        config = require "plugins.configs.indent"
-    }
+    -- use {
+    --     -- Add indentation guides even on blank lines
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     config = require "plugins.configs.indent"
+    -- }
     use {
         -- Autoclose brackets, parentheses...
         "windwp/nvim-autopairs",
@@ -250,7 +251,7 @@ require("packer").startup(function(use)
     --     config = require "plugins.configs.leap"
     -- }
 
-   ---- Snippets
+    ---- Snippets
     use {
         "L3MON4D3/LuaSnip",
     }

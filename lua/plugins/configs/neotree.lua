@@ -15,11 +15,7 @@ neotree.setup {
             last_indent_marker = "└",
             indent_size = 2,
         },
-    },
-    name = {
-        trailing_slash = false,
-        use_git_status_colors = true
-    },
+            },
     buffers = {
         follow_current_file = true, -- This will find and focus the file in the active buffer every time the current file is changed while the tree is open.
         group_empty_dirs = true, -- when true, empty folders will be grouped together
@@ -68,19 +64,6 @@ neotree.setup {
         }
     },
     git_status = {
-        symbols = {
-            -- Change type
-            added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-            modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-            deleted   = "✖", -- this can only be used in the git_status source
-            renamed   = "", -- this can only be used in the git_status source
-            -- Status type
-            untracked = "",
-            ignored   = "",
-            unstaged  = "",
-            staged    = "",
-            conflict  = "",
-        },
         window = {
             position = "float",
             mappings = {

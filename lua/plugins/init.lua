@@ -35,6 +35,8 @@ require("packer").startup(function(use)
     -- use "rmehri01/onenord.nvim"
     -- use "folke/tokyonight.nvim"
     use "navarasu/onedark.nvim"
+    -- use "JoosepAlviste/palenightfall.nvim"
+    -- use "AlexvZyl/nordic.nvim"
     -- use "olimorris/onedarkpro.nvim"
     -- use "tiagovla/tokyodark.nvim"
     -- use "bluz71/vim-moonfly-colors"
@@ -120,7 +122,7 @@ require("packer").startup(function(use)
         -- Tree file explorer
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
-        requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim" },
+        requires = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim", "kyazdani42/nvim-web-devicons" },
         config = require "plugins.configs.neotree"
     }
     use {

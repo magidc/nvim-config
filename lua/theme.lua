@@ -48,7 +48,6 @@ local function loadNoClownFiesta()
     })
 end
 
-
 M.init = function(theme_name)
     M.theme_name = theme_name
     local _ok, theme = pcall(require, M.theme_name)
@@ -83,8 +82,8 @@ M.init = function(theme_name)
         theme.load()
     elseif M.theme_name == 'onedark' then
         theme.setup {
-            style = 'warm',
-            transparent = true, -- Show/hide background
+            style = 'warmer',
+            transparent = false, -- Show/hide background
             code_style = {
                 comments = 'italic',
                 keywords = 'none',
@@ -121,7 +120,11 @@ M.init = function(theme_name)
     elseif M.theme_name == 'draculanight' then
         theme.setup {}
         theme.load()
-    end
+    elseif M.theme_name == 'nordic' then
+        theme.setup {}
+    elseif M.theme_name == 'palenightfall' then
+        theme.setup {}
+     end
 end
 
 return M

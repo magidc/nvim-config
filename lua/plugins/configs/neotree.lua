@@ -8,14 +8,6 @@ neotree.setup {
     close_if_last_window = true,
     popup_border_style = "rounded",
     enable_git_status = true,
-    default_component_configs = {
-        indent = {
-            with_markers = false,
-            indent_marker = "│",
-            last_indent_marker = "└",
-            indent_size = 2,
-        },
-            },
     buffers = {
         follow_current_file = true, -- This will find and focus the file in the active buffer every time the current file is changed while the tree is open.
         group_empty_dirs = true, -- when true, empty folders will be grouped together

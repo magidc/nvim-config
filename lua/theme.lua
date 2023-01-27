@@ -82,7 +82,7 @@ M.init = function(theme_name)
         theme.load()
     elseif M.theme_name == 'onedark' then
         theme.setup {
-            style = 'warmer',
+            style = 'deep',
             transparent = false, -- Show/hide background
             code_style = {
                 comments = 'italic',

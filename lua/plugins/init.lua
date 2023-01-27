@@ -59,9 +59,10 @@ require("packer").startup(function(use)
     use "kyazdani42/nvim-web-devicons"
     use {
         "akinsho/bufferline.nvim",
-        requires = "kyazdani42/nvim-web-devicons",
+        requires = { "kyazdani42/nvim-web-devicons", "famiu/bufdelete.nvim" },
         config = require "plugins.configs.bufferline"
     }
+
     use "folke/which-key.nvim"
     use {
         -- Smoother scroll
@@ -239,6 +240,10 @@ require("packer").startup(function(use)
     -- Debug
     use "mfussenegger/nvim-dap"
     use {
+        "mfussenegger/nvim-dap-python",
+        config = require "plugins.configs.dappython"
+    }
+    use {
         "rcarriga/nvim-dap-ui",
         config = require "plugins.configs.dapui"
     }
@@ -248,10 +253,10 @@ require("packer").startup(function(use)
         requires = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
         config = require "plugins.configs.telescopedap"
     }
-    -- use {
-    --     "ggandor/leap.nvim",
-    --     config = require "plugins.configs.leap"
-    -- }
+    use {
+        "ggandor/leap.nvim",
+        config = require "plugins.configs.leap"
+    }
 
     ---- Snippets
     use {

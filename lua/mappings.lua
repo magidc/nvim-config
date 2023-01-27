@@ -18,7 +18,7 @@ local n_opts = {
 }
 
 wk.register({
-    ["<c-a>"] = { "ggVG", "[SELECT] Select all" },
+    ["<a-a>"] = { "ggVG", "[SELECT] Select all" },
 
     -- Edit
     ["<leader>p"] = { '"_diwP', "Replace word with paste" },
@@ -57,7 +57,8 @@ wk.register({
     ["WQ"] = { "<cmd>wqall<cr>", "[BUFFER] Quit and save all" },
     ["W"] = { "<cmd>wall<cr>", "[BUFFER] Save all" },
     ["Q"] = { "<cmd>qall!<cr>", "[BUFFER] Quit all without saving" },
-    ["<a-q>"] = { "<cmd>bd!<cr>", "[BUFFER] Close current buffer" },
+    -- Using famiu/bufdelete.nvim plugin commands to prevent messy behaviours with other plugins
+    ["<a-q>"] = { "<cmd>Bdelete!<cr>", "[BUFFER] Close current buffer" },
     ["<a-w>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
 
     -- Folds
@@ -213,6 +214,19 @@ wk.register({
     ["<a-c>"] = { "<C-o>ciw", "Change word" },
 }, s_opts)
 
+-- Terminal mode mappings
+local t_opts = {
+    mode = "t",
+    prefix = "",
+    silent = true,
+    noremap = true,
+    nowait = true,
+}
+wk.register({
+    ["<c-h>"] = { "<cmd>wincmd h<cr>,", "[TERMINAL] Move left" },
+    ["<c-j>"] = { "<cmd>wincmd j<cr>,", "[TERMINAL] Move down" },
+    ["<c-k>"] = { "<cmd>wincmd k<cr>,", "[TERMINAL] Move up" },
+    ["<c-l>"] = { "<cmd>wincmd l<cr>,", "[TERMINAL] Move right" },
+}, t_opts)
 
 wk.setup {}
-

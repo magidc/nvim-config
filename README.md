@@ -5,16 +5,16 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
 <br>
 
 *Autocompletion*
-![lsp autocompletion](./screenshots/nvim_lsp_1.png?raw=true)
+![lsp autocompletion](./screenshots/nvim_lsp_cmp.png?raw=true)
 
 *Compilation errors*
-![lsp autocompletion](./screenshots/nvim_lsp_2.png?raw=true)
+![lsp autocompletion](./screenshots/nvim_lsp_errors.png?raw=true)
 
 *Debug*
-![lsp autocompletion](./screenshots/nvim_debug.png?raw=true)
+![lsp autocompletion](./screenshots/nvim_dap.png?raw=true)
 
 *Running Spring boot*
-![lsp autocompletion](./screenshots/run.png?raw=true)
+![lsp autocompletion](./screenshots/nvim_java_launch.png?raw=true)
 
 *Telescope fuzzy finder*
 ![telecope usage](./screenshots/nvim_telescope.png?raw=true)

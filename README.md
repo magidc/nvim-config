@@ -13,7 +13,7 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
 *Debug*
 ![lsp autocompletion](./screenshots/nvim_dap.png?raw=true)
 
-*Running Spring boot*
+*Launching Java application*
 ![lsp autocompletion](./screenshots/nvim_java_launch.png?raw=true)
 
 *Telescope fuzzy finder*

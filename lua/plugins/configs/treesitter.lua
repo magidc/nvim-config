@@ -15,7 +15,7 @@ treesitter.setup {
         disable = { "python", "css", "rust" },
     },
     --ensure_installed = "all",
-    ensure_installed = {"java", "rust", "python","lua", "html", "json", "sql", "dockerfile", "yaml", "css", "javascript", "typescript"},
+    ensure_installed = {"java", "rust", "python","lua", "html", "json", "dockerfile", "yaml", "css", "javascript", "typescript"},
     -- ensure_installed = {"java", "rust", "python", "lua", "go", "html", "json", "sql", "dockerfile", "yaml", "css", "javascript", "typescript"},
     highlight = {
         enable = false,

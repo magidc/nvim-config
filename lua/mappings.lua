@@ -34,6 +34,8 @@ wk.register({
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
     ---- Following remaps conflict with Neoscroll plugin for scrolling animations
+    ["<c-i>"] = { "<c-i>zz", "Keep cursor in the middle while navigations to next position" },
+    ["<c-o>"] = { "<c-o>zz", "Keep cursor in the middle while navigating to last position" },
     ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
     ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
     ----

@@ -1,4 +1,4 @@
-# magidc NVIM Configuration
+# Neovim configuration for Java, Python, Rust and Lua
 
 This is my personal LUA based configuration for Neovim that I use on a daily basis as Java, Python and RUST IDE. This setup is the product of continuous enhancements based in what I have found in configurations shared by other users. It is an ongoing project that may evolve with time as I come accross with new plugins, refine mappings or refactor configuration files.<br>Feel free to fork this repository and adapt it to your own needs.
 
@@ -36,9 +36,9 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
    2. **Rust**: Run `:MasonInstall rust_analyzer` to download LSP to `LSP_ROOT_PATH/rust_analyzer`. This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Rust LSP settings `cmd` property to proper location.
    3. **Lua**: Run `:MasonInstall lua-language-server` to download LSP to `LSP_ROOT_PATH/lua-language-server`. This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Lua LSP settings `cmd` property to proper location.
    4. **Python**: Run `:MasonInstall pyright` to download LSP to `LSP_ROOT_PATH/pyright`.This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Pyright LSP `cmd` property to proper location.
-   5. **Bash**: Run `:MasonInstall bash-language-server` to download LSP to `LSP_ROOT_PATH/bash-language-server`.This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Bash LSP `cmd` property to proper location.  
-   6. **HTML, CSS, JSON, JavaScript, TypeScript, Markdown**: Run `:MasonInstall html-lsp` to download LSP to `LSP_ROOT_PATH/html-lsp`.This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change LSPs `cmd` property to proper location.
-   7. **Dockerfile**: Run `:MasonInstall dockerfile-language-server` to download LSP to `LSP_ROOT_PATH/dockerfile-language-server`.This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change LSPs `cmd` property to proper location.
+   <!-- 5. **Bash**: Run `:MasonInstall bash-language-server` to download LSP to `LSP_ROOT_PATH/bash-language-server`.This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change Bash LSP `cmd` property to proper location.   -->
+   <!-- 6. **HTML, CSS, JSON, JavaScript, TypeScript, Markdown**: Run `:MasonInstall html-lsp` to download LSP to `LSP_ROOT_PATH/html-lsp`.This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change LSPs `cmd` property to proper location. -->
+   <!-- 7. **Dockerfile**: Run `:MasonInstall dockerfile-language-server` to download LSP to `LSP_ROOT_PATH/dockerfile-language-server`.This environment expects to find the server executables in that location, if different one is required just edit [init.lua](https://github.com/magidc/nvim-config/blob/master/lua/lsp/init.lua) and change LSPs `cmd` property to proper location. -->
 <br>
 
 # UI theme
@@ -70,7 +70,6 @@ These configurations will allow users used to these key combinations to remain c
     > Extensions for the built-in LSP support in Neovim for eclipse.jdt.ls
 * [Nvim-dap](https://github.com/mfussenegger/nvim-dap)
     > Debug Adapter Protocol client implementation for Neovim
-* [Tokyonight UI theme](https://github.com/folke/tokyonight.nvim)
 * Others...
 
 <br>

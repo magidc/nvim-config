@@ -43,7 +43,7 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
 
 # UI theme
 Several UI themes are preconfigured in this setup. Active theme is set by editing file `lua/settings.lua`.
-Default active theme is [Tokyonight](https://github.com/folke/tokyonight.nvim).
+Default active theme is [Onedark](https://github.com/navarasu/onedark.nvim).
 
 <br>
 
@@ -51,9 +51,12 @@ Default active theme is [Tokyonight](https://github.com/folke/tokyonight.nvim).
 Most of mappings are defined in file `lua/mappings.lua`. WhichKey plugin is used in order to provide a description for each one of them.
 Other mappings can be found in specific plugin configuration files in `lua/plugins/configs` directory.
 
+<br>
+
 # Equivalent mapping configurations for other IDEs VIM integrations
-I have created configuration files with (almost) equivalent mappings for [Eclipse IDE vim plugin (vrapper)](https://github.com/magidc/dotfiles/blob/master/.vrapperrc) and for [IntelliJ vim plugin (ideaVim)](https://github.com/magidc/dotfiles/blob/master/.ideavimrc).
-These configurations will allow users used to these key combinations to remain confortable and efficient while working with other IDEs.
+I have created configuration files with (almost) equivalent mappings for [Eclipse IDE vim plugin (vrapper)](https://github.com/magidc/dotfiles/blob/master/.vrapperrc), [IntelliJ vim plugin (ideaVim)](https://github.com/magidc/dotfiles/blob/master/.ideavimrc) and [VIM (.vimrc)](https://github.com/magidc/dotfiles/blob/master/.vimrc).
+For VSCode VIM plugin I set the option to use .vimrc config file.
+These configurations will allow users who are used to these key combinations to remain confortable and efficient while working with other IDEs.
 
 <br>
 

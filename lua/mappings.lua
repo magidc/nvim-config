@@ -18,43 +18,43 @@ local n_opts = {
 }
 
 wk.register({
-    ["<a-a>"] = { "ggVG", "[SELECT] Select all" },
+    ["<c-s>"] = { "ggVG", "[SELECT] Select all" },
 
     -- Edit
-    ["<leader>p"] = { '"_diwP', "Replace word with paste" },
+    ["<a-p>"] = { '"_diwP', "Replace word with paste" },
     ["<a-j>"] = { ":m .+1<cr>==", "Move line down" },
     ["<a-k>"] = { ":m .-2<cr>==", "Move line up" },
-    ["<a-Bs>"] = { "diw", "Delete word" },
-    ["<a-c>"] = { "ciw", "Change word" },
-    ["<a-z>"] = { "ci\"", "Change word" },
-    ["<a-\\>"] = { "ci(", "Change inside parentheses" },
-    ["<a-f>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>d", "Delete function parameter" },
-    ["<a-x>"] = { "mzwdw`z", "Delete next word" },
-    ["E"] = { "ge", "Jump backwards to end of word" },
-    ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
-    ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
+
+    ["<a-Bs>"] = { "\"_diw", "Delete word" },
+    ["<a-c>"] = { "\"_ciw", "Change word" },
+    ["<a-z>"] = { "\"_ci\"", "Change within quotes" },
+    ["<a-/>"] = { "\"_ci(", "Change within parentheses" },
+    ["<a-x>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>d", "Delete function parameter" },
+    ["<a-a>"] = { "<cmd>TSTextobjectSelect @parameter.inner<cr>c", "Change function parameter" },
+
+    ["<a-o>"] = { "o<ESC>", "New line in normal mode" },
+    ["<a-O>"] = { "O<ESC>", "New line before in normal mode" },
+
+    -- Motions
+    ["E"] = { "ge", "[MOTION] Jump backwards to end of word" },
+    ["H"] = { "^", "[MOTION] Move to first character of line" },
+    ["L"] = { "$", "[MOTION] Move to last character of line" },
+    ["<a-m>"] = { "]m", "[MOTION] Move to next method" },
+    ["<a-M>"] = { "[m", "[MOTION] Move to previous method" },
     ---- Following remaps conflict with Neoscroll plugin for scrolling animations
-    ["<c-i>"] = { "<c-i>zz", "Keep cursor in the middle while navigations to next position" },
-    ["<c-o>"] = { "<c-o>zz", "Keep cursor in the middle while navigating to last position" },
     ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
     ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
     ----
     ["n"] = { "nzz", "Keep searching result in the middle" },
     ["N"] = { "Nzz", "Keep searching result in the middle" },
 
-    -- Motions
-    ["H"] = { "^", "[MOTION] Move to first character of line" },
-    ["L"] = { "$", "[MOTION] Move to last character of line" },
-    ["<a-m>"] = { "]m", "[MOTION] Move to next method" },
-    ["<a-M>"] = { "[m", "[MOTION] Move to previous method" },
-
-    -- Windows and buffers
+     -- Windows and buffers
     ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
     ["<c-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
     ["<c-k>"] = { "<c-w>k", "[WINDOW] Focus in top window" },
     ["<c-l>"] = { "<c-w>l", "[WINDOW] Focus in right window" },
-    ["<c-p>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
-    ["<c-n>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
+    ["<a-right>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
+    ["<a-left>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
     ["<a-t>"] = { "<cmd>ene<cr>", "[BUFFER] Open a new empty buffer" },
     ["WQ"] = { "<cmd>wqall<cr>", "[BUFFER] Quit and save all" },
     ["W"] = { "<cmd>wall<cr>", "[BUFFER] Save all" },
@@ -64,6 +64,7 @@ wk.register({
     ["<a-w>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
 
     -- Folds
+    ["|"] = { "zM", "[FOLDS] Collapse all folds" },
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
 
     -- Macros and registers
@@ -174,7 +175,6 @@ local i_opts = {
 
 wk.register({
     ["jk"] = { "<Esc>", "Normal mode switch" },
-    ["JK"] = { "<Esc>", "Normal mode switch" },
     ["<a-d>"] = { "<Del>", "Handy DEL on insert mode" },
     ["<a-Bs>"] = { "<C-o>diw", "Delete word" },
     ["<a-c>"] = { "<C-o>ciw", "Change word" },
@@ -201,6 +201,7 @@ wk.register({
     ["<a-j>"] = { ":m '>+1<cr>gv=gv", "[MOVE] Move block down" },
     ["<a-k>"] = { ":m '<-2<cr>gv=gv", "[MOVE] Move block up" },
     ["<leader>dx"] = { "<cmd>lua require('dapui').eval()<CR>", "[DAPUI] Evaluate (selection in visual mode) }" },
+    ["<c-s>"] = { "ggOG", "[SELECT] Select all" },
 }, v_opts)
 
 -- Select mode mappings

@@ -22,15 +22,17 @@ wk.register({
 
     -- Edit
     ["<a-p>"] = { '"_diwP', "Replace word with paste" },
+
     ["<a-j>"] = { ":m .+1<cr>==", "Move line down" },
     ["<a-k>"] = { ":m .-2<cr>==", "Move line up" },
 
-    ["<a-Bs>"] = { "\"_diw", "Delete word" },
+    ["<a-d>"] = { "\"_diw", "Delete word" },
     ["<a-c>"] = { "\"_ciw", "Change word" },
     ["<a-z>"] = { "\"_ci\"", "Change within quotes" },
-    ["<a-/>"] = { "\"_ci(", "Change within parentheses" },
-    ["<a-x>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>d", "Delete function parameter" },
+    ["<a-x>"] = { "\"_ci(", "Change within parentheses" },
+
     ["<a-a>"] = { "<cmd>TSTextobjectSelect @parameter.inner<cr>c", "Change function parameter" },
+    ["<a-s>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>d", "Delete function parameter" },
 
     ["<a-o>"] = { "o<ESC>", "New line in normal mode" },
     ["<a-O>"] = { "O<ESC>", "New line before in normal mode" },
@@ -175,10 +177,10 @@ local i_opts = {
 
 wk.register({
     ["jk"] = { "<Esc>", "Normal mode switch" },
-    ["<a-d>"] = { "<Del>", "Handy DEL on insert mode" },
-    ["<a-Bs>"] = { "<C-o>diw", "Delete word" },
-    ["<a-c>"] = { "<C-o>ciw", "Change word" },
-    ["<a-e>"] = { "<C-o>de", "Delete to end of word" },
+    ["<a-s>"] = { "<Del>", "Handy DEL on insert mode" },
+    ["<a-d>"] = { "<C-o>\"_diw", "Delete word" },
+    ["<a-c>"] = { "<C-o>\"_ciw", "Change word" },
+    ["<a-e>"] = { "<C-o>\"_de", "Delete to end of word" },
     ["<a-w>"] = { "<C-o>w", "Move to next word" },
     ["<a-b>"] = { "<C-o>b", "Move to previous word" },
     ["<a-j>"] = { "<ESC>:m .+1<cr>==gi", "[MOVE] Move block down" },

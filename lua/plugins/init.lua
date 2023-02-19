@@ -210,7 +210,7 @@ require("packer").startup(function(use)
         requires = "nvim-telescope/telescope.nvim",
         config = require "plugins.configs.project"
     }
-    ---- Comments
+    -- Comments
     use {
         "numToStr/Comment.nvim",
         config = require "plugins.configs.comment",

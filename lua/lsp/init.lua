@@ -33,7 +33,7 @@ if _lspconfig then
 
     -- LUA
     local lua_language_server_root_path = LSP_ROOT_PATH .. "/lua-language-server/extension/server/bin"
-    lspconfig.sumneko_lua.setup {
+    lspconfig.lua_ls.setup {
         cmd = { lua_language_server_root_path .. "/lua-language-server", "-E",
             lua_language_server_root_path .. "/main.lua" };
         settings = {

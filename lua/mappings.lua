@@ -41,8 +41,8 @@ wk.register({
     ["E"] = { "ge", "[MOTION] Jump backwards to end of word" },
     ["H"] = { "^", "[MOTION] Move to first character of line" },
     ["L"] = { "$", "[MOTION] Move to last character of line" },
-    ["<a-m>"] = { "]m", "[MOTION] Move to next method" },
-    ["<a-M>"] = { "[m", "[MOTION] Move to previous method" },
+    ["<a-down>"] = { "]m", "[MOTION] Move to next method" },
+    ["<a-up>"] = { "[m", "[MOTION] Move to previous method" },
     ---- Following remaps conflict with Neoscroll plugin for scrolling animations
     ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
     ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
@@ -142,7 +142,7 @@ wk.register({
     -- Refactoring
     ["<leader>r"] = {
         name = "[Code refactor]",
-        r = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
+        e = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
         f = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "[LSP] Format code" },
         n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
         o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },

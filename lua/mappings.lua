@@ -19,24 +19,24 @@ local n_opts = {
 
 wk.register({
     ["<c-s>"] = { "ggVG", "[SELECT] Select all" },
-
     -- Edit
+    -- ["d"] = { '"_d', "Do not copy when deleting" },
+    -- ["D"] = { '"_D', "Do not copy when deleting" },
+    -- ["dd"] = { '"_dd', "Do not copy when deleting" },
+    ["c"] = { '"_c', "Do not copy when changing" },
+    ["C"] = { '"_C', "Do not copy when changing" },
+    ["cc"] = { '"_cc', "Do not copy when changing" },
     ["<a-p>"] = { '"_diwP', "Replace word with paste" },
-
     ["<a-j>"] = { ":m .+1<cr>==", "Move line down" },
     ["<a-k>"] = { ":m .-2<cr>==", "Move line up" },
-
-    ["<a-d>"] = { "\"_diw", "Delete word" },
-    ["<a-c>"] = { "\"_ciw", "Change word" },
-    ["<a-z>"] = { "\"_ci\"", "Change within quotes" },
-    ["<a-x>"] = { "\"_ci(", "Change within parentheses" },
-
-    ["<a-a>"] = { "<cmd>TSTextobjectSelect @parameter.inner<cr>c", "Change function parameter" },
-    ["<a-s>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>d", "Delete function parameter" },
-
+    ["<a-d>"] = { '"_diw', "Delete word" },
+    ["<a-c>"] = { '"_ciw', "Change word" },
+    ["<a-z>"] = { '"_ci"', "Change within quotes" },
+    ["<a-x>"] = { '"_ci(', "Change within parentheses" },
+    ["<a-a>"] = { "<cmd>TSTextobjectSelect @parameter.inner<cr>\"_c", "Change function parameter" },
+    ["<a-s>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>\"_d", "Delete function parameter" },
     ["<a-o>"] = { "o<ESC>", "New line in normal mode" },
     ["<a-O>"] = { "O<ESC>", "New line before in normal mode" },
-
     -- Motions
     ["E"] = { "ge", "[MOTION] Jump backwards to end of word" },
     ["H"] = { "^", "[MOTION] Move to first character of line" },
@@ -49,14 +49,22 @@ wk.register({
     ----
     ["n"] = { "nzz", "Keep searching result in the middle" },
     ["N"] = { "Nzz", "Keep searching result in the middle" },
-
-     -- Windows and buffers
+    -- Windows and buffers
     ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
     ["<c-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
     ["<c-k>"] = { "<c-w>k", "[WINDOW] Focus in top window" },
     ["<c-l>"] = { "<c-w>l", "[WINDOW] Focus in right window" },
-    ["<a-right>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
-    ["<a-left>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
+    ["<leader>wv"] = { "<c-w>v", "[WINDOW] Split vertically" },
+    ["<leader>ws"] = { "<c-w>s", "[WINDOW] Split horizontally" },
+    ["<leader>wc"] = { "<c-w>c", "[WINDOW] Unsplit" },
+    ["<leader>wp"] = { "<c-w>p", "[WINDOW] Switch to other window" },
+    -- Without bufferline
+    -- ["<a-right>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
+    -- ["<a-left>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
+    -- With bufferline
+    ["<a-left>"] = { "<cmd>BufferLineCyclePrev<cr>", "[BUFFER] Go previous buffer" },
+    ["<a-right>"] = { "<cmd>BufferLineCycleNext<cr>", "[BUFFER] Go next buffer" },
+    ["<a-b>"] = { "<cmd>e #<cr>", "[BUFFER] Switch to other buffer" },
     ["<a-t>"] = { "<cmd>ene<cr>", "[BUFFER] Open a new empty buffer" },
     ["WQ"] = { "<cmd>wqall<cr>", "[BUFFER] Quit and save all" },
     ["W"] = { "<cmd>wall<cr>", "[BUFFER] Save all" },
@@ -64,16 +72,13 @@ wk.register({
     -- Using famiu/bufdelete.nvim plugin commands to prevent messy behaviours with other plugins
     ["<a-q>"] = { "<cmd>Bdelete!<cr>", "[BUFFER] Close current buffer" },
     ["<a-w>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
-
     -- Folds
     ["|"] = { "zM", "[FOLDS] Collapse all folds" },
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
-
     -- Macros and registers
     ["t"] = { '"_', "Set black hole registry" },
     ["qj"] = { '@q', "Execute macro saved in 'q' register" },
     [","] = { "@:", "Repeat last command" },
-
     -- Find
     [";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
     ["<leader>f"] = {
@@ -89,13 +94,9 @@ wk.register({
         c = { "<cmd>Telescope command_history<cr>", "[TELESCOPE] Search command history" },
         x = { "<cmd>Telescope neoclip<cr>", "[TELESCOPE] Search in clipboard manager" },
         p = { "<cmd>Telescope projects<cr>", "[TELESCOPE] Search projects" },
-        db = { "<cmd>Telescope dap list_breakpoints<cr>", "[TELESCOPE DAP] Breakpoints" },
-        dc = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Debug configurations" },
-        dv = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Variables" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "[TELESCOPE LSP] Find symbols" },
         r = { "<cmd>Telescope lsp_references<cr>", "[TELESCOPE LSP] Find references" },
     },
-
     -- Views
     ["<leader>v"] = {
         name = "[Views]",
@@ -105,7 +106,6 @@ wk.register({
         t = { "<cmd>ToggleTerm<cr>", "[TOGGLETERM] Open new terminal" },
         u = { "<cmd>UndotreeToggle<cr>", "[UNDOTREE]Toggle undotree" },
     },
-
     -- Debug
     ["<leader>d"] = {
         name = "[DAP debug]",
@@ -124,8 +124,11 @@ wk.register({
         x = { "<cmd>lua require('dapui').eval()<cr>", "[DAPUI] Evaluate}" },
         p = { "<cmd>DapToggleRepl<cr>", "[DAP] Repl open" },
         u = { "<cmd>lua require'dapui'.toggle()<cr>", "[DAPUI] Toggle debugging UI" },
-    },
+        s = { "<cmd>Telescope dap list_breakpoints<cr>", "[TELESCOPE DAP] Show all breakpoints" },
+        c = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Show debug configurations" },
+        w = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Wariables" },
 
+    },
     -- Code navigation
     ["<leader>c"] = {
         name = "[Code navigation]",
@@ -138,7 +141,6 @@ wk.register({
         v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
     },
-
     -- Refactoring
     ["<leader>r"] = {
         name = "[Code refactor]",
@@ -147,14 +149,12 @@ wk.register({
         n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
         o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
     },
-
     -- Errors and diagnostics
     ["<leader>e"] = {
         name = "[Diagnostics]",
         n = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "[DIAG] Go to next error" },
         p = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "[DIAG] Go to previous error" },
     },
-
     -- Git
     ["<leader>g"] = {
         name = "[GIT]",

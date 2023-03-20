@@ -18,7 +18,6 @@ if _rust then
     local opts = {
         server = {
             standalone = true,
-            cmd = { LSP_ROOT_PATH .. "/rust-analyzer/rust-analyzer" };
         },
     }
     rust.setup(opts)
@@ -27,15 +26,10 @@ end
 local _lspconfig, lspconfig = pcall(require, "lspconfig")
 if _lspconfig then
     -- Python
-    lspconfig.pyright.setup {
-        cmd = { LSP_ROOT_PATH .. "/pyright/node_modules/.bin/pyright-langserver", "--stdio" };
-    }
+    lspconfig.pyright.setup {}
 
     -- LUA
-    local lua_language_server_root_path = LSP_ROOT_PATH .. "/lua-language-server/extension/server/bin"
     lspconfig.lua_ls.setup {
-        cmd = { lua_language_server_root_path .. "/lua-language-server", "-E",
-            lua_language_server_root_path .. "/main.lua" };
         settings = {
             Lua = {
                 runtime = {
@@ -57,44 +51,42 @@ if _lspconfig then
             },
         }
     }
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-    -- -- Bash
-    -- lspconfig.bashls.setup {
-    --     cmd = { LSP_ROOT_PATH .. "/bash-language-server/node_modules/.bin/bash-language-server" };
-    -- }
-    --
+    -- Bash
+    lspconfig.bashls.setup {}
+
+    -- Javascript/Typescript
+    lspconfig.eslint.setup({
+        capabilities = capabilities,
+        settings = {
+            packageManager = 'npm'
+        },
+        on_attach = function(client, bufnr)
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = bufnr,
+                command = "EslintFixAll",
+            })
+        end,
+    })
+
+    -- HTML
+    lspconfig.html.setup {
+        capabilities = capabilities,
+    }
+
+    -- CSS
+    lspconfig.cssls.setup {
+        capabilities = capabilities
+    }
+
     -- Dockerfile
-    -- lspconfig.dockerls.setup {
-    --     cmd = { LSP_ROOT_PATH .. "/dockerfile-language-server/node_modules/.bin/docker-langserver" };
-    -- }
-    -- -- HTML
-    -- local html_root_path = LSP_ROOT_PATH .. "/html-lsp/node_modules/.bin"
-    -- lspconfig.html.setup {
-    --     cmd = { html_root_path .. "/vscode-html-language-server", "--stdio" };
-    -- }
-    --
-    -- -- JSON
-    -- lspconfig.jsonls.setup {
-    --     cmd = { html_root_path .. "/vscode-json-language-server", "--stdio" };
-    -- }
-    --
-    -- -- CSS
-    -- lspconfig.cssls.setup {
-    --     cmd = { html_root_path .. "/vscode-css-language-server", "--stdio" };
-    -- }
-    --
-    -- -- Markdown
-    -- lspconfig.cssls.setup {
-    --     cmd = { html_root_path .. "/vscode-markdown-language-server", "--stdio" };
-    -- }
-    --
-    -- -- Javascript/Typescript
-    -- lspconfig.eslint.setup {
-    --     cmd = { html_root_path .. "/vscode-eslint-language-server", "--stdio" };
-    -- }
-    -- -- CSS Modules
-    -- local cssmodules_ls_root_path = LSP_ROOT_PATH .. "/cssmodules-language-server/node_modules/.bin"
-    -- lspconfig.cssmodules_ls.setup {
-    --     cmd = { cssmodules_ls_root_path .. "/cssmodules-language-server" };
-    -- }
+    lspconfig.dockerls.setup {
+        capabilities = capabilities
+    }
+
+    -- Docker compose
+    lspconfig.docker_compose_language_service.setup {
+        capabilities = capabilities
+    }
 end

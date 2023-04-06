@@ -8,7 +8,7 @@ end
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Normal mode mappings
+-- NORMAL MODE MAPPINGS
 local n_opts = {
     mode = "n",
     prefix = "",
@@ -41,14 +41,15 @@ wk.register({
     ["E"] = { "ge", "[MOTION] Jump backwards to end of word" },
     ["H"] = { "^", "[MOTION] Move to first character of line" },
     ["L"] = { "$", "[MOTION] Move to last character of line" },
-    ["<a-down>"] = { "]m", "[MOTION] Move to next method" },
-    ["<a-up>"] = { "[m", "[MOTION] Move to previous method" },
+    --["<a-down>"] = { "]m", "[MOTION] Move to next method" },
+    --["<a-up>"] = { "[m", "[MOTION] Move to previous method" },
     ---- Following remaps conflict with Neoscroll plugin for scrolling animations
     ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
     ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
     ----
     ["n"] = { "nzz", "Keep searching result in the middle" },
     ["N"] = { "Nzz", "Keep searching result in the middle" },
+
     -- Windows and buffers
     ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
     ["<c-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
@@ -75,15 +76,21 @@ wk.register({
     -- Folds
     ["|"] = { "zM", "[FOLDS] Collapse all folds" },
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
+    ["<a-s-down>"] = { "zr", "[FOLDS] Increase fold level" },
+    ["<a-s-up>"] = { "zm", "[FOLDS] Decrease fold level" },
+    ["<a-down>"] = { "zo", "[FOLDS] Open fold" },
+    ["<a-up>"] = { "zc", "[FOLDS] Close fold" },
+
     -- Macros and registers
     ["t"] = { '"_', "Set black hole registry" },
     ["qj"] = { '@q', "Execute macro saved in 'q' register" },
     [","] = { "@:", "Repeat last command" },
+
     -- Find
     [";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
     ["<leader>f"] = {
         name = "[TELESCOPE]",
-        f = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
+        e = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
         n = { "<cmd>Telescope grep_string<cr>", "[TELESCOPE] Find files using grep in file names" },
         g = { "<cmd>Telescope live_grep<cr>", "[TELESCOPE] Find File by live grep (search content inside file)" },
         b = { "<cmd>Telescope buffers<cr>", "[TELESCOPE] Find buffers" },
@@ -97,6 +104,7 @@ wk.register({
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "[TELESCOPE LSP] Find symbols" },
         r = { "<cmd>Telescope lsp_references<cr>", "[TELESCOPE LSP] Find references" },
     },
+
     -- Views
     ["<leader>v"] = {
         name = "[Views]",
@@ -106,12 +114,13 @@ wk.register({
         t = { "<cmd>ToggleTerm<cr>", "[TOGGLETERM] Open new terminal" },
         u = { "<cmd>UndotreeToggle<cr>", "[UNDOTREE]Toggle undotree" },
     },
+
     -- Debug
     ["<leader>d"] = {
         name = "[DAP debug]",
         r = { "<cmd>lua require'dap'.run_last()<cr>", "[DAP] Run last" },
         R = { "<cmd>lua require'dap'.run()<cr>", "[DAP] Run" },
-        d = { "<cmd>DapContinue<cr>", "[DAP] Debug/Resume" },
+        e = { "<cmd>DapContinue<cr>", "[DAP] Debug/Resume" },
         k = { "<cmd>DapTerminate<cr>", "[DAP] Terminate" },
         b = { "<cmd>DapToggleBreakpoint<cr>", "[DAP] Toggle breakpoint" },
         B = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
@@ -129,6 +138,7 @@ wk.register({
         w = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Wariables" },
 
     },
+
     -- Code navigation
     ["<leader>c"] = {
         name = "[Code navigation]",
@@ -141,6 +151,7 @@ wk.register({
         v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
     },
+
     -- Refactoring
     ["<leader>r"] = {
         name = "[Code refactor]",
@@ -149,12 +160,14 @@ wk.register({
         n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
         o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
     },
+
     -- Errors and diagnostics
     ["<leader>e"] = {
         name = "[Diagnostics]",
         n = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "[DIAG] Go to next error" },
         p = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "[DIAG] Go to previous error" },
     },
+
     -- Git
     ["<leader>g"] = {
         name = "[GIT]",
@@ -166,7 +179,7 @@ wk.register({
     },
 }, n_opts)
 
--- Insert mode mappings
+-- INSERT MODE MAPPINGS
 local i_opts = {
     mode = "i",
     prefix = "",
@@ -187,7 +200,7 @@ wk.register({
     ["<a-k>"] = { "<ESC>:m .-2<cr>==gi", "[MOVE] Move block up" },
 }, i_opts)
 
--- Visual mode mappings
+-- VISUAL MODE MAPPINGS
 local v_opts = {
     mode = "v",
     nowait = true,

@@ -70,7 +70,7 @@ require("packer").startup(function(use)
         config = require "plugins.configs.neoscroll"
     }
     use {
-        -- Better looking folding
+        -- Better looking -- folding
         "kevinhwang91/nvim-ufo",
         requires = "kevinhwang91/promise-async",
         config = require "plugins.configs.ufo"
@@ -116,7 +116,7 @@ require("packer").startup(function(use)
         "jose-elias-alvarez/null-ls.nvim",
         config = require "plugins.configs.null-ls"
     }
-    use "rcarriga/nvim-notify" -- Popup notifications
+    use "rcarriga/nvim-notify"      -- Popup notifications
     use "terryma/vim-expand-region" --Incremental selection expansion
     use "mbbill/undotree"
     use {
@@ -135,7 +135,7 @@ require("packer").startup(function(use)
     use {
         "nvim-treesitter/nvim-treesitter",
         requires = {
-            "p00f/nvim-ts-rainbow", -- Open/Close node coloring
+            "p00f/nvim-ts-rainbow",       -- Open/Close node coloring
             "nvim-treesitter/nvim-treesitter-textobjects",
             "nvim-treesitter/playground", -- View treesitter information directly in Neovim
         },

@@ -62,7 +62,6 @@ require("packer").startup(function(use)
         requires = { "kyazdani42/nvim-web-devicons", "famiu/bufdelete.nvim" },
         config = require "plugins.configs.bufferline"
     }
-
     use "folke/which-key.nvim"
     use {
         -- Smoother scroll

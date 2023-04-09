@@ -51,10 +51,6 @@ wk.register({
     ["N"] = { "Nzz", "Keep searching result in the middle" },
 
     -- Windows and buffers
-    ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
-    ["<c-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
-    ["<c-k>"] = { "<c-w>k", "[WINDOW] Focus in top window" },
-    ["<c-l>"] = { "<c-w>l", "[WINDOW] Focus in right window" },
     ["<leader>wv"] = { "<c-w>v", "[WINDOW] Split vertically" },
     ["<leader>ws"] = { "<c-w>s", "[WINDOW] Split horizontally" },
     ["<leader>wc"] = { "<c-w>c", "[WINDOW] Unsplit" },

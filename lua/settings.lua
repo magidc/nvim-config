@@ -1,7 +1,7 @@
 local utils = require "utils"
 
 local options = {
-    termguicolors = true,
+    termguicolors = false,
     fileencoding = "utf-8",
     autoread = true,
     wrap = true,
@@ -58,6 +58,10 @@ vim.cmd [[filetype plugin indent on]]
 
 utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, java = 4, json = 4 }
 
+-- Space as leader key
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- nvim-notify as default vim notification method
 local _notify, notify = pcall(require, "notify")
 if _notify then
@@ -65,8 +69,4 @@ if _notify then
 end
 
 -- UI theme
-local themename = "onedark"
-local _theme, theme = pcall(require, themename)
-if _theme then
-    require("theme").init(themename)
-end
+require("theme").set_active_theme("onedark")

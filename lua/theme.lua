@@ -48,83 +48,139 @@ local function loadNoClownFiesta()
     })
 end
 
-M.init = function(theme_name)
-    M.theme_name = theme_name
-    local _ok, theme = pcall(require, M.theme_name)
+local themes = {
+    onenord = {
+        "rmehri01/onenord.nvim",
+        config = function()
+            require('onenord').setup {
+                borders = true,
+                fade_nc = false,
+                styles = {
+                    comments = "italic",
+                    strings = "NONE",
+                    keywords = "NONE",
+                    functions = "italic",
+                    variables = "bold",
+                    diagnostics = "underline"
+                },
+                disable = {
+                    background = false,
+                    cursorline = false,
+                    eob_lines = true
+                },
+                colors = {},
+            }
+        end
+    },
+    tokyonight = {
+        "folke/tokyonight.nvim",
+        config = function()
+            local theme = require('tokyonight')
+            theme.setup({
+                style = 'night',
+                on_colors = function(colors)
+                    colors.bg_dark = '#000000'
+                    colors.bg = '#11121D'
+                end
+            })
+            theme.load()
+        end
+    },
+    onedark = {
+        "navarasu/onedark.nvim",
+        config = function()
+            local theme = require('onedark')
+            theme.setup {
+                style = 'deep',
+                transparent = false, -- Show/hide background
+                code_style = {
+                    comments = 'italic',
+                    keywords = 'none',
+                    functions = 'none',
+                    strings = 'none',
+                    variables = 'none'
+                },
+                lualine = {
+                    transparent = true, -- lualine center bar transparency
+                },
+            }
+            theme.load()
+            -- loadNoClownFiesta()
+        end
+    },
+    palenightfall = {
+        "JoosepAlviste/palenightfall.nvim",
+        config = function()
+            require('palenightfall').setup {}
+        end
+    },
+    nordic = {
+        "AlexvZyl/nordic.nvim",
+        config = function()
+            require('nordic').setup {}
+        end
+    },
+    onedarkpro = {
+        "olimorris/onedarkpro.nvim",
+        config = function()
+            vim.o.background = "dark"
+            require('onedarkpro').load()
+        end
+    },
+    tokyodark = {
+        "tiagovla/tokyodark.nvim",
+        config = function()
+            vim.g.tokyodark_transparent_background = false
+            vim.g.tokyodark_enable_italic_comment = true
+            vim.g.tokyodark_enable_italic = true
+            vim.g.tokyodark_color_gamma = "0.0"
+            vim.cmd 'colorscheme tokyodark'
+        end
+    },
+    moonfly = {
+        "bluz71/vim-moonfly-colors",
+        config = function()
+            vim.cmd [[colorscheme moonfly]]
+        end
+    },
+    dracula = {
+        "Mofiqul/dracula.nvim",
+        config = function()
+            local theme = require('dracula')
+            theme.setup {}
+            theme.load()
+        end
+    },
+    draculanight = {
+        "magidc/draculanight",
+        config = function()
+            local theme = require('draculanight')
+            theme.setup {}
+            theme.load()
+        end
+    },
+    catppuccin = {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        config = function()
+            vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+            vim.cmd [[colorscheme catppuccin]]
+        end
+    },
+    material = {
+        "marko-cerovac/material.nvim",
+        config = function()
+            require "plugins.configs.materialui"
+        end
+    },
+}
 
-    if M.theme_name == 'onenord' then
-        theme.setup {
-            borders = true,
-            fade_nc = false,
-            styles = {
-                comments = "italic",
-                strings = "NONE",
-                keywords = "NONE",
-                functions = "italic",
-                variables = "bold",
-                diagnostics = "underline"
-            },
-            disable = {
-                background = false,
-                cursorline = false,
-                eob_lines = true
-            },
-            colors = {},
-        }
-    elseif M.theme_name == 'tokyonight' then
-        theme.setup({
-            style = 'night',
-            on_colors = function(colors)
-                colors.bg_dark = '#000000'
-                colors.bg = '#11121D'
-            end
-        })
-        theme.load()
-    elseif M.theme_name == 'onedark' then
-        theme.setup {
-            style = 'deep',
-            transparent = false, -- Show/hide background
-            code_style = {
-                comments = 'italic',
-                keywords = 'none',
-                functions = 'none',
-                strings = 'none',
-                variables = 'none'
-            },
-            lualine = {
-                transparent = true, -- lualine center bar transparency
-            },
-        }
-        theme.load()
-        --loadNoClownFiesta()
-    elseif M.theme_name == 'moonfly' then
-        vim.cmd [[colorscheme moonfly]]
-    elseif M.theme_name == 'material' then
-        vim.g.material_style = "oceanic"
-        vim.cmd 'colorscheme material'
-    elseif M.theme_name == 'onedarkpro' then
-        vim.o.background = "dark"
-        theme.load()
-    elseif M.theme_name == 'tokyodark' then
-        vim.g.tokyodark_transparent_background = false
-        vim.g.tokyodark_enable_italic_comment = true
-        vim.g.tokyodark_enable_italic = true
-        vim.g.tokyodark_color_gamma = "0.0"
-        vim.cmd 'colorscheme tokyodark'
-    elseif M.theme_name == 'catppuccin' then
-        vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-        vim.cmd [[colorscheme catppuccin]]
-    elseif M.theme_name == 'dracula' then
-        theme.setup {}
-        theme.load()
-    elseif M.theme_name == 'draculanight' then
-        theme.setup {}
-        theme.load()
-    elseif M.theme_name == 'nordic' then
-        theme.setup {}
-    elseif M.theme_name == 'palenightfall' then
-        theme.setup {}
-     end
+M.set_active_theme = function(theme_name)
+    M.theme_name = theme_name
+end
+
+M.get_active_theme =  function()
+    return themes[M.theme_name]
 end
 
 return M

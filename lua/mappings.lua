@@ -51,10 +51,10 @@ wk.register({
     ["N"] = { "Nzz", "Keep searching result in the middle" },
 
     -- Windows and buffers
-    ["<leader>wv"] = { "<c-w>v", "[WINDOW] Split vertically" },
-    ["<leader>ws"] = { "<c-w>s", "[WINDOW] Split horizontally" },
-    ["<leader>wc"] = { "<c-w>c", "[WINDOW] Unsplit" },
-    ["<leader>wp"] = { "<c-w>p", "[WINDOW] Switch to other window" },
+    -- ["<leader>wv"] = { "<c-w>v", "[WINDOW] Split vertically" },
+    -- ["<leader>ws"] = { "<c-w>s", "[WINDOW] Split horizontally" },
+    -- ["<leader>wc"] = { "<c-w>c", "[WINDOW] Unsplit" },
+    -- ["<leader>wp"] = { "<c-w>p", "[WINDOW] Switch to other window" },
     -- Without bufferline
     -- ["<a-right>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
     -- ["<a-left>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },

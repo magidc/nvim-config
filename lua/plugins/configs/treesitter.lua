@@ -15,8 +15,7 @@ treesitter.setup {
         disable = { "python", "css", "rust" },
     },
     --ensure_installed = "all",
-    ensure_installed = {"java", "rust", "python","lua", "html", "json", "dockerfile", "yaml", "css", "javascript", "typescript"},
-    -- ensure_installed = {"java", "rust", "python", "lua", "go", "html", "json", "sql", "dockerfile", "yaml", "css", "javascript", "typescript"},
+    ensure_installed = { "java", "rust", "python", "lua", "html", "json", "dockerfile", "yaml", "css", "javascript", "typescript" },
     highlight = {
         enable = false,
     },
@@ -81,19 +80,28 @@ treesitter.setup {
     playground = {
         enable = true,
         disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
         persist_queries = false, -- Whether the query persists across vim sessions
         keybindings = {
-          toggle_query_editor = 'o',
-          toggle_hl_groups = 'i',
-          toggle_injected_languages = 't',
-          toggle_anonymous_nodes = 'a',
-          toggle_language_display = 'I',
-          focus_language = 'f',
-          unfocus_language = 'F',
-          update = 'R',
-          goto_node = '<cr>',
-          show_help = '?',
+            toggle_query_editor = 'o',
+            toggle_hl_groups = 'i',
+            toggle_injected_languages = 't',
+            toggle_anonymous_nodes = 'a',
+            toggle_language_display = 'I',
+            focus_language = 'f',
+            unfocus_language = 'F',
+            update = 'R',
+            goto_node = '<cr>',
+            show_help = '?',
         },
-      }
+    },
+    -- incremental_selection = {
+    --     enable = true,
+    --     keymaps = {
+    --         init_selection = "+", -- set to `false` to disable one of the mappings
+    --         node_incremental = "+",
+    --         scope_incremental = "grc",
+    --         node_decremental = "_",
+    --     },
+    -- },
 }

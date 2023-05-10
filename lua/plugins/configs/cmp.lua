@@ -7,9 +7,9 @@ if not _cmp or not _lspkind or not _luasnip then
 end
 
 local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+    unpack = unpack or table.unpack
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 -- Lazy load all vscode like snippets
@@ -35,18 +35,19 @@ cmp.setup {
             luasnip.lsp_expand(args.body)
         end
     },
-    -- sorting = {
-    --     comparators = {
-    --         cmp.config.compare.offset,
-    --         cmp.config.compare.exact,
-    --         cmp.config.compare.score,
-    --         cmp.config.compare._under_comparator,
-    --         cmp.config.compare.kind,
-    --         cmp.config.compare.sort_text,
-    --         cmp.config.compare.length,
-    --         cmp.config.compare.order,
-    --     }
-    -- },
+    sorting = {
+        comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.score,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        },
+    },
     formatting = {
         format = function(entry, vim_item)
             -- Fancy icons and a name of kind
@@ -93,7 +94,7 @@ cmp.setup {
         { name = "nvim_lua" },
         { name = "luasnip" },
         { name = "path" },
-        { name = "buffer" }
+        -- { name = "buffer" }
     },
 }
 

@@ -41,8 +41,8 @@ wk.register({
     ["E"] = { "ge", "[MOTION] Jump backwards to end of word" },
     ["H"] = { "^", "[MOTION] Move to first character of line" },
     ["L"] = { "$", "[MOTION] Move to last character of line" },
-    --["<a-down>"] = { "]m", "[MOTION] Move to next method" },
-    --["<a-up>"] = { "[m", "[MOTION] Move to previous method" },
+    ["m"] = { "]m", "[MOTION] Move to next method" },
+    ["M"] = { "[m", "[MOTION] Move to previous method" },
     ---- Following remaps conflict with Neoscroll plugin for scrolling animations
     ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
     ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
@@ -146,6 +146,7 @@ wk.register({
         r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
         v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
+        m = { "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>", "[TELESCOPE] Get current buffer functions" },
     },
 
     -- Refactoring

@@ -4,8 +4,6 @@ if not _lualine then
     return
 end
 
-local gps = require("nvim-gps")
-
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -14,11 +12,9 @@ lualine.setup({
         always_divide_middle = true,
         globalstatus = true
     },
-    -- Autosession plugin integration
     sections = {
         lualine_c = {
-            { gps.get_location, cond = gps.is_available },
-            "lsp_progress"
+            "lsp_progress",
         }
     }
 })

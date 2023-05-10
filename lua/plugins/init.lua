@@ -60,20 +60,11 @@ local plugins = {
         "nvim-lualine/lualine.nvim",
         dependencies = {
             "arkav/lualine-lsp-progress",
-            "SmiteshP/nvim-gps",
         },
         config = function()
             require "plugins.configs.lualine"
         end
     },
-    -- {
-    --     -- Status line component that shows context of the current cursor position in file.
-    --     "SmiteshP/nvim-gps",
-    --     dependencies = "nvim-treesitter/nvim-treesitter",
-    --     config = function()
-    --         require "plugins.configs.gps"
-    --     end
-    -- },
     {
         -- Pretty list for showing diagnostics, references, telescope results, quickfix and location lists
         "folke/trouble.nvim",
@@ -105,10 +96,6 @@ local plugins = {
     },
     { -- Popup notifications
         "rcarriga/nvim-notify"
-    },
-    {
-        -- Incremental selection expansion
-        "terryma/vim-expand-region"
     },
     "mbbill/undotree",
     {
@@ -149,6 +136,10 @@ local plugins = {
         config = function()
             require "plugins.configs.telescope"
         end
+    },
+    {
+        -- Incremental selection expansion
+        "terryma/vim-expand-region"
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -200,9 +191,6 @@ local plugins = {
         config = function()
             require "plugins.configs.toggleterm"
         end
-    },
-    {
-        "wellle/targets.vim"
     },
     {
         -- Automatically highlighting other uses of the current word under the cursor
@@ -301,19 +289,26 @@ local plugins = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-nvim-lsp-document-symbol",
+            -- "hrsh7th/cmp-nvim-lsp-document-symbol",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
-            "lukas-reineke/cmp-under-comparator", -- Better sort completion items starting with underscore (Python)
+            -- "lukas-reineke/cmp-under-comparator", -- Better sort completion items starting with underscore (Python)
         },
         config = function()
             require "plugins.configs.cmp"
         end
     },
-    -- VSCode like item type icons
-    "onsails/lspkind.nvim",
-
-    "ray-x/lsp_signature.nvim",
+    {
+        -- VSCode like item type icons
+        "onsails/lspkind.nvim",
+    },
+    {
+        -- Show function signature when you type
+        "ray-x/lsp_signature.nvim",
+        config = function()
+            require "plugins.configs.lspsignature"
+        end
+    },
 
     -- Tmux
     {
@@ -336,6 +331,5 @@ local plugins = {
 local theme = require("theme")
 table.insert(plugins, theme.get_active_theme())
 
-vim.api.nvim_echo({ { 'Active theme: ' .. theme.theme_name, "Normal" } }, true, {});
+-- vim.api.nvim_echo({ { 'Active theme: ' .. theme.theme_name, "Normal" } }, true, {});
 lazy.setup(plugins)
-

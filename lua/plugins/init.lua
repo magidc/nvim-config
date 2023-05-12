@@ -245,11 +245,16 @@ local plugins = {
     "mfussenegger/nvim-jdtls",
 
     -- Debug
-    "mfussenegger/nvim-dap",
+    {
+        "mfussenegger/nvim-dap",
+        config = function()
+            require "lsp.configs.dap"
+        end
+    },
     {
         "mfussenegger/nvim-dap-python",
         config = function()
-            require "plugins.configs.dappython"
+            require "lsp.configs.dap-python"
         end
     },
     {

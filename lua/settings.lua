@@ -1,7 +1,7 @@
 local utils = require "utils"
 
 local options = {
-    termguicolors = false,
+    termguicolors = true,
     fileencoding = "utf-8",
     autoread = true,
     wrap = true,

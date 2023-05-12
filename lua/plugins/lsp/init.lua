@@ -6,7 +6,7 @@ local function start_language_server(pattern, callback)
     })
 end
 
--- JAVA
+-- Java
 local _jdtls, jdtls = pcall(require, "lsp.configs.jdtls")
 if _jdtls and type(jdtls) ~= 'boolean' then
     start_language_server('java', jdtls.start)

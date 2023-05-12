@@ -5,5 +5,3 @@ if not ok then
 end
 dap.setup('/opt/anaconda3/envs/arelle/bin/python3')
 
-
-

@@ -216,7 +216,12 @@ local plugins = {
             require "plugins.configs.comment"
         end
     },
-
+    {
+        "ggandor/leap.nvim",
+        config = function()
+            require "plugins.configs.leap"
+        end
+    },
     {
         "folke/todo-comments.nvim",
         dependencies = "nvim-lua/plenary.nvim",
@@ -225,28 +230,24 @@ local plugins = {
         end
     },
     {
+        "simrat39/rust-tools.nvim",
+        dependencies = "nvim-lua/plenary.nvim"
+    },
+
+    ---- LSP
+    "neovim/nvim-lspconfig",
+    "mfussenegger/nvim-jdtls",
+    {
         "williamboman/mason.nvim",
         config = function()
             require "plugins.configs.mason"
         end
     },
 
-    ---- LSP
-    {
-        "neovim/nvim-lspconfig",
-        config = function()
-            require "plugins.configs.lspconfig"
-        end
-    },
-    {
-        "simrat39/rust-tools.nvim",
-        dependencies = "nvim-lua/plenary.nvim"
-    },
-    "mfussenegger/nvim-jdtls",
-
     -- Debug
     {
         "mfussenegger/nvim-dap",
+        dependencies = "rcarriga/nvim-dap-ui",
         config = function()
             require "lsp.configs.dap"
         end
@@ -258,23 +259,10 @@ local plugins = {
         end
     },
     {
-        "rcarriga/nvim-dap-ui",
-        config = function()
-            require "plugins.configs.dapui"
-        end
-    },
-
-    {
         "nvim-telescope/telescope-dap.nvim",
         dependencies = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
         config = function()
             require "plugins.configs.telescopedap"
-        end
-    },
-    {
-        "ggandor/leap.nvim",
-        config = function()
-            require "plugins.configs.leap"
         end
     },
 

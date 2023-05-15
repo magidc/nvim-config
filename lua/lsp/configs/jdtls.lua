@@ -14,17 +14,16 @@ end
 local share_dir = os.getenv("HOME") .. "/.local/share"
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = share_dir .. "/eclipse/" .. project_name
+
 -- Set proper Java executable
 local java_cmd = '/opt/java/jdk-18/bin/java'
+local mason_registry = require("mason-registry")
 
 local bundles = {
-    vim.fn.glob(
-        share_dir ..
-        "/nvim/debug_extensions/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
-    ),
+    mason_registry.get_package("java-debug-adapter"):get_install_path() .. '/extension/server/com.microsoft.java.debug.plugin-0.45.0.jar'
 }
 vim.list_extend(bundles,
-    vim.split(vim.fn.glob(share_dir .. "/nvim/debug_extensions/vscode-java-test/server/*.jar"), "\n"))
+    vim.split(vim.fn.glob(mason_registry.get_package("java-test"):get_install_path() .. "/extension/server/*.jar"), "\n"))
 
 local on_attach = function(client, bufnr)
     handlers.on_attach(client, bufnr)
@@ -33,12 +32,15 @@ local on_attach = function(client, bufnr)
         jdtls.setup_dap({ hotcodereplace = "auto" })
         jdtls.setup.add_commands()
         -- Auto-detect main and setup dap config
-        require("jdtls.dap").setup_dap_main_class_configs({ config_overrides = {
-            vmArgs = "-Dspring.profiles.active=local",
-        } })
+        require("jdtls.dap").setup_dap_main_class_configs({
+            config_overrides = {
+                vmArgs = "-Dspring.profiles.active=local",
+            }
+        })
     end
 end
 
+local jdtls_path =  mason_registry.get_package("jdtls"):get_install_path()
 
 local config = {
     cmd = {
@@ -53,8 +55,8 @@ local config = {
         '--add-modules=ALL-SYSTEM',
         '--add-opens', 'java.base/java.util=ALL-UNNAMED',
         '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-        '-jar', LSP_ROOT_PATH .. '/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-        '-configuration', LSP_ROOT_PATH .. '/jdtls/config_linux',
+        '-jar', jdtls_path .. '/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+        '-configuration', jdtls_path .. '/config_linux',
         '-data', workspace_dir
     },
     flags = {

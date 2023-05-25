@@ -38,8 +38,8 @@ treesitter.setup {
             enable = true,
             lookahead = true,
             keymaps = {
-                ["af"] = "@parameter.outer",
-                ["if"] = "@parameter.inner",
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
                 ["ab"] = "@block.outer",
                 ["ib"] = "@block.inner",
                 ["am"] = "@function.outer",
@@ -54,25 +54,25 @@ treesitter.setup {
             goto_next_start = {
                 [']m'] = '@function.outer',
                 [']['] = '@class.outer',
-                [']f'] = '@parameter.outer',
+                [']a'] = '@parameter.outer',
                 [']b'] = '@block.outer'
             },
             goto_next_end = {
                 [']M'] = '@function.outer',
                 [']]'] = '@class.outer',
-                [']F'] = '@parameter.outer',
+                [']A'] = '@parameter.outer',
                 [']B'] = '@block.outer'
             },
             goto_previous_start = {
                 ['[m'] = '@function.outer',
                 ['[['] = '@class.outer',
-                ['[f'] = '@parameter.outer',
+                ['[a'] = '@parameter.outer',
                 ['[b'] = '@block.outer'
             },
             goto_previous_end = {
                 ['[M'] = '@function.outer',
                 ['[]'] = '@class.outer',
-                ['[F'] = '@parameter.outer',
+                ['[A'] = '@parameter.outer',
                 ['[B'] = '@block.outer'
             }
         }

@@ -69,4 +69,4 @@ if _notify then
 end
 
 -- UI theme
-require("theme").set_active_theme("onedark")
+require("theme").set_active_theme("tokyonight")

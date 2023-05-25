@@ -17,7 +17,10 @@ if not ok then
     return
 end
 
+local theme = require("theme")
+
 local plugins = {
+    theme.get_active_theme(),
     ---- UI
     {
         -- Start page
@@ -163,6 +166,13 @@ local plugins = {
         end
     },
     {
+        -- Extended increment/decrement functions
+        "monaqa/dial.nvim",
+        config = function()
+            require "plugins.configs.dial"
+        end
+    },
+    {
         -- Autochange open/close chars
         "kylechui/nvim-surround",
         config = function()
@@ -197,17 +207,30 @@ local plugins = {
         "RRethy/vim-illuminate"
     },
     {
-        --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
-        "sindrets/diffview.nvim",
-        dependencies = "nvim-lua/plenary.nvim"
-    },
-    {
         -- Project management
         "ahmedkhalf/project.nvim",
         dependencies = "nvim-telescope/telescope.nvim",
         config = function()
             require "plugins.configs.project"
         end
+    },
+    {
+        -- Automatic switch to absolute line numbers when you are not in normal or visual mode, or focus is in other split
+        "sitiom/nvim-numbertoggle"
+    },
+    {
+        "folke/zen-mode.nvim",
+        config = function()
+            require "plugins.configs.zen"
+        end
+    },
+    {
+        "chrisgrieser/nvim-spider",
+        lazy = true
+    },
+    {
+        "chrisgrieser/nvim-various-textobjs",
+        opts = { useDefaultKeymaps = true },
     },
     -- Comments
     {
@@ -243,7 +266,12 @@ local plugins = {
             require "plugins.configs.mason"
         end
     },
-
+    {
+        'VidocqH/lsp-lens.nvim',
+        config = function()
+            require "plugins.configs.lens"
+        end
+    },
     -- Debug
     {
         "mfussenegger/nvim-dap",
@@ -274,6 +302,20 @@ local plugins = {
         "rafamadriz/friendly-snippets",
     },
     ---- Completion
+    {
+        "ms-jpq/coq_nvim",
+        branch = "coq",
+        dependencies = {
+            {
+                "ms-jpq/coq.artifacts",
+                branch = "artifacts"
+            },
+            {
+                "ms-jpq/coq.thirdparty",
+                branch = "3p"
+            }
+        }
+    },
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -313,6 +355,11 @@ local plugins = {
 
     ---- Git
     {
+        --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
+        "sindrets/diffview.nvim",
+        dependencies = "nvim-lua/plenary.nvim"
+    },
+    {
         -- Add git related info in the signs columns and popups
         "lewis6991/gitsigns.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
@@ -321,8 +368,6 @@ local plugins = {
         end
     },
 }
-local theme = require("theme")
-table.insert(plugins, theme.get_active_theme())
 
 -- vim.api.nvim_echo({ { 'Active theme: ' .. theme.theme_name, "Normal" } }, true, {});
 lazy.setup(plugins)

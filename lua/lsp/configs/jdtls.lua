@@ -20,7 +20,8 @@ local java_cmd = '/opt/java/jdk-18/bin/java'
 local mason_registry = require("mason-registry")
 
 local bundles = {
-    mason_registry.get_package("java-debug-adapter"):get_install_path() .. '/extension/server/com.microsoft.java.debug.plugin-0.45.0.jar'
+    mason_registry.get_package("java-debug-adapter"):get_install_path() ..
+    '/extension/server/com.microsoft.java.debug.plugin-0.45.0.jar'
 }
 vim.list_extend(bundles,
     vim.split(vim.fn.glob(mason_registry.get_package("java-test"):get_install_path() .. "/extension/server/*.jar"), "\n"))
@@ -40,7 +41,7 @@ local on_attach = function(client, bufnr)
     end
 end
 
-local jdtls_path =  mason_registry.get_package("jdtls"):get_install_path()
+local jdtls_path = mason_registry.get_package("jdtls"):get_install_path()
 
 local config = {
     cmd = {

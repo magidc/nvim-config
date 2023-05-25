@@ -37,12 +37,21 @@ wk.register({
     ["<a-s>"] = { "<cmd>TSTextobjectSelect @parameter.outer<cr>\"_d", "Delete function parameter" },
     ["<a-o>"] = { "o<ESC>", "New line in normal mode" },
     ["<a-O>"] = { "O<ESC>", "New line before in normal mode" },
+
+    ["<C-a>"] = { "<cmd>DialIncrement<cr>", "Increment" },
+    ["<C-x>"] = { "<cmd>DialDecrement<cr>", " Decrement" },
+    ["g<C-a>"] = { "<cmd>DialIncrement<cr>", "Increment" },
+    ["g<C-x>"] = { "<cmd>DialDecrement<cr>", "Decrement" },
     -- Motions
-    ["E"] = { "ge", "[MOTION] Jump backwards to end of word" },
+    -- ["E"] = { "ge", "[MOTION] Jump backwards to end of word" },
     ["H"] = { "^", "[MOTION] Move to first character of line" },
     ["L"] = { "$", "[MOTION] Move to last character of line" },
-    ["m"] = { "]m", "[MOTION] Move to next method" },
-    ["M"] = { "[m", "[MOTION] Move to previous method" },
+    ["<a-down>"] = { "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", "[MOTION] Move to next method" },
+    ["<a-up>"] = { "<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>", "[MOTION] Move to previous method" },
+    ["w"] = { "<cmd>lua require('spider').motion('w')<cr>", "[MOTION] Spider-w motion"},
+    ["e"] = { "<cmd>lua require('spider').motion('e')<cr>", "[MOTION] Spider-e motion"},
+    ["b"] = { "<cmd>lua require('spider').motion('b')<cr>", "[MOTION] Spider-b motion"},
+    ["E"] = { "<cmd>lua require('spider').motion('ge')<cr>", "[MOTION] Spider-ge motion"},
     ---- Following remaps conflict with Neoscroll plugin for scrolling animations
     ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
     ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
@@ -74,8 +83,8 @@ wk.register({
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
     ["<a-s-down>"] = { "zr", "[FOLDS] Increase fold level" },
     ["<a-s-up>"] = { "zm", "[FOLDS] Decrease fold level" },
-    ["<a-down>"] = { "zo", "[FOLDS] Open fold" },
-    ["<a-up>"] = { "zc", "[FOLDS] Close fold" },
+    -- ["<a-down>"] = { "zo", "[FOLDS] Open fold" },
+    -- ["<a-up>"] = { "zc", "[FOLDS] Close fold" },
 
     -- Macros and registers
     ["t"] = { '"_', "Set black hole registry" },
@@ -146,7 +155,8 @@ wk.register({
         r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
         v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
-        m = { "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>", "[TELESCOPE] Get current buffer functions" },
+        x = { "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>",
+            "[TELESCOPE] Get current buffer functions" },
     },
 
     -- Refactoring
@@ -173,6 +183,11 @@ wk.register({
         d = { "<cmd>Gitsigns diffthis<cr>", "[GIT] Diff" },
         n = { "<cmd>Gitsigns next_hunk<cr>", "[GIT] Next hunk" },
         p = { "<cmd>Gitsigns prev_hunk<cr>", "[GIT] Prev hunk" },
+    },
+    -- Display modes
+    ["<leader>m"] = {
+        name = "[Display modes]",
+        z = { "<cmd>ZenMode<cr>", "[MODE] Toggle zen mode" },
     },
 }, n_opts)
 
@@ -212,8 +227,18 @@ wk.register({
     [">"] = { ">gv", "[Indent] Indent right" },
     ["<a-j>"] = { ":m '>+1<cr>gv=gv", "[MOVE] Move block down" },
     ["<a-k>"] = { ":m '<-2<cr>gv=gv", "[MOVE] Move block up" },
+    ["w"] = { "<cmd>lua require('spider').motion('w')<cr>", "[MOTION] Spider-w motion"},
+    ["e"] = { "<cmd>lua require('spider').motion('e')<cr>", "[MOTION] Spider-e motion"},
+    ["b"] = { "<cmd>lua require('spider').motion('b')<cr>", "[MOTION] Spider-b motion"},
+    ["E"] = { "<cmd>lua require('spider').motion('ge')<cr>", "[MOTION] Spider-ge motion"},
+
     ["<leader>dx"] = { "<cmd>lua require('dapui').eval()<CR>", "[DAPUI] Evaluate (selection in visual mode) }" },
     ["<c-s>"] = { "ggOG", "[SELECT] Select all" },
+    ["<C-a>"] = { "<cmd>DialIncrement<cr>", "Increment" },
+    ["<C-x>"] = { "<cmd>DialDecrement<cr>", " Decrement" },
+    ["g<C-a>"] = { "<cmd>DialIncrement<cr>", "Increment" },
+    ["g<C-x>"] = { "<cmd>DialDecrement<cr>", "Decrement" },
+
 }, v_opts)
 
 -- Select mode mappings

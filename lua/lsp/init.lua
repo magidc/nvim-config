@@ -8,7 +8,7 @@ if _jdtls and type(jdtls) ~= 'boolean' then
     })
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require('lsp.handlers').capabilities
 
 -- Rust
 local _rust, rust = pcall(require, "rust-tools")
@@ -46,6 +46,7 @@ if _lspconfig then
 
     -- LUA
     lspconfig.lua_ls.setup {
+        autostart = false,
         settings = {
             Lua = {
                 runtime = {
@@ -68,40 +69,47 @@ if _lspconfig then
         }
     }
 
-    -- -- Bash
-    -- lspconfig.bashls.setup {}
-    --
-    -- -- Javascript/Typescript
-    -- lspconfig.eslint.setup({
-    --     capabilities = capabilities,
-    --     settings = {
-    --         packageManager = 'npm'
-    --     },
-    --     on_attach = function(client, bufnr)
-    --         vim.api.nvim_create_autocmd("BufWritePre", {
-    --             buffer = bufnr,
-    --             command = "EslintFixAll",
-    --         })
-    --     end,
-    -- })
-    --
+    -- Bash
+    lspconfig.bashls.setup {
+        autostart = false
+    }
+
+    -- Javascript/Typescript
+    lspconfig.eslint.setup({
+        autostart = false,
+        capabilities = capabilities,
+        settings = {
+            packageManager = 'npm'
+        },
+        on_attach = function(client, bufnr)
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = bufnr,
+                command = "EslintFixAll",
+            })
+        end,
+    })
+
     -- HTML
     lspconfig.html.setup {
+        autostart = false,
         capabilities = capabilities,
     }
 
     -- CSS
     lspconfig.cssls.setup {
+        autostart = false,
         capabilities = capabilities
     }
 
     -- Dockerfile
     lspconfig.dockerls.setup {
+        autostart = false,
         capabilities = capabilities
     }
 
     -- Docker compose
     lspconfig.docker_compose_language_service.setup {
+        autostart = false,
         capabilities = capabilities
     }
 end

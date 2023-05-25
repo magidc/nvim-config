@@ -180,7 +180,10 @@ M.set_active_theme = function(theme_name)
 end
 
 M.get_active_theme =  function()
-    return themes[M.theme_name]
+    theme = themes[M.theme_name]
+    theme.lazy = false 
+    theme.priority = 1000
+    return theme
 end
 
 return M

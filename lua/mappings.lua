@@ -38,12 +38,7 @@ wk.register({
     ["<a-o>"] = { "o<ESC>", "New line in normal mode" },
     ["<a-O>"] = { "O<ESC>", "New line before in normal mode" },
 
-    ["<C-a>"] = { "<cmd>DialIncrement<cr>", "Increment" },
-    ["<C-x>"] = { "<cmd>DialDecrement<cr>", " Decrement" },
-    ["g<C-a>"] = { "<cmd>DialIncrement<cr>", "Increment" },
-    ["g<C-x>"] = { "<cmd>DialDecrement<cr>", "Decrement" },
     -- Motions
-    -- ["E"] = { "ge", "[MOTION] Jump backwards to end of word" },
     ["H"] = { "^", "[MOTION] Move to first character of line" },
     ["L"] = { "$", "[MOTION] Move to last character of line" },
     ["<a-down>"] = { "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", "[MOTION] Move to next method" },
@@ -222,23 +217,27 @@ local v_opts = {
 }
 wk.register({
     ["jk"] = { "<Esc>", "Normal mode switch" },
+    ["<c-s>"] = { "ggOG", "[SELECT] Select all" },
+    -- Edit
+     ["c"] = { '"_c', "Do not copy when changing" },
+    ["C"] = { '"_C', "Do not copy when changing" },
+    ["cc"] = { '"_cc', "Do not copy when changing" },
     ["p"] = { '"_dP', "Paste without replacing what is was in clipboard" },
-    ["<"] = { "<gv", "[Indent] Indent left" },
-    [">"] = { ">gv", "[Indent] Indent right" },
     ["<a-j>"] = { ":m '>+1<cr>gv=gv", "[MOVE] Move block down" },
     ["<a-k>"] = { ":m '<-2<cr>gv=gv", "[MOVE] Move block up" },
+    -- Motions
+    ["H"] = { "^", "[MOTION] Move to first character of line" },
+    ["L"] = { "$", "[MOTION] Move to last character of line" },
+    ["<a-down>"] = { "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", "[MOTION] Move to next method" },
+    ["<a-up>"] = { "<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>", "[MOTION] Move to previous method" },
     ["w"] = { "<cmd>lua require('spider').motion('w')<cr>", "[MOTION] Spider-w motion"},
     ["e"] = { "<cmd>lua require('spider').motion('e')<cr>", "[MOTION] Spider-e motion"},
     ["b"] = { "<cmd>lua require('spider').motion('b')<cr>", "[MOTION] Spider-b motion"},
     ["E"] = { "<cmd>lua require('spider').motion('ge')<cr>", "[MOTION] Spider-ge motion"},
 
+    ["<"] = { "<gv", "[Indent] Indent left" },
+    [">"] = { ">gv", "[Indent] Indent right" },
     ["<leader>dx"] = { "<cmd>lua require('dapui').eval()<CR>", "[DAPUI] Evaluate (selection in visual mode) }" },
-    ["<c-s>"] = { "ggOG", "[SELECT] Select all" },
-    ["<C-a>"] = { "<cmd>DialIncrement<cr>", "Increment" },
-    ["<C-x>"] = { "<cmd>DialDecrement<cr>", " Decrement" },
-    ["g<C-a>"] = { "<cmd>DialIncrement<cr>", "Increment" },
-    ["g<C-x>"] = { "<cmd>DialDecrement<cr>", "Decrement" },
-
 }, v_opts)
 
 -- Select mode mappings

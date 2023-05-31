@@ -4,6 +4,8 @@ if not _lualine then
     return
 end
 
+local _gps, gps = pcall(require, "nvim-gps")
+
 lualine.setup({
     options = {
         icons_enabled = true,
@@ -15,6 +17,7 @@ lualine.setup({
     sections = {
         lualine_c = {
             "lsp_progress",
+            { gps.get_location, cond = gps.is_available },
         }
     }
 })

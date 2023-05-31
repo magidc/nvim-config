@@ -51,6 +51,6 @@ M.on_attach = function(client, bufnr)
     set_hover_border(client)
 end
 
--- M.capabilities = require("cmp_nvim_lsp").default_capabilities()
-M.capabilities = require('coq').lsp_ensure_capabilities()
+M.capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- M.capabilities = require('coq').lsp_ensure_capabilities()
 return M

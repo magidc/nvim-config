@@ -130,6 +130,12 @@ local plugins = {
             require "plugins.configs.treesitter"
         end
     },
+    {
+        "magidc/nvim-gps",
+        config = function()
+            require "plugins.configs.gps"
+        end
+    },
 
     ---- Utilities
     {

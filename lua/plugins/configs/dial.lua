@@ -21,3 +21,12 @@ dial.augends:register_group {
         },
     }
 }
+
+vim.api.nvim_set_keymap("n", "<c-a>", require("dial.map").inc_normal(), {noremap = true})
+vim.api.nvim_set_keymap("n", "<c-x>", require("dial.map").dec_normal(), {noremap = true})
+vim.api.nvim_set_keymap("n", "g<c-a>", require("dial.map").inc_gnormal(), {noremap = true})
+vim.api.nvim_set_keymap("n", "g<c-x>", require("dial.map").dec_gnormal(), {noremap = true})
+vim.api.nvim_set_keymap("v", "<c-a>", require("dial.map").inc_visual() .. "gv", {noremap = true})
+vim.api.nvim_set_keymap("v", "<c-x>", require("dial.map").dec_visual() .. "gv", {noremap = true})
+vim.api.nvim_set_keymap("v", "g<c-a>", require("dial.map").inc_gvisual() .. "gv", {noremap = true})
+vim.api.nvim_set_keymap("v", "g<c-x>", require("dial.map").dec_gvisual() .. "gv", {noremap = true})

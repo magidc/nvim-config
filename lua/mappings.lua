@@ -142,16 +142,16 @@ wk.register({
     -- Code navigation
     ["<leader>c"] = {
         name = "[Code navigation]",
-        c = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
+        l = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
         d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
         t = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "[LSP] Go to type definition" },
         i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
         s = { "<cmd>lua require'jdtls'.super_implementation()<cr>", "[JDLTS] Go to super implementation" },
         r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
         v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
+        c = { "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", "[LSP] Show incoming calls" },
         h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
-        x = { "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>",
-            "[TELESCOPE] Get current buffer functions" },
+        x = { "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>", "[TELESCOPE] Get current buffer functions" },
     },
 
     -- Refactoring

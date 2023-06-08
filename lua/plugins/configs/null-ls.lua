@@ -7,6 +7,7 @@ null_ls.setup({
     sources = {
         null_ls.builtins.formatting.xmllint,
         null_ls.builtins.formatting.prettier,
-        null_ls.builtins.diagnostics.jsonlint,
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.hadolint,  -- For Dockerfiles
     },
 })

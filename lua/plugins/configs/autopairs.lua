@@ -1,7 +1,7 @@
-local ok, autopairs = pcall(require, "nvim-autopairs")
-
-if not ok then
-    return
-end
-
-autopairs.setup {}
+return {
+	-- Autoclose brackets, parentheses...
+	"windwp/nvim-autopairs",
+	config = function()
+		require("nvim-autopairs").setup()
+	end,
+}

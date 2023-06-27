@@ -112,4 +112,6 @@ if _lspconfig then
         autostart = false,
         capabilities = capabilities
     }
+    -- XML
+    lspconfig.lemminx.setup{}
 end

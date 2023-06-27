@@ -1,7 +1,6 @@
-local ok, mason = pcall(require, "mason")
-
-if not ok then
-    return
-end
-
-mason.setup({})
+return {
+    "williamboman/mason.nvim",
+    config = function()
+        require("mason").setup()
+    end,
+}

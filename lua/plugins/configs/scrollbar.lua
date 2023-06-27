@@ -1,13 +1,11 @@
-local _scrollbar, scrollbar = pcall(require, "scrollbar")
-
-if not _scrollbar then
-    return
-end
-
-local colors = require("theme").colors
-
-scrollbar.setup {
-    handle = {
-        color = colors.grey12
-    }
+return {
+    -- Scroll bar
+    "petertriho/nvim-scrollbar",
+    config = function()
+        require("scrollbar").setup({
+            handle = {
+                color = require("theme").colors.red,
+            },
+        })
+    end,
 }

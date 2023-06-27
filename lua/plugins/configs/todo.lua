@@ -1,8 +1,7 @@
-local ok, todo = pcall(require, "todo-comments")
-
-if not ok then
-    return
-end
-
-todo.setup {
+return {
+    "folke/todo-comments.nvim",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function()
+        require("todo-comments").setup()
+    end,
 }

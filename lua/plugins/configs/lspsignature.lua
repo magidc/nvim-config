@@ -1,8 +1,7 @@
-local ok, signature = pcall(require, "lsp_signature")
-
-if not ok then
-    return
-end
-
-signature.setup()
-
+return {
+	-- Show function signature when you type
+	"ray-x/lsp_signature.nvim",
+	config = function()
+		require("lsp_signature").setup()
+	end,
+}

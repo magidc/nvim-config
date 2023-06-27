@@ -1,7 +1,7 @@
-local ok, _ = pcall(require, "dapui")
-
-if not ok then
-    return
-end
-
-require("telescope").load_extension("dap")
+return {
+    "nvim-telescope/telescope-dap.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
+    config = function()
+        require("telescope").load_extension("dap")
+    end,
+}

@@ -1,23 +1,24 @@
-local _lualine, lualine = pcall(require, "lualine")
-
-if not _lualine then
-    return
-end
-
-local _gps, gps = pcall(require, "nvim-gps")
-
-lualine.setup({
-    options = {
-        icons_enabled = true,
-        theme = require("theme").theme_name,
-        disabled_filetypes = {},
-        always_divide_middle = true,
-        globalstatus = true
+return {
+    -- Status bar
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+        "arkav/lualine-lsp-progress",
     },
-    sections = {
-        lualine_c = {
-            "lsp_progress",
-            "aerial",
-        }
-    }
-})
+    config = function()
+        require("lualine").setup({
+            options = {
+                icons_enabled = true,
+                theme = require("theme").theme_name,
+                disabled_filetypes = {},
+                always_divide_middle = true,
+                globalstatus = true,
+            },
+            sections = {
+                lualine_c = {
+                    "lsp_progress",
+                    "aerial",
+                },
+            },
+        })
+    end,
+}

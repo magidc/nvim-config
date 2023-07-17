@@ -20,6 +20,7 @@ return {
 			--ensure_installed = "all",
 			ensure_installed = {
 				"java",
+                "cpp",
 				"rust",
 				"python",
 				"lua",

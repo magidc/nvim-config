@@ -61,11 +61,13 @@ local plugins = {
 	require("plugins.configs.flash"),
 	require("plugins.configs.todo"),
 	---- LSP
-	"neovim/nvim-lspconfig",
-	"mfussenegger/nvim-jdtls",
 	require("plugins.configs.mason"),
+    require("plugins.configs.mason-lspconfig"),
+    "neovim/nvim-lspconfig",
+    "mfussenegger/nvim-jdtls",
 	require("plugins.configs.lens"),
 	require("plugins.configs.null-ls"), -- Extends LSP function with external tools
+	require("plugins.configs.formatter"),
 	require("plugins.configs.rust-tools"),
 	-- Debug
 	require("lsp.configs.dap"),

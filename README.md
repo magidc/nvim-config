@@ -28,16 +28,14 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
     ```
 2. Install [ripgrep](https://github.com/BurntSushi/ripgrep) into your OS. It is required by some [Telescope](https://github.com/nvim-telescope/telescope.nvim) plugin searching modes.
 
-3. This environment is configured with Language Server Providers (LSP) for Java, Python, Rust and Lua. All of them are integrated with Neovim native LSP support. It is required to install LSP in your system in order to have IDE features like autocompletions or error highlight. To facilitate installation of LSPs this configuration relies on [mason.nvim](https://github.com/williamboman/mason.nvim#installation) plugin. Find below the instructions to setup each one of the supported LSPs:
-   1. **Java**: Run `:MasonInstall jdtls` to download LSP. Make also sure to set the `java_cmd` path in the config file!!
-   2. **Rust**: Run `:MasonInstall rust_analyzer` to download LSP.
-   3. **Lua**: Run `:MasonInstall lua-language-server` to download LSP.
-   4. **Python**: Run `:MasonInstall pyright` to download LSP.
+3. This environment is configured with Language Server Providers (LSP) for Java, Python, Rust and Lua. All of them are integrated with Neovim native LSP support. It is required to install LSP in your system in order to have IDE features like autocompletions or error highlight. To facilitate installation of LSPs this configuration relies on [mason.nvim](https://github.com/williamboman/mason.nvim#installation) plugin. Most of language servers (LSP) are automatically installed but some dependencias like debug adapters (DAP) must be installed manually by running following commands:
+   1. **Java**: Run `:MasonInstall jdtls java-test java-debug-adapter` to download and install LSP and DAP components for Java. Make also sure to set the `java_cmd` path in the config file!!
+   2. **Rust**: Run `:MasonInstall codelldb` to download DAP.
 <br>
 
 # UI theme
 Several UI themes are preconfigured in this setup. Active theme is set by editing file `lua/settings.lua`.
-Default active theme is [Onedark](https://github.com/navarasu/onedark.nvim).
+Default active theme is [Tokyonight](https://github.com/folke/tokyonight.nvim).
 
 <br>
 

@@ -64,7 +64,7 @@ local config = {
 		"--add-opens",
 		"java.base/java.lang=ALL-UNNAMED",
 		"-jar",
-		jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.6.500.v20230622-2056.jar",
+		jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar",
 		"-configuration",
 		jdtls_path .. "/config_linux",
 		"-data",
@@ -75,8 +75,8 @@ local config = {
 		allow_incremental_sync = true,
 	},
 	--root_dir = require("jdtls.setup").find_root({"build.gradle", "pom.xml", ".git"}),
-	-- Using .metadata dir (Eclipse workspace) as reference for setting root dir
-	root_dir = jdtls.setup.find_root({ ".metadata", "pom.xml", ".git" }),
+	-- Using .project file (Eclipse workspace) as reference for setting root dir
+	root_dir = jdtls.setup.find_root({ ".project", "pom.xml", ".git" }),
 
 	on_init = on_init,
 	init_options = {

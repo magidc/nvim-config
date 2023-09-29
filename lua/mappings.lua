@@ -29,6 +29,7 @@ wk.register({
 	["cc"] = { '"_cc', "Do not copy when changing" },
 	
     ["<a-p>"] = { '"_diwP', "Replace word with paste" },
+    ["<a-P>"] = { '"_ddP', "Replace line with paste" },
 	
     ["<a-j>"] = { ":m .+1<cr>==", "Move line down" },
 	["<a-k>"] = { ":m .-2<cr>==", "Move line up" },
@@ -128,14 +129,8 @@ wk.register({
 		e = { "<cmd>DapContinue<cr>", "[DAP] Debug/Resume" },
 		k = { "<cmd>DapTerminate<cr>", "[DAP] Terminate" },
 		b = { "<cmd>DapToggleBreakpoint<cr>", "[DAP] Toggle breakpoint" },
-		B = {
-			"<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
-			"[DAP] Set conditional breakpoint",
-		},
-		l = {
-			"<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>",
-			"[DAP] Set log point breakpoint",
-		},
+		B = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", "[DAP] Set conditional breakpoint", },
+		l = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", "[DAP] Set log point breakpoint", },
 		v = { "<cmd>DapStepOver<cr>", "[DAP] Step over" },
 		i = { "<cmd>DapStepInto<cr>", "[DAP] Step into" },
 		o = { "<cmd>DapStepOut<cr>", "[DAP] Step out" },
@@ -159,9 +154,7 @@ wk.register({
 		v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
 		c = { "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", "[LSP] Show incoming calls" },
 		h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
-		x = {
-			"<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>",
-			"[TELESCOPE] Get current buffer functions",
+		x = { "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>", "[TELESCOPE] Get current buffer functions",
 		},
 	},
 

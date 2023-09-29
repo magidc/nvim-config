@@ -81,6 +81,7 @@ local themes = {
                 on_colors = function(colors)
                     colors.bg_dark = '#000000'
                     colors.bg = '#11121D'
+                    -- colors.bg_visual = M.colors.grey12
                 end
             })
             theme.load()

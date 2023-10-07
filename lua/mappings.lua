@@ -27,10 +27,10 @@ wk.register({
 	["c"] = { '"_c', "Do not copy when changing" },
 	["C"] = { '"_C', "Do not copy when changing" },
 	["cc"] = { '"_cc', "Do not copy when changing" },
-	
+
     ["<a-p>"] = { '"_diwP', "Replace word with paste" },
     ["<a-P>"] = { '"_ddP', "Replace line with paste" },
-	
+
     ["<a-j>"] = { ":m .+1<cr>==", "Move line down" },
 	["<a-k>"] = { ":m .-2<cr>==", "Move line up" },
 
@@ -61,7 +61,7 @@ wk.register({
     ----
     ["n"] = { "nzz", "Keep searching result in the middle" },
     ["N"] = { "Nzz", "Keep searching result in the middle" },
-	
+
     ["<a-down>"] = { "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", "[MOTION] Move to next method" },
 	["<a-up>"] = { "<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>", "[MOTION] Move to previous method" },
 
@@ -69,7 +69,7 @@ wk.register({
 	---- Without bufferline
 	-- ["<a-right>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
 	-- ["<a-left>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
-	-- With bufferline
+    -- With bufferline
 	["<a-left>"] = { "<cmd>BufferLineCyclePrev<cr>", "[BUFFER] Go previous buffer" },
 	["<a-right>"] = { "<cmd>BufferLineCycleNext<cr>", "[BUFFER] Go next buffer" },
 	["<a-b>"] = { "<cmd>e #<cr>", "[BUFFER] Switch to other buffer" },
@@ -90,10 +90,10 @@ wk.register({
 	-- Macros and registers
 	["t"] = { '"_', "Set black hole registry" },
 	["qj"] = { "@q", "Execute macro saved in 'q' register" },
-	[","] = { "@:", "Repeat last command" },
+
+    ["<leader>l"] = { "<cmd>noh<cr>", "Clean search highlights" },
 
 	-- Find
-	[";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
 	["<leader>f"] = {
 		name = "[TELESCOPE]",
 		e = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },

@@ -162,7 +162,7 @@ wk.register({
 	["<leader>r"] = {
 		name = "[Code refactor]",
 		e = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
-		f = { "<cmd>lua vim.lsp.buf.format { async = true }<cr>", "[LSP] Format code" },
+		f = { "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>", "[CONFORM] Format code" },
 		n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
 		["<a-d>"] = { '<C-o>"_diw', "Delete word" },
 		["<a-c>"] = { '<C-o>"_ciw', "Change word" },

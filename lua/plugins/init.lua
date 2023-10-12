@@ -60,6 +60,7 @@ local plugins = {
 	require("plugins.configs.comment"),
 	require("plugins.configs.flash"),
 	require("plugins.configs.todo"),
+	require("plugins.configs.harpoon"),
 	---- LSP
 	require("plugins.configs.mason"),
     require("plugins.configs.mason-lspconfig"),

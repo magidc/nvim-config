@@ -29,15 +29,15 @@ wk.register({
 	["cc"] = { '"_cc', "Do not copy when changing" },
 
     ["<a-p>"] = { '"_diwP', "Replace word with paste" },
-    ["<a-P>"] = { '"_ddP', "Replace line with paste" },
+    ["<a-s-p>"] = { '"_ddP', "Replace line with paste" },
 
     ["<a-j>"] = { ":m .+1<cr>==", "Move line down" },
 	["<a-k>"] = { ":m .-2<cr>==", "Move line up" },
 
 	["<a-d>"] = { '"_diw', "Delete word" },
 	["<a-c>"] = { '"_ciw', "Change word" },
-	["<a-D>"] = { '<cmd>lua require("various-textobjs").subword(true)<cr>"_d', "Delete subword" },
-	["<a-C>"] = { '<cmd>lua require("various-textobjs").subword(true)<cr>"_c', "Change subword" },
+	["<a-s-d>"] = { '<cmd>lua require("various-textobjs").subword(true)<cr>"_d', "Delete subword" },
+	["<a-s-c>"] = { '<cmd>lua require("various-textobjs").subword(true)<cr>"_c', "Change subword" },
 	["<a-z>"] = { '"_ci"', "Change within quotes" },
 	["<a-x>"] = { '"_ci(', "Change within parentheses" },
 
@@ -189,6 +189,22 @@ wk.register({
 		name = "[Display modes]",
 		z = { "<cmd>ZenMode<cr>", "[MODE] Toggle zen mode" },
 	},
+
+	-- Jumps/Marks
+	["<leader>j"] = {
+		name = "[Jumps]",
+		k = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "[HARPOON] Show quick menu" },
+		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "[HARPOON] Add file" },
+	},
+	-- ["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "[HARPOON] Go to file 1" },
+	-- ["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "[HARPOON] Go to file 2" },
+	-- ["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "[HARPOON] Go to file 3" },
+	-- ["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "[HARPOON] Go to file 4" },
+	-- ["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "[HARPOON] Go to file 5" },
+	-- ["6"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", "[HARPOON] Go to file 6" },
+	-- ["7"] = { "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", "[HARPOON] Go to file 7" },
+	-- ["8"] = { "<cmd>lua require('harpoon.ui').nav_file(8)<cr>", "[HARPOON] Go to file 8" },
+	-- ["9"] = { "<cmd>lua require('harpoon.ui').nav_file(9)<cr>", "[HARPOON] Go to file 9" },
 }, n_opts)
 
 -- INSERT MODE MAPPINGS

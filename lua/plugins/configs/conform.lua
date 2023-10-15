@@ -10,13 +10,18 @@ return {
 				-- file is assumed to be modified in-place by the format command.
 				stdin = true,
 			},
+			tidy = {
+				command = "tidy",
+				args = { "--tidy-mark", "no", "-quiet", "-indent", "-wrap", "0" },
+				stdin = true,
+			},
 		},
 
 		formatters_by_ft = {
 			lua = { "stylua" },
 			json = { "jq" },
-            html = { { "prettierd", "prettier" } },
-			xhtml = { "xmllint" },
+			html = { { "prettierd", "prettier", "tidy" } },
+			xhtml = { "xmllint", "tidy" },
 			xml = { "xmllint" },
 			xsd = { "xmllint" },
 			javascript = { { "prettierd", "prettier" } },

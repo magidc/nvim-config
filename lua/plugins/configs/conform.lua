@@ -21,6 +21,7 @@ return {
 			lua = { "stylua" },
 			json = { "jq" },
 			html = { { "prettierd", "prettier", "tidy" } },
+			css = { { "prettierd", "prettier", "tidy" } },
 			xhtml = { "xmllint", "tidy" },
 			xml = { "xmllint" },
 			xsd = { "xmllint" },

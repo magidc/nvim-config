@@ -81,6 +81,7 @@ local plugins = {
 	require("plugins.configs.coq"),
 	require("plugins.configs.cmp"),
 	require("plugins.configs.lspsignature"),
+    require("plugins.configs.copilot"),
 	-- Tmux
 	require("plugins.configs.tmux"),
 	---- Git

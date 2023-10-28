@@ -116,4 +116,7 @@ if _lspconfig then
 	})
 	-- XML
 	lspconfig.lemminx.setup({})
+
+	-- VUE
+	lspconfig.vuels.setup({})
 end

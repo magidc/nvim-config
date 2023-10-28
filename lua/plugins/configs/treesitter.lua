@@ -36,6 +36,7 @@ return {
                 "css",
                 "javascript",
                 "typescript",
+                "vue",
             },
             highlight = {
                 enable = false,

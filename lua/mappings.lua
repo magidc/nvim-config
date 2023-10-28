@@ -44,8 +44,8 @@ wk.register({
 	["<a-a>"] = { '<cmd>TSTextobjectSelect @parameter.inner<cr>"_c', "Change function parameter" },
 	["<a-s>"] = { '<cmd>TSTextobjectSelect @parameter.outer<cr>"_d', "Delete function parameter" },
 
-	["<a-o>"] = { "o<ESC>", "New line in normal mode" },
-	["<a-O>"] = { "O<ESC>", "New line before in normal mode" },
+	["<a-o>"] = { "mao<ESC>`a", "New line in normal mode" },
+	["<a-O>"] = { "maO<ESC>`a", "New line before in normal mode" },
 
 	-- Motions
 	["H"] = { "^", "[MOTION] Move to first character of line" },
@@ -65,7 +65,7 @@ wk.register({
     ["<a-down>"] = { "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", "[MOTION] Move to next method" },
 	["<a-up>"] = { "<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>", "[MOTION] Move to previous method" },
 
-	-- Windows and buffers
+	-- Window navigation
 	---- Without bufferline
 	-- ["<a-right>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
 	-- ["<a-left>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
@@ -91,9 +91,8 @@ wk.register({
 	["t"] = { '"_', "Set black hole registry" },
 	["qj"] = { "@q", "Execute macro saved in 'q' register" },
 
-    ["<leader>l"] = { "<cmd>noh<cr>", "Clean search highlights" },
-
 	-- Find
+    [";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
 	["<leader>f"] = {
 		name = "[TELESCOPE]",
 		e = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
@@ -102,7 +101,7 @@ wk.register({
 		b = { "<cmd>Telescope buffers<cr>", "[TELESCOPE] Find buffers" },
 		m = { "<cmd>Telescope marks<cr>", "[TELESCOPE] Marks" },
 		h = { "<cmd>Telescope oldfiles<cr>", "[TELESCOPE] Recent files" },
-		z = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "[TELESCOPE] Current buffer fuzzy find" },
+		d = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "[TELESCOPE] Current buffer fuzzy find" },
 		t = { "<cmd>TodoTelescope<cr>", "[TELESCOPE] TODO list" },
 		c = { "<cmd>Telescope command_history<cr>", "[TELESCOPE] Search command history" },
 		x = { "<cmd>Telescope neoclip<cr>", "[TELESCOPE] Search in clipboard manager" },
@@ -164,8 +163,6 @@ wk.register({
 		e = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
 		f = { "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>", "[CONFORM] Format code" },
 		n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
-		["<a-d>"] = { '<C-o>"_diw', "Delete word" },
-		["<a-c>"] = { '<C-o>"_ciw', "Change word" },
 		o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
 	},
 
@@ -239,6 +236,7 @@ local v_opts = {
 wk.register({
 	["jk"] = { "<Esc>", "Normal mode switch" },
 	["<c-s>"] = { "ggOG", "[SELECT] Select all" },
+	["v"] = { "^o$", "[SELECT] Select trimmed line" },
 	-- Edit
 	["c"] = { '"_c', "Do not copy when changing" },
 	["C"] = { '"_C', "Do not copy when changing" },

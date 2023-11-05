@@ -78,7 +78,7 @@ if _lspconfig then
 
 	-- Javascript/Typescript
 	lspconfig.eslint.setup({
-		autostart = false,
+		autostart = true,
 		capabilities = capabilities,
 		settings = {
 			packageManager = "npm",

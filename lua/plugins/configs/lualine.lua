@@ -1,9 +1,6 @@
 return {
     -- Status bar
     "nvim-lualine/lualine.nvim",
-    dependencies = {
-        "arkav/lualine-lsp-progress",
-    },
     config = function()
         require("lualine").setup({
             options = {
@@ -15,7 +12,6 @@ return {
             },
             sections = {
                 lualine_c = {
-                    "lsp_progress",
                     "aerial",
                 },
             },

@@ -17,7 +17,6 @@ local n_opts = {
 	nowait = true,
 }
 
-
 wk.register({
 	["<c-s>"] = { "ggVG", "[SELECT] Select all" },
 	-- Edit
@@ -28,10 +27,10 @@ wk.register({
 	["C"] = { '"_C', "Do not copy when changing" },
 	["cc"] = { '"_cc', "Do not copy when changing" },
 
-    ["<a-p>"] = { '"_diwP', "Replace word with paste" },
-    ["<a-s-p>"] = { '"_ddP', "Replace line with paste" },
+	["<a-p>"] = { '"_diwP', "Replace word with paste" },
+	["<a-s-p>"] = { '"_ddP', "Replace line with paste" },
 
-    ["<a-j>"] = { ":m .+1<cr>==", "Move line down" },
+	["<a-j>"] = { ":m .+1<cr>==", "Move line down" },
 	["<a-k>"] = { ":m .-2<cr>==", "Move line up" },
 
 	["<a-d>"] = { '"_diw', "Delete word" },
@@ -50,26 +49,26 @@ wk.register({
 	-- Motions
 	["H"] = { "^", "[MOTION] Move to first character of line" },
 	["L"] = { "$", "[MOTION] Move to last character of line" },
-    ["W"] = { "<cmd>lua require('spider').motion('w')<cr>", "[MOTION] Spider-w motion" },
-    ["B"] = { "<cmd>lua require('spider').motion('b')<cr>", "[MOTION] Spider-b motion" },
-    ["E"] = { "<cmd>lua require('spider').motion('e')<cr>", "[MOTION] Spider-e motion" },
-    ["gE"] = { "<cmd>lua require('spider').motion('ge')<cr>", "[MOTION] Spider-ge motion" },
+	["W"] = { "<cmd>lua require('spider').motion('w')<cr>", "[MOTION] Spider-w motion" },
+	["B"] = { "<cmd>lua require('spider').motion('b')<cr>", "[MOTION] Spider-b motion" },
+	["E"] = { "<cmd>lua require('spider').motion('e')<cr>", "[MOTION] Spider-e motion" },
+	["gE"] = { "<cmd>lua require('spider').motion('ge')<cr>", "[MOTION] Spider-ge motion" },
 
-    ---- Following remaps conflict with Neoscroll plugin for scrolling animations
-    ["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
-    ["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
-    ----
-    ["n"] = { "nzz", "Keep searching result in the middle" },
-    ["N"] = { "Nzz", "Keep searching result in the middle" },
+	---- Following remaps conflict with Neoscroll plugin for scrolling animations
+	["<c-d>"] = { "<c-d>zz", "Keep cursor in the middle while scrolling down" },
+	["<c-u>"] = { "<c-u>zz", "Keep cursor in the middle while scrolling up" },
+	----
+	["n"] = { "nzz", "Keep searching result in the middle" },
+	["N"] = { "Nzz", "Keep searching result in the middle" },
 
-    ["<a-down>"] = { "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", "[MOTION] Move to next method" },
+	["<a-down>"] = { "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", "[MOTION] Move to next method" },
 	["<a-up>"] = { "<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>", "[MOTION] Move to previous method" },
 
 	-- Window navigation
 	---- Without bufferline
 	-- ["<a-right>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
 	-- ["<a-left>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
-    -- With bufferline
+	-- With bufferline
 	["<a-left>"] = { "<cmd>BufferLineCyclePrev<cr>", "[BUFFER] Go previous buffer" },
 	["<a-right>"] = { "<cmd>BufferLineCycleNext<cr>", "[BUFFER] Go next buffer" },
 	["<a-b>"] = { "<cmd>e #<cr>", "[BUFFER] Switch to other buffer" },
@@ -92,7 +91,7 @@ wk.register({
 	["qj"] = { "@q", "Execute macro saved in 'q' register" },
 
 	-- Find
-    [";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
+	[";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
 	["<leader>f"] = {
 		name = "[TELESCOPE]",
 		e = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
@@ -108,6 +107,12 @@ wk.register({
 		p = { "<cmd>Telescope projects<cr>", "[TELESCOPE] Search projects" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "[TELESCOPE LSP] Find symbols" },
 		r = { "<cmd>Telescope lsp_references<cr>", "[TELESCOPE LSP] Find references" },
+        z = { "<cmd>Telescope zoxide list<cr>", "[TELESCOPE] Zoxide" },
+        f = { "<cmd>Telescope frecency<cr>", "[TELESCOPE] Frecency" },
+		ic = { "<cmd>Telescope git_commits<cr>", "[TELESCOPE] Git commits" },
+		ib = { "<cmd>Telescope git_branches<cr>", "[TELESCOPE] Git branches" },
+		is = { "<cmd>Telescope git_status<cr>", "[TELESCOPE] Git status" },
+		ih = { "<cmd>Telescope git_stash<cr>", "[TELESCOPE] Git stash" },
 	},
 
 	-- Views
@@ -123,13 +128,20 @@ wk.register({
 	-- Debug
 	["<leader>d"] = {
 		name = "[DAP debug]",
-		r = { "<cmd>lua require'dap'.run_last()<cr>", "[DAP] Run last" },
 		R = { "<cmd>lua require'dap'.run()<cr>", "[DAP] Run" },
-		e = { "<cmd>DapContinue<cr>", "[DAP] Debug/Resume" },
+		e = { "<cmd>lua require'dap'.run_last()<cr>", "[DAP] Debug last" },
+		E = { "<cmd>Telescope dap configurations<cr>", "[DAP] Show debug configurations" },
 		k = { "<cmd>DapTerminate<cr>", "[DAP] Terminate" },
 		b = { "<cmd>DapToggleBreakpoint<cr>", "[DAP] Toggle breakpoint" },
-		B = { "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", "[DAP] Set conditional breakpoint", },
-		l = { "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", "[DAP] Set log point breakpoint", },
+		B = {
+			"<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
+			"[DAP] Set conditional breakpoint",
+		},
+		l = {
+			"<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>",
+			"[DAP] Set log point breakpoint",
+		},
+		c = { "<cmd>DapContinue<cr>", "[DAP] Continue" },
 		v = { "<cmd>DapStepOver<cr>", "[DAP] Step over" },
 		i = { "<cmd>DapStepInto<cr>", "[DAP] Step into" },
 		o = { "<cmd>DapStepOut<cr>", "[DAP] Step out" },
@@ -137,7 +149,6 @@ wk.register({
 		p = { "<cmd>DapToggleRepl<cr>", "[DAP] Repl open" },
 		u = { "<cmd>lua require'dapui'.toggle()<cr>", "[DAPUI] Toggle debugging UI" },
 		s = { "<cmd>Telescope dap list_breakpoints<cr>", "[TELESCOPE DAP] Show all breakpoints" },
-		c = { "<cmd>Telescope dap configurations<cr>", "[TELESCOPE DAP] Show debug configurations" },
 		w = { "<cmd>Telescope dap variables<cr>", "[TELESCOPE DAP] Wariables" },
 	},
 
@@ -153,7 +164,9 @@ wk.register({
 		v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
 		c = { "<cmd>lua vim.lsp.buf.incoming_calls()<cr>", "[LSP] Show incoming calls" },
 		h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
-		x = { "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>", "[TELESCOPE] Get current buffer functions",
+		x = {
+			"<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>",
+			"[TELESCOPE] Get current buffer functions",
 		},
 	},
 
@@ -163,7 +176,6 @@ wk.register({
 		e = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
 		f = { "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>", "[CONFORM] Format code" },
 		n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
-		o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
 	},
 
 	-- Errors and diagnostics

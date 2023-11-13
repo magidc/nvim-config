@@ -3,6 +3,8 @@ return {
 	dependencies = {
 		"hiphish/rainbow-delimiters.nvim",
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		"windwp/nvim-ts-autotag",
+		"nvim-treesitter/nvim-treesitter-refactor",
 		"nvim-treesitter/playground", -- View treesitter information directly in Neovim
 	},
 	build = ":TSUpdate",
@@ -38,8 +40,24 @@ return {
 				"typescript",
 				"vue",
 			},
-			highlight = {
-				enable = false,
+			refactor = {
+				highlight_definitions = {
+					enable = true,
+					-- Set to false if you have an `updatetime` of ~100.
+					clear_on_cursor_move = true,
+				},
+				highlight_current_scope = { enable = false },
+				navigation = {
+					enable = true,
+					-- Assign keymaps to false to disable them, e.g. `goto_definition = false`.
+					keymaps = {
+						goto_definition = false,
+						list_definitions = false,
+						list_definitions_toc = false,
+						goto_next_usage = "]]",
+						goto_previous_usage = "[[",
+					},
+				},
 			},
 			rainbow = {
 				colors = {
@@ -79,7 +97,7 @@ return {
 					set_jumps = true, -- whether to set jumps in the jumplist
 					goto_next_start = {
 						["]m"] = { query = "@function.outer", desc = "Next method start" },
-						["]["] = { query = "@class.outer", desc = "Next class start" },
+						["]c"] = { query = "@class.outer", desc = "Next class start" },
 						["]a"] = { query = "@parameter.outer", desc = "Next argument/parameter start" },
 						["]b"] = { query = "@block.outer", desc = "Next block start" },
 						["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
@@ -87,7 +105,7 @@ return {
 					},
 					goto_next_end = {
 						["]M"] = { query = "@function.outer", desc = "Next method end" },
-						["]]"] = { query = "@class.outer", desc = "Next class end" },
+						["]C"] = { query = "@class.outer", desc = "Next class end" },
 						["]A"] = { query = "@parameter.inner", desc = "Next argument/parameter end" },
 						["]B"] = { query = "@block.outer", desc = "Next block end" },
 						["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
@@ -95,7 +113,7 @@ return {
 					},
 					goto_previous_start = {
 						["[m"] = { query = "@function.outer", desc = "Previous method start" },
-						["[["] = { query = "@class.outer", desc = "Previous class start" },
+						["[c"] = { query = "@class.outer", desc = "Previous class start" },
 						["[a"] = { query = "@parameter.outer", desc = "Previous argument/parameter start" },
 						["[b"] = { query = "@block.outer", desc = "Previous block start" },
 						["[i"] = { query = "@conditional.outer", desc = "Previous conditional start" },
@@ -103,7 +121,7 @@ return {
 					},
 					goto_previous_end = {
 						["[M"] = { query = "@function.outer", desc = "Previous method end" },
-						["[]"] = { query = "@class.outer", desc = "Previous class end" },
+						["[C"] = { query = "@class.outer", desc = "Previous class end" },
 						["[A"] = { query = "@parameter.inner", desc = "Previous argument/parameter end" },
 						["[B"] = { query = "@block.outer", desc = "Previous block end" },
 						["[I"] = { query = "@conditional.outer", desc = "Previous conditional end" },

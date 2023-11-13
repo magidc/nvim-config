@@ -39,19 +39,17 @@ local plugins = {
 	"mbbill/undotree",
 	require("plugins.configs.neotree"),
 	require("plugins.configs.lualine"),
-	require("plugins.configs.lspsaga"),
 	require("plugins.configs.treesitter"),
 	---- Utilities
 	require("plugins.configs.telescope"),
 	"terryma/vim-expand-region", -- Incremental selection expansion
-	require("plugins.configs.telescope-fzf"),
 	require("plugins.configs.autopairs"),
 	require("plugins.configs.dial"), -- Extended increment/decrement functions
 	require("plugins.configs.surround"), -- Autochange open/close chars
 	-- require("plugins.configs.colorizer"), -- Colorize written color codes (#02F1AA, rgb(0,10,20)...)
 	require("plugins.configs.neoclip"), -- Clipboard manager
 	require("plugins.configs.toggleterm"), --- Improved terminal toggle
-    -- require("plugins.configs.illuminate"), --- Automatically highlighting other uses of the word under the cursor
+	-- require("plugins.configs.illuminate"), --- Automatically highlighting other uses of the word under the cursor
 	require("plugins.configs.project"), -- Project management
 	"sitiom/nvim-numbertoggle", -- Automatic switch to absolute line numbers when you are not in normal or visual mode, or focus is in other split
 	require("plugins.configs.zen"),
@@ -62,18 +60,22 @@ local plugins = {
 	require("plugins.configs.todo"),
 	require("plugins.configs.harpoon"),
 	require("plugins.configs.bigfile"),
-	---- LSP
-	require("plugins.configs.mason"),
-    require("plugins.configs.mason-lspconfig"),
-    "neovim/nvim-lspconfig",
-    "mfussenegger/nvim-jdtls",
+	require("plugins.configs.splitjoin"), -- Quick split or join of lists
+	---- Code
+	require("plugins.configs.lspsaga"),
 	require("plugins.configs.lens"),
 	require("plugins.configs.conform"), -- Formatting tool
-	require("plugins.configs.rust-tools"),
-	-- Debug
-	require("lsp.configs.dap"),
-	require("lsp.configs.dap-python"),
 	require("plugins.configs.telescopedap"),
+
+	---- LSP/DAP
+	require("plugins.configs.mason"),
+	require("plugins.configs.mason-lspconfig"),
+	"neovim/nvim-lspconfig",
+	require("lsp.configs.dap"),
+	require("lsp.configs.java"),
+	require("lsp.configs.rust"),
+	require("lsp.configs.python"),
+
 	---- Snippets
 	"L3MON4D3/LuaSnip",
 	"rafamadriz/friendly-snippets",
@@ -81,7 +83,7 @@ local plugins = {
 	require("plugins.configs.coq"),
 	require("plugins.configs.cmp"),
 	require("plugins.configs.lspsignature"),
-    require("plugins.configs.copilot"),
+	require("plugins.configs.copilot"),
 	-- Tmux
 	require("plugins.configs.tmux"),
 	---- Git

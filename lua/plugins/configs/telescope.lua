@@ -1,9 +1,15 @@
 return {
 	-- Search engine
 	"nvim-telescope/telescope.nvim",
-	dependencies = { "nvim-lua/plenary.nvim" },
+	dependencies = {
+	  "nvim-lua/plenary.nvim",
+	  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	  "nvim-telescope/telescope-frecency.nvim",
+	  "jvgrootveld/telescope-zoxide",
+	},
 	config = function()
-		require("telescope").setup({
+		telescope = require("telescope")
+		telescope.setup({
 			picker = {
 				hidden = true,
 			},
@@ -19,7 +25,17 @@ return {
 					"--smart-case",
 					"--hidden",
 				},
-				file_ignore_patterns = { ".git/", ".settings/", ".metadata/", "target/", "node_modules/", ".class$", "dist/",  ".png" },
+				file_ignore_patterns = {
+					".git/",
+					".settings/",
+					".metadata/",
+					"target/",
+					"node_modules/",
+					".class$",
+					"dist/",
+					".png",
+					"package-lock.json",
+				},
 				mappings = {
 					i = {
 						["<C-u>"] = false,
@@ -27,6 +43,12 @@ return {
 					},
 				},
 				layout_strategy = "horizontal",
+				layout_config = {
+					--   width = 0.5,
+					--   height = 0.4,
+					preview_cutoff = 120,
+				},
+				prompt_prefix = "   ",
 				file_sorter = require("telescope.sorters").get_fuzzy_file,
 				generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 				path_display = { "truncate" },
@@ -45,7 +67,20 @@ return {
 					override_file_sorter = true,
 					case_mode = "smart_case",
 				},
+				frecency = {
+					default_workspace = "CWD",
+					show_scores = true,
+					show_unindexed = true,
+					disable_devicons = false,
+					ignore_patterns = {
+						"*.git/*",
+						"*/tmp/*",
+						"*/lua-language-server/*",
+					},
+				},
 			},
 		})
-	end
+		telescope.load_extension("fzf")
+		telescope.load_extension("frecency")
+	end,
 }

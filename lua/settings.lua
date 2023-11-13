@@ -45,6 +45,8 @@ local options = {
     foldlevelstart = 99,
     foldlevel = 99,
     foldenable = true,
+    title = true,
+    confirm = true,
 }
 
 for key, value in pairs(options) do

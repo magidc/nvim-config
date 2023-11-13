@@ -1,19 +1,14 @@
 return {
-	"glepnir/lspsaga.nvim",
-	branch = "main",
+	"nvimdev/lspsaga.nvim",
 	config = function()
 		require("lspsaga").setup({
-			code_action_lightbulb = {
+			lightbulb = {
 				enable = false,
 				sign = true,
-				enable_in_insert = true,
-				sign_priority = 20,
+				debounce = 10,
 				virtual_text = true,
-			},
-			symbol_in_winbar = {
-				enable = false,
+				sign_priority = 40
 			},
 		})
-		require("plugins.configs.lspsaga")
 	end,
 }

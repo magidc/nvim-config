@@ -2,10 +2,11 @@ return {
 	-- Search engine
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
-	  "nvim-lua/plenary.nvim",
-	  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-	  "nvim-telescope/telescope-frecency.nvim",
-	  "jvgrootveld/telescope-zoxide",
+		"nvim-lua/plenary.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		"nvim-telescope/telescope-frecency.nvim",
+		"nvim-telescope/telescope.nvim",
+        "nvim-telescope/telescope-dap.nvim"
 	},
 	config = function()
 		telescope = require("telescope")
@@ -82,5 +83,6 @@ return {
 		})
 		telescope.load_extension("fzf")
 		telescope.load_extension("frecency")
+		telescope.load_extension("dap")
 	end,
 }

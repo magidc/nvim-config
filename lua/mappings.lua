@@ -107,7 +107,7 @@ wk.register({
 		p = { "<cmd>Telescope projects<cr>", "[TELESCOPE] Search projects" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "[TELESCOPE LSP] Find symbols" },
 		r = { "<cmd>Telescope lsp_references<cr>", "[TELESCOPE LSP] Find references" },
-        z = { "<cmd>Telescope zoxide list<cr>", "[TELESCOPE] Zoxide" },
+        -- z = { "<cmd>Telescope zoxide list<cr>", "[TELESCOPE] Zoxide" },
         f = { "<cmd>Telescope frecency<cr>", "[TELESCOPE] Frecency" },
 		ic = { "<cmd>Telescope git_commits<cr>", "[TELESCOPE] Git commits" },
 		ib = { "<cmd>Telescope git_branches<cr>", "[TELESCOPE] Git branches" },

@@ -28,9 +28,7 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
     ```
 2. Install [ripgrep](https://github.com/BurntSushi/ripgrep) into your OS. It is required by some [Telescope](https://github.com/nvim-telescope/telescope.nvim) plugin searching modes.
 
-3. This environment is configured with Language Server Providers (LSP) for Java, Python, Rust and Lua. All of them are integrated with Neovim native LSP support. It is required to install LSP in your system in order to have IDE features like autocompletions or error highlight. To facilitate installation of LSPs this configuration relies on [mason.nvim](https://github.com/williamboman/mason.nvim#installation) plugin. Most of language servers (LSP) are automatically installed but some dependencies like debugging adapters (DAP) must be installed manually by running following commands:
-   1. **Java**: Run `:MasonInstall jdtls java-test java-debug-adapter` to download and install LSP and DAP components for Java. Make also sure to set the `java_cmd` path in the config file!!
-   2. **Rust**: Run `:MasonInstall codelldb` to download DAP.
+3. This environment is preconfigured with Language Server Providers (LSP)and Debug Adapters  (DAP) for Java, Python, Rust and Lua. These components provide IDE features like autocompletions, error highlight or debugging. As it is required to have installed these components in your system, this Neovim setup relies on [mason.nvim](https://github.com/williamboman/mason.nvim#installation) plugin to install them automatically if they are missing.
 <br>
 
 # UI theme
@@ -41,7 +39,7 @@ Default active theme is [Tokyonight](https://github.com/folke/tokyonight.nvim).
 
 # Custom mappings
 Most of mappings are defined in file `lua/mappings.lua`. WhichKey plugin is used in order to provide a description for each one of them.
-Other mappings can be found in specific plugin configuration files in `lua/plugins/configs` directory.
+Other mappings can be found in specific plugin configuration files in `lua/plugins/configs` directory. Also, language specific mappings are defined in LSP config files, these mappings only will available when working with specific programming languages (when LSP are attached)
 
 <br>
 
@@ -73,6 +71,6 @@ If you have problems while installing or using this setup, please report an issu
 
 <br>
 
-# Contributing
-By the moment, free contribution is not allowed. I consider this setup to be on its early stages so it requires to be more mature before opening to other users. However I would appreciate suggestions.
+# Feedback and suggestions
+I would appreciate suggestions and feedback regarding this Neovim configuration. As it is an ongoing project I will be changing over the time to become more useful and easy to use. Please do not hesitate to contact me if you have any comments
 

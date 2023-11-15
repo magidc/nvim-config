@@ -75,16 +75,11 @@ return {
 			on_attach = function(client, bufnr)
 				handlers.on_attach(client, bufnr)
 				if client.name == "jdtls" then
-					wk = require("which-key")
-					wk.register({
-						["<leader>de"] = {
-							"<cmd>DAPContinue<cr>",
-							"[JDLTS] Show debug configurations",
-							["<leader>ro"] = {
-								"<cmd>lua require'jdtls'.organize_imports()<cr>",
-								"[JDLTS] Organize imports",
-							},
-						},
+					vim.api.nvim_echo({ { "sdsd", "Normal" } }, true, {})
+
+					require("which-key").register({
+						["<leader>de"] = { "<cmd>DapContinue<cr>", "[JDLTS] Show debug configurations" },
+						["<leader>ro"] = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
 					})
 					jdtls = require("jdtls")
 					jdtls.setup_dap({ hotcodereplace = "auto" })

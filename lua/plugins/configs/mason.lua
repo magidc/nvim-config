@@ -19,8 +19,8 @@ return {
 					"rust_analyzer",
 					"lua_ls",
 					"bashls",
-                    "dockerls",
-                    "docker_compose_language_service"
+					"dockerls",
+					"docker_compose_language_service",
 				},
 				automatic_installation = true,
 			})

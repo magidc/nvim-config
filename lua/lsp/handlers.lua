@@ -24,12 +24,6 @@ local signature_cfg = {
     -- decorator = {"`", "`"}  -- this is no longer needed as nvim give me a handler and it allow me to highlight active parameter in floating_window
 }
 
-local function set_document_higlighting(client)
-    local dfp = client.server_capabilities.documentFormattingProvider
-    if dfp == true or (type(dfp) == "table" and next(dfp) ~= nil) then
-        require("illuminate").on_attach(client)
-    end
-end
 
 local function set_signature_helper(client, bufnr)
     local shp = client.server_capabilities.signatureHelpProvider
@@ -46,7 +40,6 @@ local function set_hover_border(client)
 end
 
 M.on_attach = function(client, bufnr)
-    set_document_higlighting(client)
     set_signature_helper(client, bufnr)
     set_hover_border(client)
 end

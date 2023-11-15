@@ -63,6 +63,7 @@ local plugins = {
 	require("plugins.configs.splitjoin"), -- Quick split or join of lists
 	---- Code
 	require("plugins.configs.lspsaga"),
+	require("plugins.configs.refactor"),
 	require("plugins.configs.lens"),
 	require("plugins.configs.conform"), -- Formatting tool
 

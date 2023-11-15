@@ -107,8 +107,8 @@ wk.register({
 		p = { "<cmd>Telescope projects<cr>", "[TELESCOPE] Search projects" },
 		s = { "<cmd>Telescope lsp_document_symbols<cr>", "[TELESCOPE LSP] Find symbols" },
 		r = { "<cmd>Telescope lsp_references<cr>", "[TELESCOPE LSP] Find references" },
-        -- z = { "<cmd>Telescope zoxide list<cr>", "[TELESCOPE] Zoxide" },
-        f = { "<cmd>Telescope frecency<cr>", "[TELESCOPE] Frecency" },
+		-- z = { "<cmd>Telescope zoxide list<cr>", "[TELESCOPE] Zoxide" },
+		f = { "<cmd>Telescope frecency<cr>", "[TELESCOPE] Frecency" },
 		ic = { "<cmd>Telescope git_commits<cr>", "[TELESCOPE] Git commits" },
 		ib = { "<cmd>Telescope git_branches<cr>", "[TELESCOPE] Git branches" },
 		is = { "<cmd>Telescope git_status<cr>", "[TELESCOPE] Git status" },
@@ -176,6 +176,8 @@ wk.register({
 		e = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
 		f = { "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>", "[CONFORM] Format code" },
 		n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
+		i = { "<cmdr:Refactor inline_var <cr>", "[REFACTOR] Inline variable" },
+		I = { "<cmdr:Refactor inline_func <cr>", "[REFACTOR] Inline function" },
 	},
 
 	-- Errors and diagnostics
@@ -205,15 +207,6 @@ wk.register({
 		k = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", "[HARPOON] Show quick menu" },
 		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "[HARPOON] Add file" },
 	},
-	-- ["1"] = { "<cmd>lua require('harpoon.ui').nav_file(1)<cr>", "[HARPOON] Go to file 1" },
-	-- ["2"] = { "<cmd>lua require('harpoon.ui').nav_file(2)<cr>", "[HARPOON] Go to file 2" },
-	-- ["3"] = { "<cmd>lua require('harpoon.ui').nav_file(3)<cr>", "[HARPOON] Go to file 3" },
-	-- ["4"] = { "<cmd>lua require('harpoon.ui').nav_file(4)<cr>", "[HARPOON] Go to file 4" },
-	-- ["5"] = { "<cmd>lua require('harpoon.ui').nav_file(5)<cr>", "[HARPOON] Go to file 5" },
-	-- ["6"] = { "<cmd>lua require('harpoon.ui').nav_file(6)<cr>", "[HARPOON] Go to file 6" },
-	-- ["7"] = { "<cmd>lua require('harpoon.ui').nav_file(7)<cr>", "[HARPOON] Go to file 7" },
-	-- ["8"] = { "<cmd>lua require('harpoon.ui').nav_file(8)<cr>", "[HARPOON] Go to file 8" },
-	-- ["9"] = { "<cmd>lua require('harpoon.ui').nav_file(9)<cr>", "[HARPOON] Go to file 9" },
 }, n_opts)
 
 -- INSERT MODE MAPPINGS
@@ -283,6 +276,23 @@ wk.register({
 	["<a-Bs>"] = { "<C-o>diw", "Delete word" },
 	["<a-c>"] = { "<C-o>ciw", "Change word" },
 }, s_opts)
+
+-- Execution mode mappings
+local x_opts = {
+	mode = "x",
+	prefix = "",
+	silent = true,
+	noremap = true,
+	nowait = true,
+}
+wk.register({
+	["<leader>r"] = {
+		name = "[Code refactor]",
+		v = { "<cmd>:Refactor extract_var <cr>", "[REFACTOR] Extract variable" },
+		x = { "<cmd>:Refactor extract <cr>", "[REFACTOR] Extract function" },
+		l = { "<cmdr:Refactor extract_to_file <cr>", "[REFACTOR] Extract to file" },
+	},
+}, x_opts)
 
 -- Terminal mode mappings
 local t_opts = {

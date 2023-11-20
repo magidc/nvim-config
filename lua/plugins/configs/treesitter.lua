@@ -6,6 +6,7 @@ return {
 		"windwp/nvim-ts-autotag",
 		"nvim-treesitter/nvim-treesitter-refactor",
 		"nvim-treesitter/playground", -- View treesitter information directly in Neovim
+		"andymass/vim-matchup",
 	},
 	build = ":TSUpdate",
 	config = function()
@@ -147,12 +148,17 @@ return {
 					show_help = "?",
 				},
 			},
+			matchup = {
+				-- enables vim-matchup integration
+				enable = true,
+				enable_quotes = true,
+			},
 			-- incremental_selection = {
 			--     enable = true,
 			--     keymaps = {
-			--         init_selection = "+", -- set to `false` to disable one of the mappings
-			--         node_incremental = "+",
-			--         scope_incremental = "grc",
+			--         init_selection = "grn", -- set to `false` to disable one of the mappings
+			--         node_incremental = "grn",
+			--         scope_incremental = "grp",
 			--         node_decremental = "_",
 			--     },
 			-- },

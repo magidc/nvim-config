@@ -37,7 +37,7 @@ wk.register({
 	["<a-c>"] = { '"_ciw', "Change word" },
 	["<a-s-d>"] = { '<cmd>lua require("various-textobjs").subword(true)<cr>"_d', "Delete subword" },
 	["<a-s-c>"] = { '<cmd>lua require("various-textobjs").subword(true)<cr>"_c', "Change subword" },
-	["<a-z>"] = { '"_ci"', "Change within quotes" },
+	["<a-z>"] = { '"_c<plug>(matchup-i%)', "Change within block delimiters or quotes" },
 	["<a-x>"] = { '"_ci(', "Change within parentheses" },
 
 	["<a-a>"] = { '<cmd>TSTextobjectSelect @parameter.inner<cr>"_c', "Change function parameter" },

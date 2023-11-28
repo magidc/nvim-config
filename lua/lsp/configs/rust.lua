@@ -151,10 +151,10 @@ return {
 		config = function()
 			require("crates").setup({
 				src = {
-					coq = {
+				--[[ 	coq = {
 						enabled = true,
 						name = "crates.nvim",
-					},
+					}, ]]
 					cmp = {
 						enabled = true,
 					},

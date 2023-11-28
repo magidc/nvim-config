@@ -58,8 +58,7 @@ return {
 				allow_incremental_sync = true,
 			},
 			--root_dir = require("jdtls.setup").find_root({"build.gradle", "pom.xml", ".git"}),
-			-- Using .project file (Eclipse workspace) as reference for setting root dir
-			root_dir = jdtls.setup.find_root({ ".project", "pom.xml", ".git" }),
+			root_dir = jdtls.setup.find_root({ ".metadata", ".git" }),
 
 			on_init = function(client)
 				if client.config.settings then

@@ -66,11 +66,12 @@ local plugins = {
 	require("plugins.configs.refactor"),
 	require("plugins.configs.lens"),
 	require("plugins.configs.conform"), -- Formatting tool
+    require("plugins.configs.glance"),
 
 	---- LSP/DAP
 	require("plugins.configs.mason"),
 	"neovim/nvim-lspconfig",
-	require("lsp.configs.dap"),
+    require("lsp.configs.dap"),
 	require("lsp.configs.java"),
 	require("lsp.configs.rust"),
 	require("lsp.configs.python"),
@@ -79,7 +80,7 @@ local plugins = {
 	"L3MON4D3/LuaSnip",
 	"rafamadriz/friendly-snippets",
 	---- Completion
-	require("plugins.configs.coq"),
+	-- require("plugins.configs.coq"),
 	require("plugins.configs.cmp"),
 	require("plugins.configs.lspsignature"),
 	require("plugins.configs.copilot"),

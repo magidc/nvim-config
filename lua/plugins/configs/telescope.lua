@@ -5,8 +5,9 @@ return {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-telescope/telescope-frecency.nvim",
+		"jvgrootveld/telescope-zoxide",
 		"nvim-telescope/telescope.nvim",
-        "nvim-telescope/telescope-dap.nvim"
+		"nvim-telescope/telescope-dap.nvim",
 	},
 	config = function()
 		telescope = require("telescope")
@@ -83,6 +84,7 @@ return {
 		})
 		telescope.load_extension("fzf")
 		telescope.load_extension("frecency")
+		telescope.load_extension("zoxide")
 		telescope.load_extension("dap")
 	end,
 }

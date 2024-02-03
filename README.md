@@ -44,7 +44,7 @@ Other mappings can be found in specific plugin configuration files in `lua/plugi
 <br>
 
 # Equivalent mapping configurations for other IDEs VIM integrations
-I have created configuration files with (almost) equivalent mappings for [Eclipse IDE vim plugin (vrapper)](https://github.com/magidc/dotfiles/blob/master/.vrapperrc), [IntelliJ vim plugin (ideaVim)](https://github.com/magidc/dotfiles/blob/master/jetbrains/.ideavimrc) and [VSCode vim plugin (vscodevim)](https://github.com/magidc/dotfiles/blob/master/vscode/keybindings.json).
+I have created configuration files with (almost) equivalent mappings for [Eclipse IDE vim plugin (vrapper)](https://github.com/magidc/dotfiles/blob/master/vrapperrc), [IntelliJ vim plugin (ideaVim)](https://github.com/magidc/dotfiles/blob/master/jetbrains/ideavimrc) and [VSCode vim plugin (vscodevim)](https://github.com/magidc/dotfiles/blob/master/vscode/keybindings.json).
 These configurations will allow users who are used to these key combinations to remain confortable and efficient while working with other IDEs.
 
 <br>

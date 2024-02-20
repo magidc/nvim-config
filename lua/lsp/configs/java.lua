@@ -10,7 +10,7 @@ return {
 		workspace_dir = share_dir .. "/eclipse/" .. project_name
 
 		-- Set proper Java executable
-		java_cmd = "/opt/java/jdk-18/bin/java"
+		java_cmd = "/opt/java/jdk-21/bin/java"
 		mason_registry = require("mason-registry")
 
 		-- vim.fn.glob Is needed to set paths using wildcard (*)
@@ -58,7 +58,7 @@ return {
 				allow_incremental_sync = true,
 			},
 			--root_dir = require("jdtls.setup").find_root({"build.gradle", "pom.xml", ".git"}),
-			root_dir = jdtls.setup.find_root({ ".metadata", ".git" }),
+			root_dir = jdtls.setup.find_root({ ".metadata", ".git", "pom.xml" }),
 
 			on_init = function(client)
 				if client.config.settings then

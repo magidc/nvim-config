@@ -117,11 +117,11 @@ wk.register({
 	-- Views
 	["<leader>v"] = {
 		name = "[Views]",
-		f = { "<cmd>NeoTreeFocusToggle<cr>", "[NEOTREE] Toggle" },
-		p = { "<cmd>TroubleToggle<cr>", "[TROUBLE] Toggle" },
-		s = { "<cmd>AerialToggle<cr>", "[AERIAL] Toggle" },
+		f = { "<cmd>NeoTreeFocusToggle<cr>", "[NEOTREE] Toggle file tree view" },
+		p = { "<cmd>TroubleToggle<cr>", "[TROUBLE] Toggle problem and diagnostics view" },
+		s = { "<cmd>AerialToggle<cr>", "[AERIAL] Toggle file structure view" },
 		t = { "<cmd>ToggleTerm<cr>", "[TOGGLETERM] Open new terminal" },
-		u = { "<cmd>UndotreeToggle<cr>", "[UNDOTREE]Toggle undotree" },
+		u = { "<cmd>UndotreeToggle<cr>", "[UNDOTREE]Toggle last undoable changes view" },
 	},
 
 	-- Debug
@@ -179,8 +179,8 @@ wk.register({
 		e = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
 		f = { "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>", "[CONFORM] Format code" },
 		n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
-		i = { "<cmdr:Refactor inline_var <cr>", "[REFACTOR] Inline variable" },
-		I = { "<cmdr:Refactor inline_func <cr>", "[REFACTOR] Inline function" },
+		i = { "<cmd>:Refactor inline_var <cr>", "[REFACTOR] Inline variable" },
+		I = { "<cmd>:Refactor inline_func <cr>", "[REFACTOR] Inline function" },
 	},
 
 	-- Errors and diagnostics

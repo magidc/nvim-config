@@ -79,8 +79,8 @@ wk.register({
 	["<a-q>"] = { "<cmd>Bdelete!<cr>", "[BUFFER] Close current buffer" },
 	["<a-w>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
 	-- Folds
-	["|"] = { "zM", "[FOLDS] Collapse all folds" },
-	["--"] = { "zR", "[FOLDS] Expand all folds" },
+	["|"] = { "za", "[FOLDS] Toggle fold" },
+	["--"] = { "zA", "[FOLDS] Toggle all folds" },
 	["<a-s-down>"] = { "zr", "[FOLDS] Increase fold level" },
 	["<a-s-up>"] = { "zm", "[FOLDS] Decrease fold level" },
 	-- ["<a-down>"] = { "zo", "[FOLDS] Open fold" },

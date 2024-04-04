@@ -2,6 +2,7 @@ return {
 	"hrsh7th/nvim-cmp",
 	lazy = true,
 	dependencies = {
+        "hrsh7th/cmp-copilot",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-buffer",
@@ -105,6 +106,7 @@ return {
 				}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 			}),
 			sources = {
+				{ name = "copilot" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
 				{ name = "luasnip" },

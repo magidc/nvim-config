@@ -3,7 +3,9 @@ local capabilities = require("lsp.handlers").capabilities
 local _lspconfig, lspconfig = pcall(require, "lspconfig")
 if _lspconfig then
 	-- Python
-	lspconfig.pyright.setup({})
+	lspconfig.pyright.setup({
+    autostart = false,
+  })
 
 	-- LUA
 	lspconfig.lua_ls.setup({

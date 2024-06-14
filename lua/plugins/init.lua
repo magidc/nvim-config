@@ -106,6 +106,9 @@ local plugins = {
 
   -- Integrate LazyGit into Neovim
   require("plugins.configs.lazygit"),
+
+  --Heuristically determine the tabstops and spaces
+  require("plugins.configs.tabstops"),
 }
 
 -- vim.api.nvim_echo({ { 'Active theme: ' .. theme.theme_name, "Normal" } }, true, {});

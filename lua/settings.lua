@@ -67,7 +67,8 @@ vim.cmd([[
     syntax on
 ]])
 
-utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 2, java = 4, json = 2, yaml = 2 }
+
+--(Using vim-sleuth plugin instead) utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 2, java = 4, json = 2, yaml = 2 }
 
 -- Space as leader key
 vim.g.mapleader = ' '

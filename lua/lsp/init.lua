@@ -82,4 +82,5 @@ if _lspconfig then
 
 	-- VUE
 	lspconfig.vuels.setup({})
+
 end

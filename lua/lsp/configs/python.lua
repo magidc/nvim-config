@@ -2,6 +2,6 @@ return {
     "mfussenegger/nvim-dap-python",
 	ft = { "py" },
     config = function()
-        require("dap-python").setup("/opt/anaconda3/envs/arelle/bin/python3")
+        require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
     end,
 }

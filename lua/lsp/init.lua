@@ -2,6 +2,7 @@ local capabilities = require("lsp.handlers").capabilities
 
 local _lspconfig, lspconfig = pcall(require, "lspconfig")
 if _lspconfig then
+
 	-- Python
 	lspconfig.pyright.setup({
     autostart = false,
@@ -82,5 +83,13 @@ if _lspconfig then
 
 	-- VUE
 	lspconfig.vuels.setup({})
+
+	-- YAMLs
+  lspconfig.yamlls.setup({
+  	autostart = false,
+  })
+
+  -- Kotlin LS
+  lspconfig.kotlin_language_server.setup(){})
 
 end

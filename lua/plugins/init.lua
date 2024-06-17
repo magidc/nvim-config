@@ -77,16 +77,16 @@ local plugins = {
 	require("plugins.configs.refactor"),
 	require("plugins.configs.lens"),
 	require("plugins.configs.conform"), -- Formatting tool
-  require("plugins.configs.glance"),
+    require("plugins.configs.glance"),
 
 	---- LSP/DAP
 	require("plugins.configs.mason"),
 	"neovim/nvim-lspconfig",
-  require("lsp.configs.dap"),
+    require("lsp.configs.dap"),
 	require("lsp.configs.java"),
 	require("lsp.configs.rust"),
 	require("lsp.configs.python"),
-  require("lsp.configs.yaml"),
+    require("lsp.configs.yaml"),
 
 	---- Snippets
 	"L3MON4D3/LuaSnip",

@@ -10,7 +10,23 @@ return {
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
-					"pyright",
+          "bashls",
+          "clangd",
+          "csharp_ls",
+          "cmake",
+					"dotls",
+          "elixirls",
+          "erlangls",
+          "helm_ls",
+          "gradle_ls",
+          "groovyls",
+          "jdtls",
+          "jqls",
+          "jsonls",
+          "kotlin_language_server",
+          "matlab_ls",
+          "nginx_language_server",
+          "pyright",
 					"lemminx",
 					"html",
 					"tsserver",
@@ -20,6 +36,7 @@ return {
 					"bashls",
 					"dockerls",
 					"docker_compose_language_service",
+					"yamlls",
 				},
 				automatic_installation = true,
 			})

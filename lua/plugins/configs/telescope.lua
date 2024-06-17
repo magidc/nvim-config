@@ -86,5 +86,6 @@ return {
 		telescope.load_extension("frecency")
 		telescope.load_extension("zoxide")
 		telescope.load_extension("dap")
+		-- telescope.load_extension("yaml_schema")
 	end,
 }

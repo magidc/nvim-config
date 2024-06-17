@@ -89,7 +89,70 @@ if _lspconfig then
   	autostart = false,
   })
 
+  -- CMake Language Server
+  lspconfig.cmake.setup({})
+
+  -- Elixir Language Server
+  lspconfig.elixirls.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+
+  -- Erlang Language Server
+  lspconfig.erlangls.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+
+  -- Go Language Server
+  lspconfig.gopls.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+
+  -- Gradle Language Server
+  lspconfig.gradle_ls.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+
+  -- Groovy Language Server
+  lspconfig.groovyls.setup({})
+
+  -- Helm Language Server
+  lspconfig.helm_ls.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+  
+  -- Json Language Server
+  lspconfig.jsonls.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+
   -- Kotlin LS
-  lspconfig.kotlin_language_server.setup(){})
+  lspconfig.kotlin_language_server.setup({})
+
+  -- Make Language Server
+  lspconfig.autotools_ls.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+
+  -- Powershell Language Server
+  lspconfig.powershell_es.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+
+  -- SQL Language Server
+  lspconfig.sqlls.setup({
+    autostart = false,
+    capabilities = capabilities,
+  })
+
+  -- Terraform Language Server
+  lspconfig.terraformls.setup({})
 
 end

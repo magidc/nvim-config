@@ -49,7 +49,7 @@ return {
 				"-jar",
 				vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
 				"-configuration",
-				jdtls_path .. "/config_linux",
+				jdtls_path .. "/config_mac_arm",
 				"-data",
 				workspace_dir,
 			},
@@ -58,7 +58,7 @@ return {
 				allow_incremental_sync = true,
 			},
 			--root_dir = require("jdtls.setup").find_root({"build.gradle", "pom.xml", ".git"}),
-			root_dir = jdtls.setup.find_root({ ".metadata", ".git", "pom.xml" }),
+			root_dir = jdtls.setup.find_root({ "gradlew", "mvnw", ".metadata", ".git", "pom.xml" }),
 
 			on_init = function(client)
 				if client.config.settings then

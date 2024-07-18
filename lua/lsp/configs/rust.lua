@@ -126,9 +126,8 @@ return {
 					on_attach = function(_, bufnr)
 						handlers.on_attach(_, bufnr)
 						wk = require("which-key")
-						wk.register({
-							["<leader>dE"] = { "<cmd>RustDebuggables<cr>", "[RUST] Show debug configurations",
-							},
+						wk.add({
+							{ "<leader>dE", "<cmd>RustDebuggables<cr>", desc = "[RUST] Show debug configurations" },
 						})
 					end,
 					capabilities = handlers.capabilities,
@@ -144,14 +143,14 @@ return {
 	{
 		"saecki/crates.nvim",
 		enabled = true,
-        event = { "BufRead Cargo.toml" },
+		event = { "BufRead Cargo.toml" },
 		tag = "v0.4.0",
 		lazy = true,
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("crates").setup({
 				src = {
-				--[[ 	coq = {
+					--[[ 	coq = {
 						enabled = true,
 						name = "crates.nvim",
 					}, ]]

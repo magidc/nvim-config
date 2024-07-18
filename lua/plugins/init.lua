@@ -61,6 +61,7 @@ local plugins = {
 	require("plugins.configs.harpoon"),
 	require("plugins.configs.bigfile"),
 	require("plugins.configs.splitjoin"), -- Quick split or join of lists
+    "mg979/vim-visual-multi",
 	---- Code
 	require("plugins.configs.lspsaga"),
 	require("plugins.configs.refactor"),

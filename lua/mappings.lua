@@ -9,7 +9,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- NORMAL MODE MAPPINGS
-
 wk.add({
     -- Edition
 	{ "<c-s>", "ggVG", desc = "[SELECT] Select all" },

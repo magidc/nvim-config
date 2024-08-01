@@ -54,6 +54,7 @@ local plugins = {
 	"sitiom/nvim-numbertoggle", -- Automatic switch to absolute line numbers when you are not in normal or visual mode, or focus is in other split
 	require("plugins.configs.zen"),
 	"chrisgrieser/nvim-spider",
+	require("plugins.configs.matchup"),
 	require("plugins.configs.textobjs"),
 	require("plugins.configs.comment"),
 	require("plugins.configs.flash"),

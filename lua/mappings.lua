@@ -67,10 +67,10 @@ wk.register({
 	-- Window navigation
 	---- Without bufferline
 	-- ["<a-right>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
-	-- ["<a-left>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
+	-- ["<a-left>"] = {d"<cmd>bp<cr>", "[BUFFER] Go next buffer" },
 	-- With bufferline
-	["<a-left>"] = { "<cmd>BufferLineCyclePrev<cr>", "[BUFFER] Go previous buffer" },
-	["<a-right>"] = { "<cmd>BufferLineCycleNext<cr>", "[BUFFER] Go next buffer" },
+	["<a-h>"] = { "<cmd>BufferLineCyclePrev<cr>", "[BUFFER] Go previous buffer" },
+	["<a-l>"] = { "<cmd>BufferLineCycleNext<cr>", "[BUFFER] Go next buffer" },
 	["<a-b>"] = { "<cmd>e #<cr>", "[BUFFER] Switch to other buffer" },
 	["<a-t>"] = { "<cmd>ene<cr>", "[BUFFER] Open a new empty buffer" },
 	["Z"] = { "<cmd>wall<cr>", "[BUFFER] Save all" },

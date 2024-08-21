@@ -11,13 +11,8 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
           "bashls",
-          "clangd",
-          "csharp_ls",
-          "cmake",
 					"dotls",
           "elixirls",
-          "erlangls",
-          "helm_ls",
           "gradle_ls",
           "groovyls",
           "jdtls",
@@ -26,7 +21,6 @@ return {
           "kotlin_language_server",
           "matlab_ls",
           "pyright",
-					"lemminx",
 					"html",
 					"tsserver",
 					"eslint",

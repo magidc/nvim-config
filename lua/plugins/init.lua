@@ -65,6 +65,7 @@ local plugins = {
 	"sitiom/nvim-numbertoggle", -- Automatic switch to absolute line numbers when you are not in normal or visual mode, or focus is in other split
 	require("plugins.configs.zen"),
 	"chrisgrieser/nvim-spider",
+  require("plugins.configs.matchup"),
 	require("plugins.configs.textobjs"),
 	require("plugins.configs.comment"),
 	require("plugins.configs.flash"),
@@ -72,6 +73,8 @@ local plugins = {
 	require("plugins.configs.harpoon"),
 	require("plugins.configs.bigfile"),
 	require("plugins.configs.splitjoin"), -- Quick split or join of lists
+  "mg979/vim-visual-multi",
+  
 	---- Code
 	require("plugins.configs.lspsaga"),
 	require("plugins.configs.refactor"),

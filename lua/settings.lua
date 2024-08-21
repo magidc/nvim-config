@@ -43,7 +43,7 @@ local options = {
     splitright = true,
     swapfile = false,
     tabstop = 2,
-    termguicolors = true,
+    -- termguicolors = true,
     -- Decrease update time
     timeoutlen = 1000,
     ttimeoutlen = 0,

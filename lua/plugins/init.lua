@@ -114,6 +114,9 @@ local plugins = {
 
   --Heuristically determine the tabstops and spaces
   require("plugins.configs.tabstops"),
+
+  -- Latex based on VimTex
+  require("plugins.configs.latex"),
 }
 
 -- vim.api.nvim_echo({ { 'Active theme: ' .. theme.theme_name, "Normal" } }, true, {});

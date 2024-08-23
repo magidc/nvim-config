@@ -2,7 +2,7 @@ return {
 	"hrsh7th/nvim-cmp",
 	lazy = true,
 	dependencies = {
-        "hrsh7th/cmp-copilot",
+		"hrsh7th/cmp-copilot",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-nvim-lua",
 		"hrsh7th/cmp-buffer",
@@ -23,9 +23,12 @@ return {
 		end
 
 		local has_words_before = function()
+			if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+				return false
+			end
 			unpack = unpack or table.unpack
 			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 		end
 
 		-- Lazy load all vscode like snippets
@@ -65,32 +68,27 @@ return {
 				},
 			},
 			formatting = {
-				format = function(entry, vim_item)
-					-- Fancy icons and a name of kind
-					vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
-					return vim_item
-				end,
+				format = lspkind.cmp_format({
+					mode = "symbol",
+					maxwidth = 50,
+					ellipsis_char = "...",
+					show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+					symbol_map = { Copilot = "" },
+				}),
 			},
 
 			mapping = cmp.mapping.preset.insert({
+                -- Not interested in going up and down using Tab, there is already C-n/C-p or arrows. Tab is reserved for snippets or Copilot
 				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-					-- they way you will only jump inside the snippet region
-					elseif luasnip.expand_or_jumpable() then
+					if luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump()
-					elseif has_words_before() then
-						cmp.complete()
 					else
 						fallback()
 					end
 				end, { "i", "s" }),
 
 				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
+					if luasnip.jumpable(-1) then
 						luasnip.jump(-1)
 					else
 						fallback()
@@ -106,12 +104,11 @@ return {
 				}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 			}),
 			sources = {
-				{ name = "copilot" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
 				{ name = "luasnip" },
 				{ name = "path" },
-				{ name = "buffer" }
+				{ name = "buffer" },
 			},
 		})
 

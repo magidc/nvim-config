@@ -146,7 +146,7 @@ wk.add({
 	{ "<leader>cv", "<cmd>Lspsaga hover_doc<cr>", desc = "[LSP] Hover" },
 	{ "<leader>cc", "<cmd>Telescope lsp_incoming_calls<cr>", desc = "[LSP] Show incoming Calls" },
 	{ "<leader>ch", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "[LSP] Signature Help" },
-	{ "<leader>cx", "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function'}}<cr>", desc = "[TELESCOPE] Get current buffer functions", },
+	{ "<leader>cx", "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function', 'function_definition'}}<cr>", desc = "[TELESCOPE] Get current buffer functions", },
 
     -- Refactoring
 	{ "<leader>r", group = "[Code Refactor]" },

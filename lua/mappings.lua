@@ -107,7 +107,7 @@ wk.add({
     -- Views
 	{ "<leader>v", group = "Views" },
 	{ "<leader>vf", "<cmd>NeoTreeFocusToggle<cr>", desc = "[NEOTREE] Toggle file tree view" },
-	{ "<leader>vp", "<cmd>TroubleToggle<cr>", desc = "[TROUBLE] Toggle problem and diagnostics view" },
+	{ "<leader>vp", "<cmd>Trouble diagnostics<cr>", desc = "[TROUBLE] Toggle problem and diagnostics view" },
 	{ "<leader>vs", "<cmd>AerialToggle<cr>", desc = "[AERIAL] Toggle file structure view" },
 	{ "<leader>vt", "<cmd>ToggleTerm<cr>", desc = "[TOGGLETERM] Open new terminal" },
 	{ "<leader>vu", "<cmd>UndotreeToggle<cr>", desc = "[UNDOTREE]Toggle last undoable changes view" },

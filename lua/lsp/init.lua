@@ -32,6 +32,36 @@ if _lspconfig then
 			},
 		},
 	})
+	-- Rust
+	lspconfig.rust_analyzer.setup({
+		on_attach = function(client, bufnr)
+			require("lsp.handlers").on_attach(client, bufnr)
+			-- vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+		end,
+		-- capabilities = capabilities,
+		settings = {
+			["rust-analyzer"] = {
+				diagnostics = {
+					enable = true,
+				},
+				imports = {
+					granularity = {
+						group = "module",
+					},
+					prefix = "self",
+				},
+				cargo = {
+					buildScripts = {
+						enable = true,
+					},
+				},
+				procMacro = {
+					enable = true,
+				},
+			},
+		},
+	})
+
 	-- Clangd (C++)
 	lspconfig.clangd.setup({})
 

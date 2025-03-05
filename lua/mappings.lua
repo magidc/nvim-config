@@ -8,6 +8,18 @@ end
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- MULTIPLE MODES MAPPINGS
+wk.add({
+    mode = {"n","v","o" },
+	{ "H", "^", desc = "[MOTION] Move to first character of line" },
+	{ "L", "$", desc = "[MOTION] Move to last character of line" },
+    { "gE", "<cmd>lua require('spider').motion('ge')<cr>", desc = "[MOTION] Spider-ge motion" },
+	{ "B", "<cmd>lua require('spider').motion('b')<cr>", desc = "[MOTION] Spider-b motion" },
+	{ "E", "<cmd>lua require('spider').motion('e')<cr>", desc = "[MOTION] Spider-e motion" },
+	{ "W", "<cmd>lua require('spider').motion('w')<cr>", desc = "[MOTION] Spider-w motion" },
+	{ "<c-s>", "ggOG", desc = "[SELECT] Select all" },
+})
+
 -- NORMAL MODE MAPPINGS
 wk.add({
     -- Edition
@@ -38,13 +50,6 @@ wk.add({
 	{ "<a-o>", "mao<ESC>`a", desc = "New line in normal mode" },
 	{ "<a-O>", "maO<ESC>`a", desc = "New line before in normal mode" },
 
-    -- Motions
-	{ "H", "^", desc = "[MOTION] Move to first character of line" },
-	{ "L", "$", desc = "[MOTION] Move to last character of line" },
-	{ "W", "<cmd>lua require('spider').motion('w')<cr>", desc = "[MOTION] Spider-w motion" },
-	{ "B", "<cmd>lua require('spider').motion('b')<cr>", desc = "[MOTION] Spider-b motion" },
-	{ "E", "<cmd>lua require('spider').motion('e')<cr>", desc = "[MOTION] Spider-e motion" },
-	{ "gE", "<cmd>lua require('spider').motion('ge')<cr>", desc = "[MOTION] Spider-ge motion" },
 	---- Following remaps conflict with Neoscroll plugin for scrolling animations
 	{ "<c-d>", "<c-d>zz", desc = "Keep cursor in the middle while scrolling down" },
 	{ "<c-u>", "<c-u>zz", desc = "Keep cursor in the middle while scrolling up" },
@@ -210,12 +215,6 @@ wk.add({
     -- Motions
 	{ "<a-down>", "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", desc = "[MOTION] Move to next method" },
 	{ "<a-up>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>", desc = "[MOTION] Move to previous method" },
-	{ "H", "^", desc = "[MOTION] Move to first character of line" },
-	{ "L", "$", desc = "[MOTION] Move to last character of line" },
-    { "gE", "<cmd>lua require('spider').motion('ge')<cr>", desc = "[MOTION] Spider-ge motion" },
-	{ "B", "<cmd>lua require('spider').motion('b')<cr>", desc = "[MOTION] Spider-b motion" },
-	{ "E", "<cmd>lua require('spider').motion('e')<cr>", desc = "[MOTION] Spider-e motion" },
-	{ "W", "<cmd>lua require('spider').motion('w')<cr>", desc = "[MOTION] Spider-w motion" },
     { "<", "<gv", desc = "[Indent] Indent left" },
     { ">", ">gv", desc = "[Indent] Indent right" },
     { "<leader>dx", "<cmd>lua require('dapui').eval()<CR>", desc = "[DAPUI] Evaluate (selection in visual mode) }" },
@@ -245,5 +244,9 @@ wk.add({
     { "<c-k>", "<cmd>wincmd k<cr>,", desc = "[TERMINAL] Move up" },
     { "<c-l>", "<cmd>wincmd l<cr>,", desc = "[TERMINAL] Move right" },
 })
+
+
+
+
 
 wk.setup({})

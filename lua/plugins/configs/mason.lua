@@ -22,7 +22,6 @@ return {
           "matlab_ls",
           "pyright",
 					"html",
-					"tsserver",
 					"eslint",
 					"rust_analyzer",
 					"lua_ls",

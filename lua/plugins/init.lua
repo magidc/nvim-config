@@ -85,11 +85,11 @@ local plugins = {
 	---- LSP/DAP
 	require("plugins.configs.mason"),
 	"neovim/nvim-lspconfig",
-    require("lsp.configs.dap"),
+  require("lsp.configs.dap"),
 	require("lsp.configs.java"),
 	require("lsp.configs.rust"),
 	require("lsp.configs.python"),
-    require("lsp.configs.yaml"),
+  require("lsp.configs.yaml"),
 
 	---- Snippets
 	"L3MON4D3/LuaSnip",

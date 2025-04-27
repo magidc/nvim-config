@@ -52,6 +52,7 @@ local options = {
     undofile = true, -- Save undo history
     updatetime = 100, -- Decrease update time
     wrap = true,
+    wrapmargin = 120,
 }
 
 for key, value in pairs(options) do

@@ -49,3 +49,16 @@ lua/custom.lua
 lua/my_plugins/*
 !lua/my_plugins/example.lua
 package-lock.json
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix

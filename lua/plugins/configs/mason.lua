@@ -20,6 +20,11 @@ return {
 					"bashls",
 					"dockerls",
 					"docker_compose_language_service",
+					"dotls",
+					"gradle_ls",
+					"jdtls",
+					"jsonls",
+					"kotlin_language_server",
 				},
 				automatic_installation = true,
 			})

@@ -77,7 +77,7 @@ wk.add({
 
     -- Folds
 	{ "|", "za", desc = "[FOLDS] Toggle fold" },
-	{ "--", "zA", desc = "[FOLDS] Toggle all folds" },
+	{ "-", "zA", desc = "[FOLDS] Toggle all folds" },
 	{ "<a-s-down>", "zr", desc = "[FOLDS] Increase fold level" },
 	{ "<a-s-up>", "zm", desc = "[FOLDS] Decrease fold level" },
 	-- { "<a-down>", "zo", desc = "[FOLDS] Open fold" },
@@ -88,7 +88,7 @@ wk.add({
 	{ "qj", "@q", desc = "Execute macro saved in 'q' register" },
 
     -- Find
-	{ ";;", "<cmd>noh<cr>", desc = "Clean search highlights" },
+	{ ";", "<cmd>noh<cr>", desc = "Clean search highlights" },
 	{ "<leader>f", group = "Find" },
 	{ "<leader>fe", "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", desc = "[TELESCOPE] Find File" },
 	{ "<leader>fn", "<cmd>Telescope grep_string<cr>", desc = "[TELESCOPE] Find files using grep in file names" },
@@ -111,7 +111,7 @@ wk.add({
 
     -- Views
 	{ "<leader>v", group = "Views" },
-	{ "<leader>vf", "<cmd>NeoTreeFocusToggle<cr>", desc = "[NEOTREE] Toggle file tree view" },
+	{ "<leader>vf", "<cmd>Neotree toggle<cr>", desc = "[NEOTREE] Toggle file tree view" },
 	{ "<leader>vp", "<cmd>Trouble diagnostics<cr>", desc = "[TROUBLE] Toggle problem and diagnostics view" },
 	{ "<leader>vs", "<cmd>AerialToggle<cr>", desc = "[AERIAL] Toggle file structure view" },
 	{ "<leader>vt", "<cmd>ToggleTerm<cr>", desc = "[TOGGLETERM] Open new terminal" },

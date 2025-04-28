@@ -221,7 +221,7 @@ local i_opts = {
 	nowait = true,
 }
 
-wk.register({
+wk.add({
 	["jk"] = { "<Esc>", "Normal mode switch" },
 	["<a-s>"] = { "<Del>", "Handy DEL on insert mode" },
 	["<a-d>"] = { '<C-o>"_diw', "Delete word" },
@@ -241,7 +241,7 @@ local v_opts = {
 	silent = true,
 	noremap = true,
 }
-wk.register({
+wk.add({
 	["jk"] = { "<Esc>", "Normal mode switch" },
 	["<c-s>"] = { "ggOG", "[SELECT] Select all" },
 	["v"] = { "^o$", "[SELECT] Select trimmed line" },
@@ -275,7 +275,7 @@ local s_opts = {
 	noremap = true,
 	nowait = true,
 }
-wk.register({
+wk.add({
 	["<a-Bs>"] = { "<C-o>diw", "Delete word" },
 	["<a-c>"] = { "<C-o>ciw", "Change word" },
 }, s_opts)
@@ -288,7 +288,7 @@ local x_opts = {
 	noremap = true,
 	nowait = true,
 }
-wk.register({
+wk.add({
 	["<leader>r"] = {
 		name = "[Code refactor]",
 		v = { "<cmd>:Refactor extract_var <cr>", "[REFACTOR] Extract variable" },
@@ -305,7 +305,7 @@ local t_opts = {
 	noremap = true,
 	nowait = true,
 }
-wk.register({
+wk.add({
 	["<c-h>"] = { "<cmd>wincmd h<cr>,", "[TERMINAL] Move left" },
 	["<c-j>"] = { "<cmd>wincmd j<cr>,", "[TERMINAL] Move down" },
 	["<c-k>"] = { "<cmd>wincmd k<cr>,", "[TERMINAL] Move up" },

@@ -17,7 +17,7 @@ local n_opts = {
 	nowait = true,
 }
 
-wk.register({
+wk.add({
 	["<c-s>"] = { "ggVG", "[SELECT] Select all" },
 	-- Edit
 	-- ["d"] = { '"_d', "Do not copy when deleting" },

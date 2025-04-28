@@ -80,7 +80,7 @@ wk.add({
 	["<a-w>"] = { "<cmd>%bd!|e#|bd#<cr>", "[BUFFER] Close other buffers" },
 	-- Folds
 	["|"] = { "za", "[FOLDS] Toggle fold" },
-	["--"] = { "zA", "[FOLDS] Toggle all folds" },
+	["-"] = { "zA", "[FOLDS] Toggle all folds" },
 	["<a-s-down>"] = { "zr", "[FOLDS] Increase fold level" },
 	["<a-s-up>"] = { "zm", "[FOLDS] Decrease fold level" },
 	-- ["<a-down>"] = { "zo", "[FOLDS] Open fold" },
@@ -91,7 +91,7 @@ wk.add({
 	["qj"] = { "@q", "Execute macro saved in 'q' register" },
 
 	-- Find
-	[";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
+	[";"] = { "<cmd>noh<cr>", "Clean search highlights" },
 	["<leader>f"] = {
 		name = "[TELESCOPE]",
 		e = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },

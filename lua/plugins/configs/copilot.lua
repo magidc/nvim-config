@@ -1,5 +1,8 @@
 return {
 	"github/copilot.vim",
+	config = function()
+
+	end,
 }
 
 -- Alternative to copilot/cmp plugins

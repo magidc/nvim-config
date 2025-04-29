@@ -21,8 +21,8 @@ return {
 		if not _cmp or not _lspkind or not _luasnip then
 			return
 		end
-
-		local has_words_before = function()
+		
+    local has_words_before = function()
 			unpack = unpack or table.unpack
 			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -32,8 +32,17 @@ return {
 		require("luasnip/loaders/from_vscode").lazy_load()
 
 		cmp.setup({
-			preselect = cmp.PreselectMode.Item,
-			-- completion = { autocomplete = false }, -- Make completion only on demand
+			--[[ 
+                No item is preselected by default. 
+                It is needed for a better interaction with Copilot.
+                Unless one item is explicitly selected, Tab button will complete Copilot suggestion and not CMP suggestion.
+                If you want to automatically select the first item in the completion menu:
+                    preselect = cmp.PreselectMode.Item,
+            ]]
+			preselect = cmp.PreselectMode.None,
+
+			-- If uncommented, CMP menu won't open automatically, it would be necessary to press <C-Space> to open it.
+			-- completion = { autocomplete = false },
 			enabled = function()
 				local in_prompt = vim.api.nvim_buf_get_option(0, "buftype") == "prompt"
 				if in_prompt then
@@ -65,32 +74,30 @@ return {
 				},
 			},
 			formatting = {
-				format = function(entry, vim_item)
-					-- Fancy icons and a name of kind
-					vim_item.kind = lspkind.presets.default[vim_item.kind] .. " " .. vim_item.kind
-					return vim_item
-				end,
+				format = lspkind.cmp_format({
+					mode = "symbol",
+					maxwidth = 50,
+					ellipsis_char = "...",
+					show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+					symbol_map = { Copilot = "" },
+				}),
 			},
 
 			mapping = cmp.mapping.preset.insert({
 				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-					-- they way you will only jump inside the snippet region
+					-- Tab accepts the completion if CMP menu is visible and one item is selected
+					-- If not it will send the action for Snippets or others (Copilot)
+					if cmp.visible() and cmp.get_selected_entry() then
+						cmp.confirm({ select = true })
 					elseif luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump()
-					elseif has_words_before() then
-						cmp.complete()
 					else
 						fallback()
 					end
 				end, { "i", "s" }),
 
 				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
+					if luasnip.jumpable(-1) then
 						luasnip.jump(-1)
 					else
 						fallback()
@@ -101,9 +108,8 @@ return {
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-q>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({
-					select = true,
-				}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				["<CR>"] = cmp.mapping.confirm({ select = true, }), 
 			}),
 			sources = {
 	--			{ name = "copilot" },
@@ -111,7 +117,7 @@ return {
 				{ name = "nvim_lua" },
 				{ name = "luasnip" },
 				{ name = "path" },
-				{ name = "buffer" }
+				{ name = "buffer" },
 			},
 		})
 

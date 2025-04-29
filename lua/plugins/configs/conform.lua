@@ -15,17 +15,23 @@ return {
 				args = { "--tidy-mark", "no", "-quiet", "-indent", "-wrap", "0" },
 				stdin = true,
 			},
+			beautysh = {
+				command = "beautysh",
+				args = { "-" },
+				stdin = true,
+			},
 		},
 
 		formatters_by_ft = {
 			lua = { "stylua" },
+			sh = { "beautysh" },
 			json = { "jq" },
-			html = { { "prettierd", "prettier", "tidy" } },
-			css = { { "prettierd", "prettier", "tidy" } },
-			xhtml = { "xmllint", "tidy" },
+			html = { "prettierd", "prettier", "tidy", stop_after_first = true },
+			css = { "prettierd", "prettier", "tidy", stop_after_first = true },
+			xhtml = { "xmllint", "tidy", stop_after_first = true },
 			xml = { "xmllint" },
 			xsd = { "xmllint" },
-			javascript = { { "prettierd", "prettier" } },
+			javascript = { "prettierd", "prettier", stop_after_first = true },
 		},
 	},
 }

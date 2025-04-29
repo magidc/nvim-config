@@ -23,7 +23,7 @@ This is my personal LUA based configuration for Neovim that I use on a daily bas
 ## Manual Setup
 0. Clone this repository into `~/.config/nvim`:
     ```
-    git clone https://github.com/magidc/nvim-config.git ~/.config/nvim
+    git clone --depth 1 https://github.com/magidc/nvim-config.git ~/.config/nvim
     ```
 1. Install latest [NeoVIM version](https://github.com/neovim/neovim/wiki/Installing-Neovim). The configuration also includes an script to install automatically Neovim in APT based Linux distributions (Debian, Ubuntu, PopOs...). See [install_nvim.sh](https://github.com/magidc/nvim-config/blob/master/install_nvim.sh)
 2. Install [ripgrep](https://github.com/BurntSushi/ripgrep) into your OS. It is required by some [Telescope](https://github.com/nvim-telescope/telescope.nvim) plugin searching modes.

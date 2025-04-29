@@ -34,12 +34,46 @@ if _lspconfig then
 			},
 		},
 	})
+	-- Rust
+	lspconfig.rust_analyzer.setup({
+		on_attach = function(client, bufnr)
+			require("lsp.handlers").on_attach(client, bufnr)
+			-- vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+		end,
+		-- capabilities = capabilities,
+		settings = {
+			["rust-analyzer"] = {
+				diagnostics = {
+					enable = true,
+				},
+				imports = {
+					granularity = {
+						group = "module",
+					},
+					prefix = "self",
+				},
+				cargo = {
+					buildScripts = {
+						enable = true,
+					},
+				},
+				procMacro = {
+					enable = true,
+				},
+			},
+		},
+	})
+
 	-- Clangd (C++)
-  -- lspconfig.clangd.setup({})
+	lspconfig.clangd.setup({
+		autostart = false,
+		capabilities = capabilities,
+    })
 
 	-- Bash
 	lspconfig.bashls.setup({
 		autostart = true,
+		capabilities = capabilities,
 	})
 
 	-- Javascript/Typescript
@@ -59,32 +93,38 @@ if _lspconfig then
 
 	-- HTML
 	lspconfig.html.setup({
-		autostart = false,
+		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- CSS
 	lspconfig.cssls.setup({
-		autostart = false,
+		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Dockerfile
 	lspconfig.dockerls.setup({
-		autostart = false,
+		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Docker compose
 	lspconfig.docker_compose_language_service.setup({
-		autostart = false,
+		autostart = true,
 		capabilities = capabilities,
 	})
 	-- XML
-	-- lspconfig.lemminx.setup({})
+	lspconfig.lemminx.setup({
+		autostart = true,
+		capabilities = capabilities,
+	})
 
 	-- VUE
-	lspconfig.vuels.setup({})
+	lspconfig.vuels.setup({
+		autostart = false,
+		capabilities = capabilities,
+	})
 
 	-- YAMLs
   lspconfig.yamlls.setup({
@@ -118,8 +158,11 @@ if _lspconfig then
     capabilities = capabilities,
   })
 
-  -- Groovy Language Server
-  lspconfig.groovyls.setup({})
+	-- -- Groovy Language Server
+	lspconfig.groovyls.setup({
+	 	autostart = false,
+	 	capabilities = capabilities,
+	})
 
   -- Helm Language Server
   --[[ lspconfig.helm_ls.setup({
@@ -133,8 +176,11 @@ if _lspconfig then
     capabilities = capabilities,
   })
 
-  -- Kotlin LS
-  lspconfig.kotlin_language_server.setup({})
+	-- Kotlin LS
+	lspconfig.kotlin_language_server.setup({
+		autostart = false,
+		capabilities = capabilities,
+	})
 
   -- Make Language Server
   lspconfig.autotools_ls.setup({
@@ -154,7 +200,10 @@ if _lspconfig then
     capabilities = capabilities,
   })
 
-  -- Terraform Language Server
-  lspconfig.terraformls.setup({})
+	-- Terraform Language Server
+	lspconfig.terraformls.setup({
+		autostart = false,
+		capabilities = capabilities,
+	})
 
 end

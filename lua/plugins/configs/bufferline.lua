@@ -18,7 +18,6 @@ return {
 				-- as an escape hatch for people who cannot bear it for whatever reason
 
 				indicator = { icon = "| ", style = "none" },
-				buffer_close_icon = "",
 				modified_icon = "●",
 				close_icon = "",
 				left_trunc_marker = "",

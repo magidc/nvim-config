@@ -34,7 +34,6 @@ local plugins = {
 	---- UI
 	theme.get_active_theme(),
 	"mhinz/vim-startify", -- Start page
-	"aktersnurra/no-clown-fiesta.nvim",
 	"kyazdani42/nvim-web-devicons",
 	"onsails/lspkind.nvim", -- VSCode like item type icons
 	require("plugins.configs.bufferline"),

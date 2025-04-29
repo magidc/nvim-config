@@ -1,4 +1,4 @@
-local utils = require "utils"
+local utils = require("utils")
 
 local options = {
     autoindent = true,
@@ -56,29 +56,25 @@ local options = {
 }
 
 for key, value in pairs(options) do
-    vim.opt[key] = value
+	vim.opt[key] = value
 end
 
-vim.opt.shortmess:append "IsF"
--- vim.opt.shortmess:append "c"
+-- vim.opt.shortmess:append "IsF"
+vim.opt.shortmess:append("c")
 
-vim.cmd [[set fcs=eob:\ ]]
-vim.cmd([[
-    filetype plugin indent on
-    syntax on
-]])
+vim.cmd([[set fcs=eob:\ ]])
+vim.cmd([[filetype plugin indent on]])
 
-
---(Using vim-sleuth plugin instead) utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 2, java = 4, json = 2, yaml = 2 }
+utils.set_indent_sizes({ go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, java = 4, json = 4 })
 
 -- Space as leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- nvim-notify as default vim notification method
 local _notify, notify = pcall(require, "notify")
 if _notify then
-    vim.notify = notify
+	vim.notify = notify
 end
 
 -- UI theme

@@ -1,12 +1,12 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		config = function()
 			require("mason").setup()
 		end,
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -26,14 +26,13 @@ return {
 					"jsonls",
 					"kotlin_language_server",
 				},
-				automatic_installation = true,
 			})
 		end,
 	},
 	{
 		"williamboman/mason-nvim-dap.nvim",
 		dependencies = {
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 			"mfussenegger/nvim-dap",
 			"jay-babu/mason-nvim-dap.nvim",
 		},

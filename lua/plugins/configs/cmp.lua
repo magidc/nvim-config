@@ -106,10 +106,10 @@ return {
 				["<CR>"] = cmp.mapping.confirm({ select = true, }), 
 			}),
 			sources = {
+                { name = "path" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
 				{ name = "luasnip" },
-				{ name = "path" },
 				{ name = "buffer" },
 			},
 		})

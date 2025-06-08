@@ -100,7 +100,7 @@ return {
 					goto_next_start = {
 						["]m"] = { query = "@function.outer", desc = "Next method start" },
 						["]c"] = { query = "@class.outer", desc = "Next class start" },
-						["]a"] = { query = "@parameter.outer", desc = "Next argument/parameter start" },
+						["]a"] = { query = "@parameter.outer", desc = "Net argument/parameter start" },
 						["]b"] = { query = "@block.outer", desc = "Next block start" },
 						["]i"] = { query = "@conditional.outer", desc = "Next conditional start" },
 						["]l"] = { query = "@loop.outer", desc = "Next loop start" },

@@ -48,13 +48,13 @@ local plugins = {
 	-- require("plugins.configs.colorizer"), -- Colorize written color codes (#02F1AA, rgb(0,10,20)...)
 	require("plugins.configs.neoclip"), -- Clipboard manager
 	require("plugins.configs.toggleterm"), --- Improved terminal toggle
-	-- require("plugins.configs.illuminate"), --- Automatically highlighting other uses of the word under the cursor
+	require("plugins.configs.illuminate"), --- Automatically highlighting other uses of the word under the cursor
 	require("plugins.configs.project"), -- Project management
 	"sitiom/nvim-numbertoggle", -- Automatic switch to absolute line numbers when you are not in normal or visual mode, or focus is in other split
 	require("plugins.configs.zen"),
-	"chrisgrieser/nvim-spider",
-	require("plugins.configs.matchup"),
+	"chrisgrieser/nvim-spider", -- Subwords motions
 	require("plugins.configs.textobjs"),
+    require("plugins.configs.substitute"), -- Replate with paste
 	require("plugins.configs.comment"),
 	require("plugins.configs.flash"),
 	require("plugins.configs.todo"),

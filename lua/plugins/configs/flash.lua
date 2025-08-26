@@ -2,7 +2,12 @@ return {
 	"folke/flash.nvim",
 	event = "VeryLazy",
 	---@type Flash.Config
-	opts = {},
+	opts = {
+		label = {
+			-- allow uppercase labels
+			uppercase = false,
+		},
+	},
 	keys = {
 		{
 			"\\",

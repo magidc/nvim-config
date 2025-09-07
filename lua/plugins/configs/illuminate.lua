@@ -16,7 +16,7 @@ return {
 			},
 
 			-- delay: delay in milliseconds
-			delay = 200,
+			delay = 100,
 			-- large_file_cutoff: number of lines at which to use large_file_config
 			-- The `under_cursor` option is disabled when this cutoff is hit
 			large_file_cutoff = 500,

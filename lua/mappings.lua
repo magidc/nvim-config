@@ -31,8 +31,8 @@ wk.add({
 	{ "C", '"_C', desc = "Do not copy when changing" },
 	{ "cc", '"_cc', desc = "Do not copy when changing" },
 
-	{ "<a-p>", '<cmd>lua require("various-textobjs").anyBracket("inner")<cr>"_dP', desc = "Replace block content with paste" },
-	{ "<a-s-p>", '"_ddP', desc = "Replace line with paste" },
+	{ "<a-s-p>", '<cmd>lua require("various-textobjs").anyBracket("inner")<cr>"_dP', desc = "Replace block content with paste" },
+	{ "<a-p>", '"_ddP', desc = "Replace line with paste" },
 	{ "s", '<cmd>lua require("substitute").operator()<cr>', desc = "Replace operator with paste" },
 
 	{ "<a-j>", ":m .+1<cr>==", desc = "Move line down" },

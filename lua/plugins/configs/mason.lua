@@ -24,7 +24,6 @@ return {
 					"gradle_ls",
 					"jdtls",
 					"jsonls",
-					"kotlin_language_server",
 				},
 			})
 		end,

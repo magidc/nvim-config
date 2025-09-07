@@ -168,10 +168,10 @@ if _lspconfig then
 	})
 
 	-- Kotlin LS
-	lspconfig.kotlin_language_server.setup({
-		autostart = false,
-		capabilities = capabilities,
-	})
+	-- lspconfig.kotlin_language_server.setup({
+	-- 	autostart = false,
+	-- 	capabilities = capabilities,
+	-- })
 
 	-- Make Language Server
 	lspconfig.autotools_ls.setup({

@@ -39,11 +39,9 @@ wk.add({
 	{ "<a-k>", ":m .-2<cr>==", desc = "Move line up" },
 
 	{ "<a-d>", '"_diw', desc = "Delete word" },
+    { "<a-s-d>", '<cmd>lua require("various-textobjs").subword(true)<cr>"_d', desc = "Delete subword" },
 	{ "<a-c>", '"_ciw', desc = "Change word" },
-	{ "<a-s-d>", '<cmd>lua require("various-textobjs").subword(true)<cr>"_d', desc = "Delete subword" },
 	{ "<a-s-c>", '<cmd>lua require("various-textobjs").subword(true)<cr>"_c', desc = "Change subword" },
-	{ "<a-z>", '<cmd>lua require("various-textobjs").anyQuote("inner")<cr>"_c', desc = "Change within any kind of quotes" },
-	{ "<a-s-z>", '<cmd>lua require("various-textobjs").anyQuote("inner")<cr>"_d', desc = "Delete within any kind of quotes" },
 	{ "<a-z>", '<cmd>lua require("various-textobjs").anyQuote("inner")<cr>"_c', desc = "Change within any kind of quotes" },
 	{ "<a-s-z>", '<cmd>lua require("various-textobjs").anyQuote("inner")<cr>"_d', desc = "Delete within any kind of quotes" },
 	{ "<a-x>", '<cmd>lua require("various-textobjs").anyBracket("inner")<cr>"_c', desc = "Change within any kind of bracket (),[],{}" },
@@ -79,16 +77,16 @@ wk.add({
 	---- Using famiu/bufdelete.nvim plugin commands to prevent messy behaviours with other plugins
 	{ "<a-q>", "<cmd>Bdelete!<cr>", desc = "[BUFFER] Close current buffer" },
 	{ "<a-w>", "<cmd>%bd!|e#|bd#<cr>", desc = "[BUFFER] Close other buffers" },
+	{ "<leader>wn", "<cmd>exec &nu==&rnu? 'set relativenumber!' : 'set relativenumber'<cr>", desc = "[VIEW] Toggle relative numbers" },
 
 	-- Folds
-	{ "|", "za", desc = "[FOLDS] Toggle fold" },
 	{ "-", "zA", desc = "[FOLDS] Toggle all folds" },
 	{ "<a-s-down>", "zr", desc = "[FOLDS] Increase fold level" },
 	{ "<a-s-up>", "zm", desc = "[FOLDS] Decrease fold level" },
 	-- { "<a-down>", "zo", desc = "[FOLDS] Open fold" },
 	-- { "<a-up>", "zc", desc = "[FOLDS] Close fold" },
+    --
 
-	-- Macros and registers
 	{ "t", '"_', desc = "Set black hole registry" },
 	{ "qj", "@q", desc = "Execute macro saved in 'q' register" },
 
@@ -109,6 +107,7 @@ wk.add({
 	{ "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "[TELESCOPE LSP] Find symbols" },
 	{ "<leader>fz", "<cmd>Telescope zoxide list<cr>", desc = "[TELESCOPE] Zoxide" },
 	{ "<leader>ff", "<cmd>Telescope frecency<cr>", desc = "[TELESCOPE] Frecency" },
+	{ "<leader>fk", "<cmd>Telescope dap list_breakpoints<cr>", desc = "[TELESCOPE DAP] Show all breakpoints" },
 	{ "<leader>fic", "<cmd>Telescope git_commits<cr>", desc = "[TELESCOPE] Git commits" },
 	{ "<leader>fib", "<cmd>Telescope git_branches<cr>", desc = "[TELESCOPE] Git branches" },
 	{ "<leader>fis", "<cmd>Telescope git_status<cr>", desc = "[TELESCOPE] Git status" },
@@ -121,6 +120,7 @@ wk.add({
 	{ "<leader>vs", "<cmd>AerialToggle<cr>", desc = "[AERIAL] Toggle file structure view" },
 	{ "<leader>vt", "<cmd>ToggleTerm<cr>", desc = "[TOGGLETERM] Open new terminal" },
 	{ "<leader>vu", "<cmd>UndotreeToggle<cr>", desc = "[UNDOTREE]Toggle last undoable changes view" },
+    { "<leader>vb", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[HARPOON] Show quick menu" },
 
 	-- Debug
 	{ "<leader>d", group = "Debug" },
@@ -129,16 +129,8 @@ wk.add({
 	{ "<leader>dE", "<cmd>Telescope dap configurations<cr>", desc = "[DAP] Show debug configurations" },
 	{ "<leader>dk", "<cmd>DapTerminate<cr>", desc = "[DAP] Terminate" },
 	{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "[DAP] Toggle breakpoint" },
-	{
-		"<leader>dB",
-		"<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>",
-		desc = "[DAP] Set conditional breakpoint",
-	},
-	{
-		"<leader>dl",
-		"<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>",
-		desc = "[DAP] Set log point breakpoint",
-	},
+	{ "<leader>dB", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", desc = "[DAP] Set conditional breakpoint", },
+	{ "<leader>dl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", desc = "[DAP] Set log point breakpoint", },
 	{ "<leader>dc", "<cmd>DapContinue<cr>", desc = "[DAP] Continue" },
 	{ "<leader>dv", "<cmd>DapStepOver<cr>", desc = "[DAP] Step oVer" },
 	{ "<leader>di", "<cmd>DapStepInto<cr>", desc = "[DAP] Step Into" },
@@ -146,7 +138,6 @@ wk.add({
 	{ "<leader>dx", "<cmd>lua require('dapui').eval()<cr>", desc = "[DAPUI] eXecute}" },
 	{ "<leader>dp", "<cmd>DapToggleRepl<cr>", desc = "[DAP] Repl open" },
 	{ "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", desc = "[DAPUI] Toggle debugging UI" },
-	{ "<leader>ds", "<cmd>Telescope dap list_breakpoints<cr>", desc = "[TELESCOPE DAP] Show all breakpoints" },
 	{ "<leader>dw", "<cmd>Telescope dap variables<cr>", desc = "[TELESCOPE DAP] Wariables" },
 
 	-- Code navigation
@@ -164,20 +155,12 @@ wk.add({
 	{ "<leader>cv", "<cmd>Lspsaga hover_doc<cr>", desc = "[LSP] Hover" },
 	{ "<leader>cc", "<cmd>Telescope lsp_incoming_calls<cr>", desc = "[LSP] Show incoming Calls" },
 	{ "<leader>ch", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "[LSP] Signature Help" },
-	{
-		"<leader>cx",
-		"<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function', 'function_definition'}}<cr>",
-		desc = "[TELESCOPE] Get current buffer functions",
-	},
+	{ "<leader>cx", "<cmd>lua require'telescope.builtin'.treesitter{ symbols = {'method', 'function', 'function_definition'}}<cr>", desc = "[TELESCOPE] Get current buffer functions", },
 
 	-- Refactoring
 	{ "<leader>r", group = "[Code Refactor]" },
 	{ "<leader>re", "<cmd>Lspsaga code_action<cr>", desc = "[LSP] Code actions" },
-	{
-		"<leader>rf",
-		"<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>",
-		desc = "[CONFORM] Format code",
-	},
+	{ "<leader>rf", "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>", desc = "[CONFORM] Format code", },
 	{ "<leader>rn", "<cmd>Lspsaga rename<cr>", desc = "[LSP] Rename" },
 	{ "<leader>ri", "<cmd>:Refactor inline_var <cr>", desc = "[REFACTOR] Inline variable" },
 	{ "<leader>rI", "<cmd>:Refactor inline_func <cr>", desc = "[REFACTOR] Inline function" },
@@ -198,10 +181,6 @@ wk.add({
 	{ "<leader>m", group = "[Display Modes]" },
 	{ "<leader>mz", "<cmd>ZenMode<cr>", desc = "[MODE] Toggle zen mode" },
 
-	-- Jumps/Marks
-	{ "<leader>j", group = "[Jumps]" },
-	{ "<leader>jk", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[HARPOON] Show quick menu" },
-	{ "<leader>ja", "<cmd>lua require('harpoon.mark').add_file()<cr>", desc = "[HARPOON] Add file" },
 })
 
 -- INSERT MODE MAPPINGS

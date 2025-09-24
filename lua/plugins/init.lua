@@ -58,7 +58,6 @@ local plugins = {
 	require("plugins.configs.comment"),
 	require("plugins.configs.flash"),
 	require("plugins.configs.todo"),
-	require("plugins.configs.harpoon"),
 	require("plugins.configs.bigfile"),
 	require("plugins.configs.splitjoin"), -- Quick split or join of lists
     "mg979/vim-visual-multi",

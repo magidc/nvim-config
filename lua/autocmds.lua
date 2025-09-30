@@ -33,3 +33,11 @@ vim.filetype.add({
 		[".zshenv"] = "sh",
 	},
 })
+
+-- Disable automatic line breaks on comments
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.opt_local.formatoptions:remove("c")
+	end,
+})

@@ -1,16 +1,17 @@
 local capabilities = require("lsp.handlers").capabilities
 
-local _lspconfig, lspconfig = pcall(require, "lspconfig")
-if _lspconfig then
+-- local _lspconfig, lspconfig = pcall(require, "lspconfig")
+local lspconfig = vim.lsp.config
+if lspconfig then
 	-- Python
-	lspconfig.pyright.setup({
+	lspconfig("pyright", {
 		autostart = false,
-        capabilities = capabilities,
+		capabilities = capabilities,
 		filetypes = { "python" },
 	})
 
 	-- LUA
-	lspconfig.lua_ls.setup({
+	lspconfig("lua_ls", {
 		autostart = false,
 		settings = {
 			Lua = {
@@ -34,7 +35,7 @@ if _lspconfig then
 		},
 	})
 	-- Rust
-	lspconfig.rust_analyzer.setup({
+	lspconfig("rust_analyzer", {
 		on_attach = function(client, bufnr)
 			require("lsp.handlers").on_attach(client, bufnr)
 			-- vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -64,19 +65,19 @@ if _lspconfig then
 	})
 
 	-- Clangd (C++)
-	lspconfig.clangd.setup({
+	lspconfig("clangd", {
 		autostart = false,
 		capabilities = capabilities,
-    })
+	})
 
 	-- Bash
-	lspconfig.bashls.setup({
+	lspconfig("bashls", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Javascript/Typescript
-	lspconfig.eslint.setup({
+	lspconfig("eslint", {
 		autostart = true,
 		capabilities = capabilities,
 		settings = {
@@ -91,108 +92,108 @@ if _lspconfig then
 	})
 
 	-- HTML
-	lspconfig.html.setup({
+	lspconfig("html", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- CSS
-	lspconfig.cssls.setup({
+	lspconfig("cssls", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Dockerfile
-	lspconfig.dockerls.setup({
+	lspconfig("dockerls", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Docker compose
-	lspconfig.docker_compose_language_service.setup({
+	lspconfig("docker_compose_language_service", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 	-- XML
-	lspconfig.lemminx.setup({
+	lspconfig("lemminx", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- VUE
-	lspconfig.vuels.setup({
+	lspconfig("vuels", {
 		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- YAMLs
-	lspconfig.yamlls.setup({
+	lspconfig("yamlls", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- CMake Language Server
-	lspconfig.cmake.setup({
+	lspconfig("cmake", {
 		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- Elixir Language Server
-	lspconfig.elixirls.setup({
+	lspconfig("elixirls", {
 		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- -- Go Language Server
-	-- lspconfig.gopls.setup({
+	-- lspconfig("gopls",{
 	-- 	autostart = false,
 	-- 	capabilities = capabilities,
 	-- })
 
 	-- Gradle Language Server
-	lspconfig.gradle_ls.setup({
+	lspconfig("gradle_ls", {
 		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- -- Groovy Language Server
-	-- lspconfig.groovyls.setup({
+	-- lspconfig("groovyls",{
 	-- 	autostart = false,
 	-- 	capabilities = capabilities,
 	-- })
 
 	-- Json Language Server
-	lspconfig.jsonls.setup({
+	lspconfig("jsonls", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Kotlin LS
-	lspconfig.kotlin_language_server.setup({
+	lspconfig("kotlin_language_server", {
 		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- Make Language Server
-	lspconfig.autotools_ls.setup({
+	lspconfig("autotools_ls", {
 		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Powershell Language Server
-	lspconfig.powershell_es.setup({
+	lspconfig("powershell_es", {
 		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- SQL Language Server
-	lspconfig.sqlls.setup({
+	lspconfig("sqlls", {
 		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- Terraform Language Server
-	lspconfig.terraformls.setup({
+	lspconfig("terraformls", {
 		autostart = false,
 		capabilities = capabilities,
 	})

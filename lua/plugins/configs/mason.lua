@@ -9,9 +9,10 @@ return {
 		"mason-org/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
+				automatic_enable = false,
 				ensure_installed = {
 					"pyright",
-					"lemminx",
+					-- "lemminx",
 					"html",
 					"tsp_server",
 					"eslint",

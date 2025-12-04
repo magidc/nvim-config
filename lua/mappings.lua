@@ -178,8 +178,8 @@ wk.add({
 	{ "<leader>gh", "<cmd>Gitsigns preview_hunk<cr>", desc = "[GIT] Preview hunk" },
 
 	-- Display modes
-	{ "<leader>m", group = "[Display Modes]" },
-	{ "<leader>mz", "<cmd>ZenMode<cr>", desc = "[MODE] Toggle zen mode" },
+	{ "<leader>z", group = "[Display Modes]" },
+	{ "<leader>zz", "<cmd>ZenMode<cr>", desc = "[MODE] Toggle zen mode" },
 
 })
 
@@ -187,14 +187,16 @@ wk.add({
 wk.add({
 	mode = { "i" },
 	{ "jk", "<Esc>", desc = "Normal mode switch" },
+    { "<a-s>", "<Del>", desc = "Handy DEL on insert mode" },
+    { "<a-c>", '<ESC>"_ciw', desc = "Change word" },
+    { "<a-s-c>", '<ESC><cmd>lua require("various-textobjs").subword(true)<cr>"_c', desc = "Change subword" },
+    { "<a-z>", '<ESC><cmd>lua require("various-textobjs").anyQuote("inner")<cr>"_c', desc = "Change within any kind of quotes" },
+    { "<a-x>", '<ESC><cmd>lua require("various-textobjs").anyBracket("inner")<cr>"_c', desc = "Change within any kind of bracket (),[],{}" },
+    { "<a-w>", "<C-o>w", desc = "Move to next word" },
 	{ "<a-b>", "<C-o>b", desc = "Move to previous word" },
-	{ "<a-c>", '<C-o>"_ciw', desc = "Change word" },
-	{ "<a-d>", '<C-o>"_diw', desc = "Delete word" },
 	{ "<a-e>", "<ESC>ea", desc = "Move to end of word" },
 	{ "<a-j>", "<ESC>:m .+1<cr>==gi", desc = "[MOVE] Move block down" },
 	{ "<a-k>", "<ESC>:m .-2<cr>==gi", desc = "[MOVE] Move block up" },
-	{ "<a-s>", "<Del>", desc = "Handy DEL on insert mode" },
-	{ "<a-w>", "<C-o>w", desc = "Move to next word" },
 })
 
 -- VISUAL MODE MAPPINGS

@@ -11,6 +11,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp-document-symbol",
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
+		"rafamadriz/friendly-snippets",
 		"lukas-reineke/cmp-under-comparator", -- Better sort completion items starting with underscore (Python)
 	},
 	config = function()
@@ -102,11 +103,11 @@ return {
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-q>"] = cmp.mapping.abort(),
-                -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				["<CR>"] = cmp.mapping.confirm({ select = true, }), 
+				-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			sources = {
-                { name = "path" },
+				{ name = "path" },
 				{ name = "nvim_lsp" },
 				{ name = "nvim_lua" },
 				{ name = "luasnip" },

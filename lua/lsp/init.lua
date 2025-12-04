@@ -2,17 +2,16 @@ local capabilities = require("lsp.handlers").capabilities
 
 -- local _lspconfig, lspconfig = pcall(require, "lspconfig")
 local lspconfig = vim.lsp.config
+
 if lspconfig then
 	-- Python
 	lspconfig("pyright", {
-		autostart = false,
 		capabilities = capabilities,
 		filetypes = { "python" },
 	})
 
 	-- LUA
 	lspconfig("lua_ls", {
-		autostart = false,
 		settings = {
 			Lua = {
 				runtime = {
@@ -66,19 +65,16 @@ if lspconfig then
 
 	-- Clangd (C++)
 	lspconfig("clangd", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- Bash
 	lspconfig("bashls", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Javascript/Typescript
 	lspconfig("eslint", {
-		autostart = true,
 		capabilities = capabilities,
 		settings = {
 			packageManager = "npm",
@@ -93,108 +89,90 @@ if lspconfig then
 
 	-- HTML
 	lspconfig("html", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- CSS
 	lspconfig("cssls", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Dockerfile
 	lspconfig("dockerls", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Docker compose
 	lspconfig("docker_compose_language_service", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 	-- XML
 	lspconfig("lemminx", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- VUE
 	lspconfig("vuels", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- YAMLs
 	lspconfig("yamlls", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- CMake Language Server
 	lspconfig("cmake", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- Elixir Language Server
 	lspconfig("elixirls", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- -- Go Language Server
 	-- lspconfig("gopls",{
-	-- 	autostart = false,
 	-- 	capabilities = capabilities,
 	-- })
 
 	-- Gradle Language Server
 	lspconfig("gradle_ls", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- -- Groovy Language Server
 	-- lspconfig("groovyls",{
-	-- 	autostart = false,
 	-- 	capabilities = capabilities,
 	-- })
 
 	-- Json Language Server
 	lspconfig("jsonls", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Kotlin LS
 	lspconfig("kotlin_language_server", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- Make Language Server
 	lspconfig("autotools_ls", {
-		autostart = true,
 		capabilities = capabilities,
 	})
 
 	-- Powershell Language Server
 	lspconfig("powershell_es", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- SQL Language Server
 	lspconfig("sqlls", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 
 	-- Terraform Language Server
 	lspconfig("terraformls", {
-		autostart = false,
 		capabilities = capabilities,
 	})
 end

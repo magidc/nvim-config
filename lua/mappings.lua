@@ -39,7 +39,8 @@ wk.add({
 		desc = "Replace block content with paste",
 	},
 	{ "<a-p>", '"_ddP', desc = "Replace line with paste" },
-	{ "s", '<cmd>lua require("substitute").operator()<cr>', desc = "Replace operator with paste" },
+	{ "gs", '<cmd>lua require("substitute").operator()<cr>', desc = "Replace operator with paste" },
+	{ "gss", '<cmd>lua require("substitute").line()<cr>', desc = "Replace line with paste" },
 
 	{ "<a-j>", ":m .+1<cr>==", desc = "Move line down" },
 	{ "<a-k>", ":m .-2<cr>==", desc = "Move line up" },

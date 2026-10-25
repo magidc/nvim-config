@@ -53,7 +53,7 @@ local plugins = {
 	require("plugins.configs.zen"),
 	"chrisgrieser/nvim-spider", -- Subwords motions
 	require("plugins.configs.textobjs"),
-    require("plugins.configs.substitute"), -- Replace with paste
+  require("plugins.configs.substitute"), -- Replace with paste
 	require("plugins.configs.comment"),
 	require("plugins.configs.flash"),
 	require("plugins.configs.todo"),

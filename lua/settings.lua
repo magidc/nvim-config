@@ -1,33 +1,30 @@
 local utils = require("utils")
 
+-- No remote plugins (rplugin) are used: skip the provider detection
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 local options = {
-	autoindent = true,
-	autoread = true,
 	background = "dark",
-	backup = false,
 	breakindent = true, -- Enable break indent
 	clipboard = "unnamed,unnamedplus", -- Use system clipboard
-	cmdheight = 1,
 	completeopt = "noinsert,menuone,noselect", -- Set completeopt to have a better completion experience
 	confirm = true,
 	cursorline = true,
-	errorbells = false,
 	expandtab = true,
-	fileencoding = "utf-8",
+	foldcolumn = "1",
 	foldenable = true,
-	foldexpr = "nvim_treesitter#foldexpr()",
+	foldexpr = "v:lua.vim.treesitter.foldexpr()",
 	foldlevel = 99,
 	foldlevelstart = 99,
 	foldmethod = "expr",
-	hidden = true,
-	hlsearch = true, -- Set highlight on search
+	foldtext = "", -- Show the first line of a closed fold with its highlighting
 	ignorecase = true, -- Case insensitive searching UNLESS /C or capital in search
-	incsearch = true,
-	inccommand = "nosplit",
 	laststatus = 3,
 	mouse = "a", -- Enable mouse mode
 	number = true, -- Make line numbers default
-	numberwidth = 4,
 	pumheight = 10,
 	relativenumber = true,
 	scrolloff = 5,
@@ -37,22 +34,19 @@ local options = {
 	sidescrolloff = 5,
 	signcolumn = "yes",
 	smartcase = true,
-	smartindent = true,
 	softtabstop = 2,
 	splitbelow = true,
 	splitright = true,
 	swapfile = false,
 	tabstop = 2,
 	termguicolors = true,
-	-- Decrease update time
-	timeoutlen = 1000,
 	ttimeoutlen = 0,
 	title = true,
 	undodir = os.getenv("HOME") .. "/.vim/undodir",
 	undofile = true, -- Save undo history
 	updatetime = 100, -- Decrease update time
-	wrap = true,
-	wrapmargin = 120,
+	winborder = "rounded", -- Border of floating windows (LSP hover, diagnostics...)
+	wrap = false,
 }
 
 for key, value in pairs(options) do
@@ -62,35 +56,41 @@ end
 vim.opt.shortmess:append("c")
 
 vim.cmd([[set fcs=eob:\ ]])
-vim.cmd([[filetype plugin indent on]])
 
 utils.set_indent_sizes({ go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, java = 4, json = 4 })
 
+-- Lua files are formatted by stylua with tabs (stylua.toml): indent Lua buffers with tabs too
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("LuaTabs", { clear = true }),
+	pattern = "lua",
+	callback = function(args)
+		vim.bo[args.buf].expandtab = false
+	end,
+})
+
 -- Disable automatic line breaks
-vim.opt.textwidth = 0
-vim.opt.wrap = false
-vim.opt.linebreak = false
 vim.opt.formatoptions:remove({ "t", "c", "a", "r", "o" })
 
 -- Space as leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- nvim-notify as default vim notification method
-local _notify, notify = pcall(require, "notify")
-if _notify then
-	vim.notify = notify
-end
-
 -- UI theme
 require("theme").set_active_theme("tokyonight")
 
--- Not apply background color when running inside tmux. My tmux config changes background color whether the pane is active or not, so I want to use that instead of neovim's background color.
+-- Not apply background color when running inside tmux. My tmux config changes background color whether the pane is
+-- active or not, so I want to use that instead of neovim's background color.
 if vim.env.TMUX then
-	vim.schedule(function()
-		local groups = { "Normal", "NormalNC", "EndOfBuffer", "SignColumn" }
+	local function clear_background()
+		local groups = { "Normal", "NormalNC", "EndOfBuffer", "SignColumn", "FoldColumn" }
 		for _, g in ipairs(groups) do
-			vim.api.nvim_set_hl(0, g, { bg = "none" })
+			vim.api.nvim_set_hl(0, g, { bg = "none", update = true })
 		end
-	end)
+	end
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		group = vim.api.nvim_create_augroup("TmuxBackground", { clear = true }),
+		callback = clear_background,
+	})
+	-- The theme is loaded later by lazy.setup(), and tokyonight's theme.load() does not trigger ColorScheme
+	vim.schedule(clear_background)
 end

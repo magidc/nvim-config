@@ -2,6 +2,16 @@ return {
 	--- Improved terminal toggle
 	"akinsho/toggleterm.nvim",
 	version = "v2.*",
+	cmd = {
+		"ToggleTerm",
+		"TermExec",
+		"TermSelect",
+		"ToggleTermToggleAll",
+		"ToggleTermSendVisualLines",
+		"ToggleTermSendVisualSelection",
+		"ToggleTermSendCurrentLine",
+		"ToggleTermSetName",
+	},
 	config = function()
 		require("toggleterm").setup({
 			-- size can be a number or function which is passed the current terminal
@@ -13,8 +23,8 @@ return {
 					return vim.o.columns * 0.4
 				end
 			end,
-			open_mapping = [[<leader>vt]],
-			insert_mappings = false,
+			-- No open_mapping: <leader>vt is mapped in mappings.lua. toggleterm would also map it in terminal mode,
+			-- where typing " vt" closes the terminal
 			--direction = 'vertical' | 'horizontal' | 'tab' | 'float',
 			direction = "vertical",
 			close_on_exit = true, -- close the terminal window when the process exits

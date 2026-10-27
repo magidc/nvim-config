@@ -6,14 +6,15 @@ return {
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"nvim-telescope/telescope-frecency.nvim",
 		"jvgrootveld/telescope-zoxide",
-		"nvim-telescope/telescope.nvim",
 		"nvim-telescope/telescope-dap.nvim",
 	},
 	config = function()
-		telescope = require("telescope")
+		local telescope = require("telescope")
 		telescope.setup({
-			picker = {
-				hidden = true,
+			pickers = {
+				find_files = {
+					hidden = true,
+				},
 			},
 			defaults = {
 				vimgrep_arguments = {
@@ -27,16 +28,19 @@ return {
 					"--smart-case",
 					"--hidden",
 				},
+				-- Lua patterns: "." and "-" must be escaped with "%"
 				file_ignore_patterns = {
-					".git/",
-					".settings/",
-					".metadata/",
+					"^%.git/",
+					"/%.git/",
+					"%.settings/",
+					"%.metadata/",
 					"target/",
 					"node_modules/",
-					".class$",
-					"dist/",
-					".png",
-					"package-lock.json",
+					"%.class$",
+					"^dist/",
+					"/dist/",
+					"%.png$",
+					"package%-lock%.json$",
 				},
 				mappings = {
 					i = {
@@ -51,24 +55,11 @@ return {
 					preview_cutoff = 120,
 				},
 				prompt_prefix = "   ",
-				file_sorter = require("telescope.sorters").get_fuzzy_file,
-				generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 				path_display = { "truncate" },
-				color_devicons = true,
-				use_less = true,
 				set_env = { ["COLORTERM"] = "truecolor" },
-				file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-				grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-				qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-				buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
 			},
 			extensions = {
-				fzf = {
-					fuzzy = true,
-					override_generic_sorter = true,
-					override_file_sorter = true,
-					case_mode = "smart_case",
-				},
+				fzf = {},
 				frecency = {
 					default_workspace = "CWD",
 					show_scores = true,

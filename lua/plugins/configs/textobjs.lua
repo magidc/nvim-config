@@ -13,7 +13,9 @@ return {
 				-- use suggested keymaps (see README)
 				useDefaults = true,
 				-- disable some default keymaps, e.g. { "ai", "ii" }
-				disabledDefaults = {},
+				-- These ones shadow built-ins (Visual an/in treesitter selection, r, R, !, gw, |, n),
+				-- the treesitter am/im method textobjects or the L/C maps from mappings.lua
+				disabledDefaults = { "am", "im", "an", "in", "r", "R", "!", "gw", "|", "n", "L", "C" },
 			},
 		})
 	end,

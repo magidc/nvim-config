@@ -1,52 +1,6 @@
 local M = {}
 
-M.colors = {
-	bg = "#2e3440",
-	fg = "#ECEFF4",
-	red = "#bf616a",
-	orange = "#d08770",
-	yellow = "#ebcb8b",
-	blue = "#5e81ac",
-	green = "#a3be8c",
-	cyan = "#88c0d0",
-	magenta = "#b48ead",
-	purple = "#534671",
-	pink = "#FFA19F",
-	grey1 = "#f8fafc",
-	grey2 = "#f0f1f4",
-	grey3 = "#eaecf0",
-	grey4 = "#d9dce3",
-	grey5 = "#c4c9d4",
-	grey6 = "#b5bcc9",
-	grey7 = "#929cb0",
-	grey8 = "#8e99ae",
-	grey9 = "#74819a",
-	grey10 = "#616d85",
-	grey11 = "#464f62",
-	grey12 = "#3a4150",
-	grey13 = "#333a47",
-	grey14 = "#242932",
-	grey15 = "#1e222a",
-	grey16 = "#1c1f26",
-	grey17 = "#0f1115",
-	grey18 = "#0d0e11",
-	grey19 = "#020203",
-}
-
-local function loadNoClownFiesta()
-	vim.cmd([[colorscheme no-clown-fiesta]])
-	require("no-clown-fiesta").setup({
-		transparent = false, -- Enable this to disable the bg color
-		styles = {
-			-- You can set any of the style values specified for `:h nvim_set_hl`
-			comments = {},
-			keywords = {},
-			functions = {},
-			variables = {},
-			type = { bold = true },
-		},
-	})
-end
+M.colors = { red = "#bf616a" }
 
 local themes = {
 	onenord = {
@@ -81,7 +35,6 @@ local themes = {
 				on_colors = function(colors)
 					colors.bg_dark = "#000000"
 					colors.bg = "#11121D"
-					-- colors.bg_visual = M.colors.grey12
 				end,
 			})
 			theme.load()
@@ -106,7 +59,6 @@ local themes = {
 				},
 			})
 			theme.load()
-			-- loadNoClownFiesta()
 		end,
 	},
 	palenightfall = {
@@ -176,14 +128,9 @@ local themes = {
 	},
 	gruvbox = {
 		"sainnhe/gruvbox-material",
-		lazy = false,
 		config = function()
-			-- Optionally configure and load the colorscheme
-			-- directly inside the plugin declaration.
+			vim.o.background = "dark"
 			vim.g.gruvbox_material_enable_italic = true
-			vim.cmd.colorscheme("gruvbox-material")
-			vim.g.show_eob = 1
-			vim.g.background = "dark"
 			vim.g.gruvbox_material_background = "hard"
 			vim.g.gruvbox_material_foreground = "material"
 			vim.g.gruvbox_material_cursor = "auto"
@@ -191,6 +138,7 @@ local themes = {
 			vim.g.gruvbox_material_ui_contrast = "high"
 			vim.g.gruvbox_material_float_style = "bright"
 			vim.g.gruvbox_material_transparent_background = 2
+			vim.cmd.colorscheme("gruvbox-material")
 		end,
 	},
 }
@@ -201,6 +149,14 @@ end
 
 M.get_active_theme = function()
 	local theme = themes[M.theme_name]
+	if not theme then
+		vim.notify(
+			("theme.lua: unknown theme '%s', using tokyonight"):format(tostring(M.theme_name)),
+			vim.log.levels.WARN
+		)
+		M.theme_name = "tokyonight" -- lualine reads it as its theme name
+		theme = themes.tokyonight
+	end
 	theme.lazy = false
 	theme.priority = 1000
 	return theme

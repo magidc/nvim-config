@@ -1,130 +1,147 @@
+local parsers = {
+	"java",
+	"cpp",
+	"rust",
+	"python",
+	"lua",
+	"html",
+	"json",
+	"dockerfile",
+	"yaml",
+	"css",
+	"javascript",
+	"typescript",
+	"vue",
+	"toml",
+	"bash",
+	"zsh",
+	"markdown", -- with markdown_inline, also highlights LSP hover docs
+	"markdown_inline",
+}
+
+-- Filetypes that keep Vim's indent script (sh: nvim-treesitter's bash indents break heredocs, arrays, continuations)
+local indent_disabled = { python = true, css = true, rust = true, sh = true }
+
+local textobjects = {
+	{ key = "a", query = "@parameter", name = "argument/parameter" },
+	{ key = "b", query = "@block", name = "block" },
+	{ key = "m", query = "@function", name = "method" },
+	{ key = "c", query = "@class", name = "class" },
+	{ key = "y", query = "@conditional", name = "conditional" },
+	{ key = "l", query = "@loop", name = "loop" },
+}
+
+-- Buffer-local, so that buffers without a parser keep the built-in ]b, ]l, ab, ib...
+local function set_textobject_maps(buf)
+	local select = require("nvim-treesitter-textobjects.select")
+	local move = require("nvim-treesitter-textobjects.move")
+	local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
+
+	for _, obj in ipairs(textobjects) do
+		local outer, inner = obj.query .. ".outer", obj.query .. ".inner"
+		local upper = obj.key:upper()
+		-- Arguments/parameters end on the inner part, the rest on the outer one
+		local end_query = obj.key == "a" and inner or outer
+
+		vim.keymap.set({ "x", "o" }, "a" .. obj.key, function()
+			select.select_textobject(outer, "textobjects")
+		end, { buf = buf, desc = "Select outer part of a " .. obj.name })
+		vim.keymap.set({ "x", "o" }, "i" .. obj.key, function()
+			select.select_textobject(inner, "textobjects")
+		end, { buf = buf, desc = "Select inner part of a " .. obj.name })
+
+		vim.keymap.set({ "n", "x", "o" }, "]" .. obj.key, function()
+			move.goto_next_start(outer, "textobjects")
+		end, { buf = buf, desc = "Next " .. obj.name .. " start" })
+		vim.keymap.set({ "n", "x", "o" }, "]" .. upper, function()
+			move.goto_next_end(end_query, "textobjects")
+		end, { buf = buf, desc = "Next " .. obj.name .. " end" })
+		vim.keymap.set({ "n", "x", "o" }, "[" .. obj.key, function()
+			move.goto_previous_start(outer, "textobjects")
+		end, { buf = buf, desc = "Previous " .. obj.name .. " start" })
+		vim.keymap.set({ "n", "x", "o" }, "[" .. upper, function()
+			move.goto_previous_end(end_query, "textobjects")
+		end, { buf = buf, desc = "Previous " .. obj.name .. " end" })
+	end
+
+	-- In diff windows ]c/[c keep jumping to the next/previous change
+	local class_move = "<Cmd>lua require('nvim-treesitter-textobjects.move').%s('@class.outer', 'textobjects')<CR>"
+	vim.keymap.set({ "n", "x", "o" }, "]c", function()
+		return vim.wo.diff and "]c" or class_move:format("goto_next_start")
+	end, { buf = buf, expr = true, desc = "Next class start or diff change" })
+	vim.keymap.set({ "n", "x", "o" }, "[c", function()
+		return vim.wo.diff and "[c" or class_move:format("goto_previous_start")
+	end, { buf = buf, expr = true, desc = "Previous class start or diff change" })
+
+	-- Repeat the last treesitter move (; and , are :noh and @:, see mappings.lua)
+	vim.keymap.set({ "n", "x", "o" }, "<M-;>", ts_repeat_move.repeat_last_move, {
+		buf = buf,
+		desc = "Repeat last treesitter move",
+	})
+	vim.keymap.set({ "n", "x", "o" }, "<M-,>", ts_repeat_move.repeat_last_move_opposite, {
+		buf = buf,
+		desc = "Repeat last treesitter move backwards",
+	})
+end
+
 return {
 	"nvim-treesitter/nvim-treesitter",
+	branch = "main",
+	lazy = false, -- main branch does not support lazy-loading
 	dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
+		{
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			branch = "main",
+			init = function()
+				-- Disable the python/rust ftplugin maps (]m, [[, ...) that would shadow the textobject and usage ones
+				vim.g.no_python_maps = true
+				vim.g.no_rust_maps = true
+			end,
+		},
 		"windwp/nvim-ts-autotag",
 		"andymass/vim-matchup",
 	},
 	build = ":TSUpdate",
-	config = function()
-		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+	opts = { ensure_installed = parsers }, -- read by install_nvim.sh
+	config = function(_, opts)
+		require("nvim-treesitter").install(opts.ensure_installed)
 
-		vim way: ; goes to the direction you were moving.
-		vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-		vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-
-		require("nvim-treesitter.configs").setup({
-			autotag = { enable = true },
-			indent = {
-				enable = true,
-				disable = { "python", "css", "rust" },
-			},
-			--ensure_installed = "all",
-			ensure_installed = {
-				"java",
-				"cpp",
-				"rust",
-				"python",
-				"lua",
-				"html",
-				"json",
-				"dockerfile",
-				"yaml",
-				"css",
-				"javascript",
-				"typescript",
-				"vue",
-				"toml",
-			},
-			refactor = {
-				-- highlight_definitions = {
-				-- 	enable = true,
-				-- 	-- Set to false if you have an `updatetime` of ~100.
-				-- 	clear_on_cursor_move = true,
-				-- },
-				highlight_current_scope = { enable = false },
-				navigation = {
-					enable = true,
-					-- Assign keymaps to false to disable them, e.g. `goto_definition = false`.
-					keymaps = {
-						goto_definition = false,
-						list_definitions = false,
-						list_definitions_toc = false,
-						goto_next_usage = "]]",
-						goto_previous_usage = "[[",
-					},
-				},
-			},
-			textobjects = {
-				select = {
-					enable = true,
-					lookahead = true,
-					keymaps = {
-						["aa"] = { query = "@parameter.outer", desc = "Select outer part of a argument/parameter" },
-						["ia"] = { query = "@parameter.inner", desc = "Select inner part of a argument/parameter" },
-						["ab"] = { query = "@block.outer", desc = "Select outer part of a block" },
-						["ib"] = { query = "@block.inner", desc = "Select inner part of a block" },
-						["am"] = { query = "@function.outer", desc = "Select outer part of a method" },
-						["im"] = { query = "@function.inner", desc = "Select inner part of a method" },
-						["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
-						["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
-						["ay"] = { query = "@conditional.outer", desc = "Select outer part of a conditional" },
-						["iy"] = { query = "@conditional.inner", desc = "Select inner part of a conditional" },
-						["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
-						["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
-					},
-				},
-				move = {
-					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
-					goto_next_start = {
-						["]m"] = { query = "@function.outer", desc = "Next method start" },
-						["]c"] = { query = "@class.outer", desc = "Next class start" },
-						["]a"] = { query = "@parameter.outer", desc = "Net argument/parameter start" },
-						["]b"] = { query = "@block.outer", desc = "Next block start" },
-						["]y"] = { query = "@conditional.outer", desc = "Next conditional start" },
-						["]l"] = { query = "@loop.outer", desc = "Next loop start" },
-					},
-					goto_next_end = {
-						["]M"] = { query = "@function.outer", desc = "Next method end" },
-						["]C"] = { query = "@class.outer", desc = "Next class end" },
-						["]A"] = { query = "@parameter.inner", desc = "Next argument/parameter end" },
-						["]B"] = { query = "@block.outer", desc = "Next block end" },
-						["]Y"] = { query = "@conditional.outer", desc = "Next conditional end" },
-						["]L"] = { query = "@loop.outer", desc = "Next loop end" },
-					},
-					goto_previous_start = {
-						["[m"] = { query = "@function.outer", desc = "Previous method start" },
-						["[c"] = { query = "@class.outer", desc = "Previous class start" },
-						["[a"] = { query = "@parameter.outer", desc = "Previous argument/parameter start" },
-						["[b"] = { query = "@block.outer", desc = "Previous block start" },
-						["[y"] = { query = "@conditional.outer", desc = "Previous conditional start" },
-						["[l"] = { query = "@loop.outer", desc = "Previous loop start" },
-					},
-					goto_previous_end = {
-						["[M"] = { query = "@function.outer", desc = "Previous method end" },
-						["[C"] = { query = "@class.outer", desc = "Previous class end" },
-						["[A"] = { query = "@parameter.inner", desc = "Previous argument/parameter end" },
-						["[B"] = { query = "@block.outer", desc = "Previous block end" },
-						["[Y"] = { query = "@conditional.outer", desc = "Previous conditional end" },
-						["[L"] = { query = "@loop.outer", desc = "Previous loop end" },
-					},
-				},
-			},
-			matchup = {
-				-- enables vim-matchup integration
-				enable = true,
-				enable_quotes = true,
-			},
-			-- incremental_selection = {
-			--     enable = true,
-			--     keymaps = {
-			--         init_selection = "grn", -- set to `false` to disable one of the mappings
-			--         node_incremental = "grn",
-			--         scope_incremental = "grp",
-			--         node_decremental = "_",
-			--     },
-			-- },
+		-- The main branch has no modules: highlighting, indentation and textobjects are set up per buffer
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("treesitter_start", { clear = true }),
+			callback = function(args)
+				-- Set by bigfile.nvim in BufReadPre (its "treesitter" feature only patches the master branch)
+				if vim.b[args.buf].bigfile_disable_treesitter == 1 then
+					return
+				end
+				local lang = vim.treesitter.language.get_lang(args.match)
+				if not lang or not pcall(vim.treesitter.start, args.buf, lang) then
+					return
+				end
+				-- Without an indents query, nvim-treesitter's indentexpr puts every line at column 0
+				if not indent_disabled[args.match] and #vim.treesitter.query.get_files(lang, "indents") > 0 then
+					vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				elseif args.match == "sh" or args.match == "zsh" then
+					-- indent/sh.vim finds heredocs, comments and strings through regex syntax groups
+					vim.bo[args.buf].syntax = "ON"
+				end
+				if #vim.treesitter.query.get_files(lang, "textobjects") > 0 then
+					set_textobject_maps(args.buf)
+				end
+			end,
 		})
+
+		require("nvim-ts-autotag").setup()
+
+		-- Textobjects
+		require("nvim-treesitter-textobjects").setup({ select = { lookahead = true } })
+
+		-- Usage navigation via vim-illuminate: LSP documentHighlight when a server is attached, otherwise word matches
+		vim.keymap.set("n", "]]", function()
+			require("illuminate").goto_next_reference(false)
+		end, { desc = "Next usage" })
+		vim.keymap.set("n", "[[", function()
+			require("illuminate").goto_prev_reference(false)
+		end, { desc = "Previous usage" })
 	end,
 }

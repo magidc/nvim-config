@@ -1,23 +1,37 @@
+-- Returns a callback that moves 'foldlevel' by delta * count, clamped to the deepest fold of the buffer
+-- ('foldlevel' starts at 99, so a plain zm needs dozens of presses before any fold closes)
+local function fold_level_step(delta)
+	return function()
+		local deepest = 0
+		for lnum = 1, vim.fn.line("$") do
+			deepest = math.max(deepest, vim.fn.foldlevel(lnum))
+		end
+		if deepest > 0 then
+			local level = math.min(vim.wo.foldlevel, deepest) + delta * vim.v.count1
+			vim.opt_local.foldlevel = math.max(0, math.min(level, deepest))
+		end
+	end
+end
+
 return {
-	-- Custom modes tu run commands with a common prefix
-	"anuvyklack/hydra.nvim",
+	-- Custom modes to run commands with a common prefix
+	"nvimtools/hydra.nvim",
 	config = function()
-		-- local ok, hydra = pcall(require, "hydra")
-		hydra = require("hydra")
+		local hydra = require("hydra")
 		hydra({
 			name = "Window resize/focus",
 			mode = "n",
 			body = "<leader>w",
 			heads = {
-				{ "<left>", "<c-w>>" },
-				{ "<right>", "<c-w><" },
-				{ "<up>", "<c-w>+" },
-				{ "<down>", "<c-w>-" },
-				{ "h", "<c-w>h" },
-				{ "j", "<c-w>j" },
-				{ "k", "<c-w>k" },
-				{ "l", "<c-w>l" },
-				{ "=", "<c-w>=" },
+				{ "<left>", "<c-w>>", { desc = "wider" } },
+				{ "<right>", "<c-w><", { desc = "narrower" } },
+				{ "<up>", "<c-w>+", { desc = "taller" } },
+				{ "<down>", "<c-w>-", { desc = "shorter" } },
+				{ "h", "<c-w>h", { desc = "left" } },
+				{ "j", "<c-w>j", { desc = "down" } },
+				{ "k", "<c-w>k", { desc = "up" } },
+				{ "l", "<c-w>l", { desc = "right" } },
+				{ "=", "<c-w>=", { desc = "equalize" } },
 			},
 		})
 
@@ -26,13 +40,13 @@ return {
 			mode = "n",
 			body = "<leader>z",
 			heads = {
-				{ "e", "zo" },
-				{ "E", "zr" },
-				{ "c", "zc" },
-				{ "C", "zm" },
-				{ " ", "za" },
-				{ "j", "zj" },
-				{ "k", "zk" },
+				{ "e", "zo", { desc = "open" } },
+				{ "E", fold_level_step(1), { desc = "open level" } },
+				{ "c", "zc", { desc = "close" } },
+				{ "C", fold_level_step(-1), { desc = "close level" } },
+				{ " ", "za", { desc = "toggle" } },
+				{ "j", "zj", { desc = "next" } },
+				{ "k", "zk", { desc = "previous" } },
 			},
 		})
 
@@ -43,9 +57,9 @@ return {
 		end
 
 		local hint_dap = [[
- _r_: Run               _d_: Debug/Resume                   _k_: Terminate
+ _r_: Run last          _d_: Debug/Resume                   _k_: Terminate
  _b_: Toggle breakpoint _B_: Toggle conditional breakpoint  _l_: Toggle log point breakpoint
- _n_: Step over         _i_: Step into                      _o_: Step out                       _x_ Evaluate
+ _n_: Step over         _i_: Step into                      _o_: Step out                       _x_: Evaluate
  _p_: Toggle REPL       _u_: Toggle UI
  _q_: exit
 ]]
@@ -56,16 +70,16 @@ return {
 				invoke_on_body = true,
 				hint = {
 					position = "bottom",
-					border = "rounded",
+					float_opts = { border = "rounded" },
 				},
 			},
 			name = "DAP",
-			mode = { "n", "v" },
+			mode = { "n", "x" },
 			body = "<leader>x",
 			heads = {
 				{ "r", dap.run_last, { silent = true } },
 				{ "d", dap.continue, { silent = true } },
-				{ "k", dap.close, { silent = true } },
+				{ "k", dap.terminate, { silent = true } },
 				-- { 'k', dap.disconnect({ terminateDebuggee = false }), { exit = true, silent = true } },
 				{ "b", dap.toggle_breakpoint, { silent = true } },
 				{
@@ -87,6 +101,5 @@ return {
 				{ "q", nil, { exit = true, nowait = true } },
 			},
 		})
-		require("plugins.configs.hydra")
 	end,
 }

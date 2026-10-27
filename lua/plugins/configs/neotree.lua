@@ -1,16 +1,21 @@
 return {
 	-- Tree file explorer
 	"nvim-neo-tree/neo-tree.nvim",
-	branch = "v2.x",
-	dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim", "kyazdani42/nvim-web-devicons" },
+	branch = "v3.x",
+	dependencies = { "nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim", "nvim-tree/nvim-web-devicons" },
 	config = function()
 		require("neo-tree").setup({
 			close_if_last_window = true,
 			popup_border_style = "rounded",
 			enable_diagnostics = true,
 			enable_git_status = true,
+			window = {
+				mappings = {
+					["w"] = "none", -- open_with_window_picker needs s1n7ax/nvim-window-picker, which is not installed
+				},
+			},
 			buffers = {
-				follow_current_file = true, -- This will find and focus the file in the active buffer every time the current file is changed while the tree is open.
+				follow_current_file = { enabled = true }, -- This will find and focus the file in the active buffer every time the current file is changed while the tree is open.
 				group_empty_dirs = true, -- when true, empty folders will be grouped together
 				show_unloaded = true,
 				window = {
@@ -45,7 +50,7 @@ return {
 						-- "thumbs.db"
 					},
 				},
-				follow_current_file = true, -- This will find and focus the file in the active buffer every
+				follow_current_file = { enabled = true }, -- This will find and focus the file in the active buffer every
 				-- time the current file is changed while the tree is open.
 				group_empty_dirs = false, -- when true, empty folders will be grouped together
 				use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
@@ -87,8 +92,6 @@ return {
 						["t"] = "open_tabnew",
 						-- ["<cr>"] = "open_drop",
 						-- ["t"] = "open_tab_drop",
-						["w"] = "open_with_window_picker",
-						["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
 						["C"] = "close_node",
 						-- ['C'] = 'close_all_subnodes',
 						["z"] = "close_all_nodes",
@@ -134,6 +137,7 @@ return {
 				window = {
 					position = "float",
 					mappings = {
+						["gg"] = "none", -- the default gg (git_commit_and_push) would fire before the gg* maps below
 						["gA"] = "git_add_all",
 						["ggu"] = "git_unstage_file",
 						["gga"] = "git_add_file",
@@ -152,6 +156,5 @@ return {
 				},
 			},
 		})
-		require("plugins.configs.neotree")
 	end,
 }

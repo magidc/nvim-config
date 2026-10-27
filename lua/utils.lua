@@ -1,16 +1,16 @@
 local _M = {}
 
 _M.set_indent_sizes = function(filetypes)
-    for filetype, size in pairs(filetypes) do
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = filetype,
-            callback = function()
-                vim.opt.shiftwidth = size
-                vim.opt.tabstop = size
-                vim.opt.softtabstop = size
-            end,
-        })
-    end
+	vim.api.nvim_create_autocmd("FileType", {
+		group = vim.api.nvim_create_augroup("IndentSizes", { clear = true }),
+		pattern = vim.tbl_keys(filetypes),
+		callback = function(args)
+			local size = filetypes[args.match]
+			vim.bo[args.buf].shiftwidth = size
+			vim.bo[args.buf].tabstop = size
+			vim.bo[args.buf].softtabstop = size
+		end,
+	})
 end
 
 return _M

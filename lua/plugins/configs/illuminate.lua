@@ -1,29 +1,31 @@
 return {
 	"RRethy/vim-illuminate",
 	event = { "BufReadPost", "BufNewFile" },
-	lazy = false,
 	config = function()
 		require("illuminate").configure({
+			-- No "treesitter" provider: it needs nvim-treesitter's locals module, which the main branch does not have
 			providers = {
 				"lsp",
-				"treesitter",
 				"regex",
 			},
 			filetypes_denylist = {
-				"NeoTree",
+				"neo-tree",
+				"neo-tree-popup",
 				"toggleterm",
 				"TelescopePrompt",
 			},
 
 			-- delay: delay in milliseconds
 			delay = 100,
-			-- large_file_cutoff: number of lines at which to use large_file_config
-			-- The `under_cursor` option is disabled when this cutoff is hit
-			large_file_cutoff = 500,
-			-- large_file_config: config to use for large files (based on large_file_cutoff).
+			-- large_file_cutoff: number of lines at which to use large_file_overrides
+			large_file_cutoff = 10000,
+			-- large_file_overrides: config to use for large files (based on large_file_cutoff).
 			-- Supports the same keys passed to .configure
-			-- If nil, vim-illuminate will be disabled for large files.
+			-- If nil, vim-illuminate will be disabled for large files (and ]]/[[ with it).
 			large_file_overrides = nil,
 		})
+		-- plugin/illuminate.vim maps <a-n>/<a-p> before this runs, too early for disable_keymaps.
+		-- <a-p> is "Replace line with paste" (mappings.lua) and references are on ]]/[[ (treesitter.lua)
+		pcall(vim.keymap.del, "n", "<a-n>")
 	end,
 }

@@ -1,12 +1,16 @@
 {
-    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.runtime.path": [
+        "lua/?.lua",
+        "lua/?/init.lua"
+    ],
+    "Lua.runtime.pathStrict": true,
     "Lua.diagnostics.disable": [
         "need-check-nil"
     ],
     "Lua.diagnostics.globals": [
-        "vim",
-        "normal_fg",
-        "has_words_before"
+        "vim"
     ],
     "Lua.workspace.checkThirdParty": false
 }

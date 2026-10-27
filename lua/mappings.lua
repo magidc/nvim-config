@@ -4,41 +4,86 @@ if not ok then
 	return
 end
 
--- Space as leader key
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+-- Returns an expr callback for a nvim-spider motion. On very long lines it falls back to the native motion:
+-- spider copies the whole line into Lua on every key, which takes seconds on minified files or logs
+local function spider_motion(motion)
+	return function()
+		if vim.fn.col("$") > 10000 then
+			return motion
+		end
+		return "<cmd>lua require('spider').motion('" .. motion .. "')<cr>"
+	end
+end
+
+-- Returns a callback that jumps to the next (1) or previous (-1) diagnostic and shows it in a floating window
+local function diagnostic_jump(count)
+	return function()
+		vim.diagnostic.jump({
+			count = count,
+			on_jump = function(_, bufnr)
+				vim.diagnostic.open_float({ bufnr = bufnr, scope = "cursor", focus = false })
+			end,
+		})
+	end
+end
+
+-- Returns a callback for Visual +/_ that uses Neovim's an/in (node_keys) where a treesitter parser or an LSP
+-- selection range is available, and vim-expand-region (fallback <Plug> keys) elsewhere
+local function selection_step(node_keys, fallback)
+	return function()
+		local count = vim.v.count1
+		local parser = vim.treesitter.get_parser(0, nil, { error = false })
+		if parser or #vim.lsp.get_clients({ bufnr = 0, method = "textDocument/selectionRange" }) > 0 then
+			vim.cmd.normal(count .. node_keys)
+		else
+			vim.cmd.normal(vim.keycode(fallback):rep(count))
+		end
+	end
+end
+
+-- Returns the first line of the Visual selection, to pre-fill Telescope prompts
+local function visual_text()
+	return vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })[1] or ""
+end
 
 -- MULTIPLE MODES MAPPINGS
 wk.add({
-	mode = { "n", "v", "o" },
+	mode = { "n", "x", "o" },
 	{ "H", "^", desc = "[MOTION] Move to first character of line" },
 	{ "L", "$", desc = "[MOTION] Move to last character of line" },
-	{ "gE", "<cmd>lua require('spider').motion('ge')<cr>", desc = "[MOTION] Spider-ge motion" },
-	{ "B", "<cmd>lua require('spider').motion('b')<cr>", desc = "[MOTION] Spider-b motion" },
-	{ "E", "<cmd>lua require('spider').motion('e')<cr>", desc = "[MOTION] Spider-e motion" },
-	{ "W", "<cmd>lua require('spider').motion('w')<cr>", desc = "[MOTION] Spider-w motion" },
-	{ "<c-s>", "ggOG", desc = "[SELECT] Select all" },
+	{ "gE", spider_motion("ge"), expr = true, desc = "[MOTION] Spider-ge motion" },
+	{ "B", spider_motion("b"), expr = true, desc = "[MOTION] Spider-b motion" },
+	{ "E", spider_motion("e"), expr = true, desc = "[MOTION] Spider-e motion" },
+	{ "W", spider_motion("w"), expr = true, desc = "[MOTION] Spider-w motion" },
 })
 
 -- NORMAL MODE MAPPINGS
 wk.add({
 	{ ",", "@:", desc = "[RUN] Repeat last command" },
-	{ "m", ":InspectTree<cr>", desc = "[TreeSitter] Toggle TreeSitter tree" },
 	-- Edition
 	{ "<c-s>", "ggVG", desc = "[SELECT] Select all" },
+	{
+		"+",
+		function()
+			-- <Esc> drops the count, which would change what v selects; Visual + then expands count times
+			return "<Esc>v" .. ("+"):rep(vim.v.count1)
+		end,
+		expr = true,
+		remap = true,
+		desc = "[SELECT] Start selection and expand it",
+	},
 	-- {"d", '"_d',desc= "Do not copy when deleting" },
 	-- {"D", '"_D',desc= "Do not copy when deleting" },
 	-- {"dd", '"_dd',desc= "Do not copy when deleting" },
 	{ "c", '"_c', desc = "Do not copy when changing" },
 	{ "C", '"_C', desc = "Do not copy when changing" },
-	{ "cc", '"_cc', desc = "Do not copy when changing" },
 
 	{
 		"<a-s-p>",
 		'<cmd>lua require("various-textobjs").anyBracket("inner")<cr>"_dP',
 		desc = "Replace block content with paste",
 	},
-	{ "<a-p>", '"_ddP', desc = "Replace line with paste" },
+	{ "<a-p>", "VP", desc = "Replace line with paste" },
 	{ "gs", '<cmd>lua require("substitute").operator()<cr>', desc = "Replace operator with paste" },
 	{ "gss", '<cmd>lua require("substitute").line()<cr>', desc = "Replace line with paste" },
 
@@ -46,9 +91,9 @@ wk.add({
 	{ "<a-k>", ":m .-2<cr>==", desc = "Move line up" },
 
 	{ "<a-d>", '"_diw', desc = "Delete word" },
-	{ "<a-s-d>", '<cmd>lua require("various-textobjs").subword(true)<cr>"_d', desc = "Delete subword" },
+	{ "<a-s-d>", '<cmd>lua require("various-textobjs").subword("inner")<cr>"_d', desc = "Delete subword" },
 	{ "<a-c>", '"_ciw', desc = "Change word" },
-	{ "<a-s-c>", '<cmd>lua require("various-textobjs").subword(true)<cr>"_c', desc = "Change subword" },
+	{ "<a-s-c>", '<cmd>lua require("various-textobjs").subword("inner")<cr>"_c', desc = "Change subword" },
 	{
 		"<a-z>",
 		'<cmd>lua require("various-textobjs").anyQuote("inner")<cr>"_c',
@@ -70,11 +115,13 @@ wk.add({
 		desc = "Delete within any kind of bracket (),[],{}",
 	},
 
-	{ "<a-a>", '<cmd>TSTextobjectSelect @parameter.inner<cr>"_c', desc = "Change function parameter" },
-	{ "<a-s>", '<cmd>TSTextobjectSelect @parameter.outer<cr>"_d', desc = "Delete function parameter" },
+	-- ia/aa are the treesitter parameter textobjects
+	{ "<a-a>", '"_cia', remap = true, desc = "Change function parameter" },
+	{ "<a-s>", '"_daa', remap = true, desc = "Delete function parameter" },
 
-	{ "<a-o>", "mao<ESC>`a", desc = "New line in normal mode" },
-	{ "<a-O>", "maO<ESC>`a", desc = "New line before in normal mode" },
+	-- Neovim's ]<Space>/[<Space> add [count] blank lines without moving the cursor or setting marks, and repeat with .
+	{ "<a-o>", "]<Space>", remap = true, desc = "New line in normal mode" },
+	{ "<a-O>", "[<Space>", remap = true, desc = "New line before in normal mode" },
 
 	---- Following remaps conflict with Neoscroll plugin for scrolling animations
 	{ "<c-d>", "<c-d>zz", desc = "Keep cursor in the middle while scrolling down" },
@@ -83,8 +130,9 @@ wk.add({
 	{ "n", "nzz", desc = "Keep searching result in the middle" },
 	{ "N", "Nzz", desc = "Keep searching result in the middle" },
 
-	{ "<a-down>", "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", desc = "[MOTION] Move to next method" },
-	{ "<a-up>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>", desc = "[MOTION] Move to previous method" },
+	-- ]m/[m are the treesitter method motions in buffers with a parser, Vim's builtin ones elsewhere
+	{ "<a-down>", "]m", mode = { "n", "x" }, remap = true, desc = "[MOTION] Move to next method" },
+	{ "<a-up>", "[m", mode = { "n", "x" }, remap = true, desc = "[MOTION] Move to previous method" },
 
 	-- Buffers
 	---- Without bufferline
@@ -97,31 +145,26 @@ wk.add({
 	{ "<a-t>", "<cmd>ene<cr>", desc = "[BUFFER] Open a new empty buffer" },
 	{ "Z", "<cmd>wall<cr>", desc = "[BUFFER] Save all" },
 	{ "Q", "<cmd>qall!<cr>", desc = "[BUFFER] Quit all without saving" },
-	---- Using famiu/bufdelete.nvim plugin commands to prevent messy behaviours with other plugins
-	{ "<a-q>", "<cmd>Bdelete!<cr>", desc = "[BUFFER] Close current buffer" },
-	{ "<a-w>", "<cmd>%bd!|e#|bd#<cr>", desc = "[BUFFER] Close other buffers" },
-	{
-		"<leader>wn",
-		"<cmd>exec &nu==&rnu? 'set relativenumber!' : 'set relativenumber'<cr>",
-		desc = "[VIEW] Toggle relative numbers",
-	},
+	---- Using nvim-mini/mini.bufremove (also bufferline's close_command) to prevent messy behaviours with other plugins
+	{ "<a-q>", "<cmd>lua require('mini.bufremove').delete(0, false)<cr>", desc = "[BUFFER] Close current buffer" },
+	{ "<a-w>", "<cmd>BufferLineCloseOthers<cr>", desc = "[BUFFER] Close other buffers" },
 
-	-- Folds
-	{ "-", "zA", desc = "[FOLDS] Toggle all folds" },
-	{ "<a-s-down>", "zr", desc = "[FOLDS] Increase fold level" },
-	{ "<a-s-up>", "zm", desc = "[FOLDS] Decrease fold level" },
-	-- { "<a-down>", "zo", desc = "[FOLDS] Open fold" },
-	-- { "<a-up>", "zc", desc = "[FOLDS] Close fold" },
-	--
+	-- Windows (resize/focus heads come from the hydra)
+	{ "<leader>w", group = "Windows" },
+	{ "<leader>wn", "<cmd>set relativenumber!<cr>", desc = "[VIEW] Toggle relative numbers" },
 
-	{ "t", '"_', desc = "Set black hole registry" },
 	{ "qj", "@q", desc = "Execute macro saved in 'q' register" },
 
 	-- Find
 	{ ";", "<cmd>noh<cr>", desc = "Clean search highlights" },
 	{ "<leader>f", group = "Find" },
 	{ "<leader>fe", "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", desc = "[TELESCOPE] Find File" },
-	{ "<leader>fn", "<cmd>Telescope grep_string<cr>", desc = "[TELESCOPE] Find files using grep in file names" },
+	{
+		"<leader>fn",
+		"<cmd>Telescope grep_string<cr>",
+		mode = { "n", "x" },
+		desc = "[TELESCOPE] Grep word under cursor or selection",
+	},
 	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "[TELESCOPE] Find File by live grep (search content)" },
 	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "[TELESCOPE] Find buffers" },
 	{ "<leader>fm", "<cmd>Telescope marks<cr>", desc = "[TELESCOPE] Marks" },
@@ -143,15 +186,16 @@ wk.add({
 	-- Views
 	{ "<leader>v", group = "Views" },
 	{ "<leader>vf", "<cmd>Neotree toggle<cr>", desc = "[NEOTREE] Toggle file tree view" },
-	{ "<leader>vp", "<cmd>Trouble diagnostics<cr>", desc = "[TROUBLE] Toggle problem and diagnostics view" },
+	{ "<leader>vp", "<cmd>Trouble diagnostics toggle<cr>", desc = "[TROUBLE] Toggle problem and diagnostics view" },
 	{ "<leader>vs", "<cmd>AerialToggle<cr>", desc = "[AERIAL] Toggle file structure view" },
-	{ "<leader>vt", "<cmd>ToggleTerm<cr>", desc = "[TOGGLETERM] Open new terminal" },
-	{ "<leader>vu", "<cmd>UndotreeToggle<cr>", desc = "[UNDOTREE]Toggle last undoable changes view" },
-	{ "<leader>vb", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", desc = "[HARPOON] Show quick menu" },
+	-- A count picks the terminal (2<leader>vt); without one, the last used terminals are toggled
+	{ "<leader>vt", "<cmd>lua require('toggleterm').toggle(vim.v.count)<cr>", desc = "[TOGGLETERM] Toggle terminal" },
+	{ "<leader>vu", "<cmd>Undotree<cr>", desc = "[UNDOTREE] Toggle undo tree view" },
+	{ "<leader>vi", "<cmd>InspectTree<cr>", desc = "[TREESITTER] Inspect tree" },
 
 	-- Debug
 	{ "<leader>d", group = "Debug" },
-	{ "<leader>dR", "<cmd>lua require'dap'.run()<cr>", desc = "[DAP] Run" },
+	{ "<leader>dR", "<cmd>DapNew<cr>", desc = "[DAP] New debug session" },
 	{ "<leader>de", "<cmd>lua require'dap'.run_last()<cr>", desc = "[DAP] Debug last" },
 	{ "<leader>dE", "<cmd>Telescope dap configurations<cr>", desc = "[DAP] Show debug configurations" },
 	{ "<leader>dk", "<cmd>DapTerminate<cr>", desc = "[DAP] Terminate" },
@@ -170,7 +214,7 @@ wk.add({
 	{ "<leader>dv", "<cmd>DapStepOver<cr>", desc = "[DAP] Step oVer" },
 	{ "<leader>di", "<cmd>DapStepInto<cr>", desc = "[DAP] Step Into" },
 	{ "<leader>do", "<cmd>DapStepOut<cr>", desc = "[DAP] Step Out" },
-	{ "<leader>dx", "<cmd>lua require('dapui').eval()<cr>", desc = "[DAPUI] eXecute}" },
+	{ "<leader>dx", "<cmd>lua require('dapui').eval()<cr>", desc = "[DAPUI] Evaluate expression" },
 	{ "<leader>dp", "<cmd>DapToggleRepl<cr>", desc = "[DAP] Repl open" },
 	{ "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", desc = "[DAPUI] Toggle debugging UI" },
 	{ "<leader>dw", "<cmd>Telescope dap variables<cr>", desc = "[TELESCOPE DAP] Wariables" },
@@ -184,7 +228,6 @@ wk.add({
 	-- {"<leader>ct", "<cmd>lua vim.lsp.buf.type_definition()<cr>", desc= "[LSP] Go to type definition" },
 	{ "<leader>ci", "<cmd>Telescope lsp_implementations<cr>", desc = "[LSP] Go to implementation" },
 	-- {"<leader>ci", "<cmd>lua vim.lsp.buf.implementation()<cr>", desc= "[LSP] Go to implementation" },
-	{ "<leader>cs", "<cmd>lua require'jdtls'.super_implementation()<cr>", desc = "[JDLTS] Go to super implementation" },
 	{ "<leader>cr", "<cmd>Telescope lsp_references<cr>", desc = "[LSP] Go to references" },
 	-- {"<leader>cr", "<cmd>lua vim.lsp.buf.references()<cr>", desc= "[LSP] Go to references" },
 	{ "<leader>cv", "<cmd>Lspsaga hover_doc<cr>", desc = "[LSP] Hover" },
@@ -197,31 +240,31 @@ wk.add({
 	},
 
 	-- Refactoring
-	{ "<leader>r", group = "[Code Refactor]" },
-	{ "<leader>re", "<cmd>Lspsaga code_action<cr>", desc = "[LSP] Code actions" },
+	{ "<leader>r", group = "[Code Refactor]", mode = { "n", "x" } },
+	-- Extract/inline refactors are code actions of the language servers (jdtls, rust-analyzer...),
+	-- in Visual mode they apply to the selection
+	{ "<leader>re", "<cmd>Lspsaga code_action<cr>", mode = { "n", "x" }, desc = "[LSP] Code actions and refactors" },
 	{
 		"<leader>rf",
-		"<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<cr>",
+		"<cmd>lua require('conform').format({ async = true, lsp_format = 'fallback' })<cr>",
 		desc = "[CONFORM] Format code",
 	},
 	{ "<leader>rn", "<cmd>Lspsaga rename<cr>", desc = "[LSP] Rename" },
-	{ "<leader>ri", "<cmd>:Refactor inline_var <cr>", desc = "[REFACTOR] Inline variable" },
-	{ "<leader>rI", "<cmd>:Refactor inline_func <cr>", desc = "[REFACTOR] Inline function" },
 
 	-- Errors and diagnostics
 	{ "<leader>e", group = "[Errors and diagnostics]" },
-	{ "<leader>en", "<cmd>lua vim.diagnostic.goto_next()<cr>", desc = "[DIAG] Go to next error" },
-	{ "<leader>ep", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "[DIAG] Go to previous error" },
+	{ "<leader>en", diagnostic_jump(1), desc = "[DIAG] Go to next error" },
+	{ "<leader>ep", diagnostic_jump(-1), desc = "[DIAG] Go to previous error" },
 
 	-- Git
 	{ "<leader>g", group = "[GIT]" },
 	{ "<leader>gd", "<cmd>Gitsigns diffthis<cr>", desc = "[GIT] Diff" },
-	{ "<leader>gn", "<cmd>Gitsigns next_hunk<cr>", desc = "[GIT] Next hunk" },
-	{ "<leader>gp", "<cmd>Gitsigns prev_hunk<cr>", desc = "[GIT] Prev hunk" },
+	{ "<leader>gn", "<cmd>Gitsigns nav_hunk next<cr>", desc = "[GIT] Next hunk" },
+	{ "<leader>gp", "<cmd>Gitsigns nav_hunk prev<cr>", desc = "[GIT] Prev hunk" },
 	{ "<leader>gh", "<cmd>Gitsigns preview_hunk<cr>", desc = "[GIT] Preview hunk" },
 
-	-- Display modes
-	{ "<leader>z", group = "[Display Modes]" },
+	-- Folds (heads come from the hydra) and display modes
+	{ "<leader>z", group = "[Folds and display modes]" },
 	{ "<leader>zz", "<cmd>ZenMode<cr>", desc = "[MODE] Toggle zen mode" },
 })
 
@@ -231,7 +274,7 @@ wk.add({
 	{ "jk", "<Esc>", desc = "Normal mode switch" },
 	{ "<a-s>", "<Del>", desc = "Handy DEL on insert mode" },
 	{ "<a-c>", '<ESC>"_ciw', desc = "Change word" },
-	{ "<a-s-c>", '<ESC><cmd>lua require("various-textobjs").subword(true)<cr>"_c', desc = "Change subword" },
+	{ "<a-s-c>", '<ESC><cmd>lua require("various-textobjs").subword("inner")<cr>"_c', desc = "Change subword" },
 	{
 		"<a-z>",
 		'<ESC><cmd>lua require("various-textobjs").anyQuote("inner")<cr>"_c',
@@ -251,50 +294,69 @@ wk.add({
 
 -- VISUAL MODE MAPPINGS
 wk.add({
-	mode = { "v" },
+	mode = { "x" },
 	{ "jk", "<Esc>", desc = "Normal mode switch" },
-	{ "<c-s>", "ggOG", desc = "[SELECT] Select all" },
+	{ "<c-s>", "<Esc>ggVG", desc = "[SELECT] Select all" },
 	{ "v", "^o$", desc = "[SELECT] Select trimmed line" },
+	-- Neovim's an/in (treesitter nodes, else LSP selection ranges), vim-expand-region in buffers that have neither
+	{
+		"+",
+		selection_step("an", "<Plug>(expand-region-grow)"),
+		desc = "[SELECT] Expand selection to parent node or text object",
+	},
+	{
+		"_",
+		selection_step("in", "<Plug>(expand-region-shrink)"),
+		desc = "[SELECT] Shrink selection to child node or back",
+	},
+
+	-- Telescope prompts pre-filled with the selection
+	{
+		"<leader>fd",
+		function()
+			require("telescope.builtin").current_buffer_fuzzy_find({ default_text = visual_text() })
+		end,
+		desc = "[TELESCOPE] Current buffer fuzzy find with selection",
+	},
+	{
+		"<leader>fg",
+		function()
+			-- live_grep's prompt is a ripgrep regex: escape the selection so it matches literally
+			local text = visual_text():gsub("[\\.%*%+%?%^%$%(%)%[%]{}|]", "\\%0")
+			require("telescope.builtin").live_grep({ default_text = text })
+		end,
+		desc = "[TELESCOPE] Live grep with selection",
+	},
 
 	-- Edit
 	{ "C", '"_C', desc = "Do not copy when changing" },
 	{ "c", '"_c', desc = "Do not copy when changing" },
-	{ "cc", '"_cc', desc = "Do not copy when changing" },
-	{ "p", '"_dP', desc = "Paste without replacing what is was in clipboard" },
+	{ "p", "P", desc = "Paste without replacing what was in clipboard" },
 	{ "<a-j>", ":m '>+1<cr>gv=gv", desc = "[MOVE] Move block down" },
 	{ "<a-k>", ":m '<-2<cr>gv=gv", desc = "[MOVE] Move block up" },
 
-	-- Motions
-	{ "<a-down>", "<cmd>TSTextobjectGotoNextStart @function.outer<cr>", desc = "[MOTION] Move to next method" },
-	{ "<a-up>", "<cmd>TSTextobjectGotoPreviousStart @function.outer<cr>", desc = "[MOTION] Move to previous method" },
+	-- Indentation
 	{ "<", "<gv", desc = "[Indent] Indent left" },
 	{ ">", ">gv", desc = "[Indent] Indent right" },
-	{ "<leader>dx", "<cmd>lua require('dapui').eval()<CR>", desc = "[DAPUI] Evaluate (selection in visual mode) }" },
+
+	-- Debug
+	{ "<leader>dx", "<cmd>lua require('dapui').eval()<CR>", desc = "[DAPUI] Evaluate selection" },
 })
 
 -- Select mode mappings
 wk.add({
 	mode = { "s" },
-	{ "<a-Bs>", "<C-o>diw", desc = "Delete word" },
-	{ "<a-c>", "<C-o>ciw", desc = "Change word" },
-})
-
--- Execution mode mappings
-wk.add({
-	mode = { "x" },
-	{ "<leader>r", group = "[Code refactor]" },
-	{ "<leader>rl", "<cmdr:Refactor extract_to_file <cr>", desc = "[REFACTOR] Extract to file" },
-	{ "<leader>rv", "<cmd>:Refactor extract_var <cr>", desc = "[REFACTOR] Extract variable" },
-	{ "<leader>rx", "<cmd>:Refactor extract <cr>", desc = "[REFACTOR] Extract function" },
+	{ "<a-Bs>", '<Esc>"_diw', desc = "Delete word" },
+	{ "<a-c>", '<Esc>"_ciw', desc = "Change word" },
 })
 
 -- Terminal mode mappings
 wk.add({
 	mode = { "t" },
-	{ "<c-h>", "<cmd>wincmd h<cr>,", desc = "[TERMINAL] Move left" },
-	{ "<c-j>", "<cmd>wincmd j<cr>,", desc = "[TERMINAL] Move down" },
-	{ "<c-k>", "<cmd>wincmd k<cr>,", desc = "[TERMINAL] Move up" },
-	{ "<c-l>", "<cmd>wincmd l<cr>,", desc = "[TERMINAL] Move right" },
+	{ "<c-h>", "<cmd>wincmd h<cr>", desc = "[TERMINAL] Move left" },
+	{ "<c-j>", "<cmd>wincmd j<cr>", desc = "[TERMINAL] Move down" },
+	{ "<c-k>", "<cmd>wincmd k<cr>", desc = "[TERMINAL] Move up" },
+	{ "<c-l>", "<cmd>wincmd l<cr>", desc = "[TERMINAL] Move right" },
 })
 
 wk.setup({})

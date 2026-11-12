@@ -28,7 +28,6 @@ local plugins = {
 	"nvim-tree/nvim-web-devicons",
 	require("plugins.configs.bufferline"),
 	"folke/which-key.nvim",
-	require("plugins.configs.neoscroll"), -- Smoother scroll
 	require("plugins.configs.scrollbar"),
 	require("plugins.configs.trouble"),
 	require("plugins.configs.aerial"),

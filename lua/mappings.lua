@@ -123,7 +123,6 @@ wk.add({
 	{ "<a-o>", "]<Space>", remap = true, desc = "New line in normal mode" },
 	{ "<a-O>", "[<Space>", remap = true, desc = "New line before in normal mode" },
 
-	---- Following remaps conflict with Neoscroll plugin for scrolling animations
 	{ "<c-d>", "<c-d>zz", desc = "Keep cursor in the middle while scrolling down" },
 	{ "<c-u>", "<c-u>zz", desc = "Keep cursor in the middle while scrolling up" },
 	----
